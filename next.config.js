@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: "/employe",
-  assetPrefix: "/employe/",
+  basePath: "/comptabilite",
+  assetPrefix: "/comptabilite/",
   reactStrictMode: true,
   typescript: {
     // !! WARN !!
