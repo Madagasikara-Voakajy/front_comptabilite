@@ -7,8 +7,8 @@ const FooterBackOffice = () => {
   return (
     <ContainerFooter>
       <Container maxWidth="xl">
-        <Box textAlign="center" sx={{py: 1}}>
-          <Typography  variant="body2" sx={{color: theme.palette.grey[500]}}>Copyright HAISOA | 2022</Typography>
+        <Box textAlign="center" sx={{ py: 1 }}>
+          <Typography variant="body2" sx={{ color: theme.palette.grey[500] }}>Copyright HAISOA | 2022</Typography>
         </Box>
       </Container>
     </ContainerFooter>
@@ -19,8 +19,8 @@ export default FooterBackOffice
 
 const ContainerFooter = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.grey[300],
-  position: "absolute",
-  bottom: 0,
-  width: "100%",
+  // position: "absolute",
+  // bottom: 0,
+  // width: "100%",
   borderRadius: 0
 }));
