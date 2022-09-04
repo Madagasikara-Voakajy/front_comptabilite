@@ -28,56 +28,56 @@ const GREY = {
 };
 
 const PRIMARY = {
-  lighter: lighten(0.2,'#73C04F'),
-  light: lighten(0.3,'#73C04F'),
+  lighter: lighten(0.2, '#73C04F'),
+  light: lighten(0.3, '#73C04F'),
   main: '#73C04F',
-  dark: darken(0.3,'#73C04F'),
-  darker: darken(0.2,'#73C04F'),
+  dark: darken(0.3, '#73C04F'),
+  darker: darken(0.2, '#73C04F'),
   contrastText: '#fff',
 };
 
 const SECONDARY = {
-  lighter: lighten(0.2,'#424242'),
-  light: lighten(0.3,'#424242'),
+  lighter: lighten(0.2, '#424242'),
+  light: lighten(0.3, '#424242'),
   main: '#424242',
-  dark: darken(0.3,'#424242'),
-  darker: darken(0.2,'#424242'),
+  dark: darken(0.3, '#424242'),
+  darker: darken(0.2, '#424242'),
   contrastText: '#fff',
 };
 
 const INFO = {
-  lighter: lighten(0.2,'#2196F3'),
-  light: lighten(0.3,'#2196F3'),
+  lighter: lighten(0.2, '#2196F3'),
+  light: lighten(0.3, '#2196F3'),
   main: '#2196F3',
-  dark: darken(0.3,'#2196F3'),
-  darker: darken(0.2,'#2196F3'),
+  dark: darken(0.3, '#2196F3'),
+  darker: darken(0.2, '#2196F3'),
   contrastText: '#fff',
 };
 
 const SUCCESS = {
-  lighter: lighten(0.2,'#4CAF50'),
-  light: lighten(0.3,'#4CAF50'),
+  lighter: lighten(0.2, '#4CAF50'),
+  light: lighten(0.3, '#4CAF50'),
   main: '#4CAF50',
-  dark: darken(0.1,'#4CAF50'),
-  darker: darken(0.05,'#4CAF50'),
+  dark: darken(0.1, '#4CAF50'),
+  darker: darken(0.05, '#4CAF50'),
   contrastText: GREY[800],
 };
 
 const WARNING = {
-  lighter: lighten(0.2,'#FBB500'),
-  light: lighten(0.3,'#FBB500'),
+  lighter: lighten(0.2, '#FBB500'),
+  light: lighten(0.3, '#FBB500'),
   main: '#FBB500',
-  dark: darken(0.1,'#FBB500'),
-  darker: darken(0.05,'#FBB500'),
+  dark: darken(0.1, '#FBB500'),
+  darker: darken(0.05, '#FBB500'),
   contrastText: GREY[800],
 };
 
 const ERROR = {
-  lighter: lighten(0.2,'#FF5252'),
-  light: lighten(0.3,'#FF5252'),
+  lighter: lighten(0.2, '#FF5252'),
+  light: lighten(0.3, '#FF5252'),
   main: '#FF5252',
-  dark: darken(0.3,'#FF5252'),
-  darker: darken(0.2,'#FF5252'),
+  dark: darken(0.3, '#FF5252'),
+  darker: darken(0.2, '#FF5252'),
   contrastText: '#fff',
 };
 /**
@@ -85,11 +85,11 @@ const ERROR = {
  * primary, secondary, success, warning info, error
  */
 const ACCENT = {
-  lighter: lighten(0.2,'#82B1FF'),
-  light: lighten(0.3,'#82B1FF'),
+  lighter: lighten(0.2, '#82B1FF'),
+  light: lighten(0.3, '#82B1FF'),
   main: '#82B1FF',
-  dark: darken(0.3,'#82B1FF'),
-  darker: darken(0.2,'#82B1FF'),
+  dark: darken(0.3, '#82B1FF'),
+  darker: darken(0.2, '#82B1FF'),
   contrastText: '#fff',
 };
 
@@ -98,11 +98,11 @@ const ACCENT = {
  * color for the navigation button
  */
 const GREYMENU = {
-  lighter: lighten(0.2,'#fff'),
-  light: lighten(0.3,'#fff'),
+  lighter: lighten(0.2, '#fff'),
+  light: lighten(0.3, '#fff'),
   main: '#fff',
-  dark: darken(0.3,'#fff'),
-  darker: darken(0.2,'#fff'),
+  dark: darken(0.3, '#fff'),
+  darker: darken(0.2, '#fff'),
   contrastText: '#637381',
 };
 
@@ -131,8 +131,8 @@ const palette = {
   success: { ...SUCCESS },
   warning: { ...WARNING },
   error: { ...ERROR },
-  accent: { ...ACCENT},
-  greymenu:{ ...GREYMENU},
+  accent: { ...ACCENT },
+  greymenu: { ...GREYMENU },
   grey: GREY,
   gradients: GRADIENTS,
   chart: CHART_COLORS,
