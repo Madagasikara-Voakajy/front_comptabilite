@@ -24,7 +24,7 @@ const FichierComptable = () => {
                     justifyContent="space-between"
                     mb={1}
                 >
-                    <Link href={"/decompte/create"}>
+                    <Link href={"/configurations/fichier-comptable/create"}>
                         <Button
                             variant="contained"
                             startIcon={<Add />}
