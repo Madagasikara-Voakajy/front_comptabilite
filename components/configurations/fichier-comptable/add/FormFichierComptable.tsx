@@ -126,21 +126,21 @@ export const CustomStack = styled(Stack)(({ theme }) => ({
     },
 }));
 
-const FormContainer = styled(Stack)(({ theme }) => ({
+export const FormContainer = styled(Stack)(({ theme }) => ({
     padding: 30,
     // border: "1px solid #E0E0E0",
     borderRadius: 20,
     background: "#fff",
 }));
 
-const NavigationContainer = styled(Stack)(({ theme }) => ({
+export const NavigationContainer = styled(Stack)(({ theme }) => ({
     flexDirection: "column",
     marginBottom: theme.spacing(2),
     flex: 1,
     width: "100%",
 }));
 
-const SectionNavigation = styled(Stack)(({ theme }) => ({
+export const SectionNavigation = styled(Stack)(({ theme }) => ({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingBottom: "5px",

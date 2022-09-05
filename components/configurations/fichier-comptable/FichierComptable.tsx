@@ -60,9 +60,11 @@ const FichierComptable = () => {
                             <KeyValue keyName="Code Postale" value="10000" />
                         </SectionDetailsContent>
                         <SectionDetailsFooter spacing={2} direction="row" >
-                            <Button variant="text" color="primary">
-                                Détails
-                            </Button>
+                            <Link href={"/configurations/fichier-comptable/1"}>
+                                <Button variant="text" color="primary">
+                                    Détails
+                                </Button>
+                            </Link>
                             <Button variant="contained" color="primary">
                                 Ouvrir
                             </Button>
