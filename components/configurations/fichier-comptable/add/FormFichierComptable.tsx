@@ -1,0 +1,147 @@
+import {
+    Button,
+    Container,
+    styled,
+    Typography,
+    Stack,
+    Divider,
+    TextField,
+} from "@mui/material";
+import Link from "next/link";
+import React from "react";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import { Check, Close } from "@mui/icons-material";
+
+const FormFichierComptable = () => {
+    return (
+        <Container maxWidth="xl">
+            <NavigationContainer>
+                <SectionNavigation>
+                    <Stack flexDirection={"row"}>
+                        <Link href="/configurations/fichier-comptable">
+                            <Button
+                                color="info"
+                                variant="text"
+                                startIcon={<ArrowBack />}
+                            >
+                                Retour
+                            </Button>
+                        </Link>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            startIcon={<Check />}
+                            sx={{ marginInline: 3 }}
+                            type="submit"
+                        >
+                            Enregistrer
+                        </Button>
+                        <Button
+                            variant="text"
+                            color="warning"
+                            size="small"
+                            startIcon={<Close />}
+                        >
+                            Annuler
+                        </Button>
+                    </Stack>
+                    <Typography variant="h4">
+                        {" "}
+                        Formulaire fichier comptable{" "}
+                    </Typography>
+                </SectionNavigation>
+            </NavigationContainer>
+            <FormContainer spacing={2}>
+                <CustomStack direction={"row"} spacing={2}>
+                    <TextField
+                        fullWidth
+                        id="positionProfile"
+                        label="Raison sociale"
+                    />
+                    <TextField
+                        id="projectName"
+                        label="Activité"
+                        fullWidth
+                    />
+                </CustomStack>
+                <CustomStack direction={"row"} spacing={2}>
+                    <TextField
+                        fullWidth
+                        id="positionProfile"
+                        label="Numéro d’Identification Fiscale (NIF)"
+                    />
+                    <TextField
+                        id="projectName"
+                        label="Numéro Statistique (STAT)"
+                        fullWidth
+                    />
+                </CustomStack>
+                <CustomStack direction={"row"} spacing={2}>
+                    <TextField
+                        fullWidth
+                        id="positionProfile"
+                        label="RCS (Registre du Commerce et de Société)"
+                    />
+                    <TextField
+                        id="projectName"
+                        label="Pays"
+                        fullWidth
+                    />
+                </CustomStack>
+                <CustomStack direction={"row"} spacing={2}>
+                    <TextField
+                        fullWidth
+                        id="positionProfile"
+                        label="Téléphone"
+                    />
+                    <TextField
+                        id="projectName"
+                        label="Adresse"
+                        fullWidth
+                    />
+                </CustomStack>
+                <CustomStack direction={"row"} spacing={2}>
+                    <TextField
+                        fullWidth
+                        id="positionProfile"
+                        label="Email"
+                    />
+                    <TextField
+                        id="projectName"
+                        label="Code Postale"
+                        fullWidth
+                    />
+                </CustomStack>
+            </FormContainer>
+        </Container>
+    )
+}
+
+export default FormFichierComptable
+
+export const CustomStack = styled(Stack)(({ theme }) => ({
+    [theme.breakpoints.down("sm")]: {
+        flexWrap: "wrap",
+    },
+}));
+
+const FormContainer = styled(Stack)(({ theme }) => ({
+    padding: 30,
+    // border: "1px solid #E0E0E0",
+    borderRadius: 20,
+    background: "#fff",
+}));
+
+const NavigationContainer = styled(Stack)(({ theme }) => ({
+    flexDirection: "column",
+    marginBottom: theme.spacing(2),
+    flex: 1,
+    width: "100%",
+}));
+
+const SectionNavigation = styled(Stack)(({ theme }) => ({
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingBottom: "5px",
+}));
