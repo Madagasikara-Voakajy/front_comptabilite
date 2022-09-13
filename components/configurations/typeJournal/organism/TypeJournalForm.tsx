@@ -91,7 +91,6 @@ const TypeJournalForm = () => {
                 Formulaire (Créer/Modifier)
               </Typography>
               <OSTextField label="Type" name="type"></OSTextField>
-              <OSTextField label="Nom" name="name"></OSTextField>
               <OSSelectField
                 id="compte"
                 name="compte"
