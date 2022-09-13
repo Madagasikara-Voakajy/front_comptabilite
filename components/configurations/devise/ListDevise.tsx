@@ -99,7 +99,7 @@ const ListDevise = () => {
   return (
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
-        <Link href="/contracts/add">
+        <Link href="/configurations/devise/add">
           <Button variant="contained" startIcon={<Add />}>
             Créer
           </Button>
