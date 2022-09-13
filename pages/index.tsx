@@ -5,6 +5,7 @@ import BackOfficeLayout from "../layouts/backOffice";
 import ListEmploye from "../components/home";
 import useBasePath from "../hooks/useBasePath";
 
+
 const Home: NextPage = () => {
   const basePath = useBasePath();
   return (
