@@ -171,7 +171,7 @@ const ListAuxiliaire = () => {
   return (
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
-        <Link href="/auxiliaire/add">
+        <Link href="/comptes/auxiliaire/add">
           <Button
             onClick={handleAdd}
             variant="contained"
@@ -254,18 +254,7 @@ const ListAuxiliaire = () => {
                               direction="row"
                               justifyContent="right"
                             >
-                              <Link href="/offre/creer">
-                                <Button
-                                  size="small"
-                                  variant="outlined"
-                                  color="info"
-                                  startIcon={<Add />}
-                                  sx={{ mr: 2, display: "none" }}
-                                >
-                                  Offre
-                                </Button>
-                              </Link>
-                              <Link href={`demande/${row.id}`}>
+                              <Link href={`/comptes/auxiliaire/${row.id}`}>
                                 <IconButton
                                   color="accent"
                                   aria-label="Details"
@@ -275,7 +264,7 @@ const ListAuxiliaire = () => {
                                   <VisibilityIcon />
                                 </IconButton>
                               </Link>
-                              <Link href={`/demande/${row.id}/edit`}>
+                              <Link href={`/comptes/auxiliaire/${row.id}/edit`}>
                                 <IconButton
                                   color="primary"
                                   aria-label="Modifier"
