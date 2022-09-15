@@ -2,7 +2,7 @@ import { Container } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
 import BackOfficeLayout from "../layouts/backOffice";
-import ListEmploye from "../components/home";
+import ListAnneeExercice from "../components/anneeExercice";
 import useBasePath from "../hooks/useBasePath";
 
 const Home: NextPage = () => {
@@ -15,7 +15,7 @@ const Home: NextPage = () => {
         <link rel="icon" href={`${basePath}/favicon.ico`} />
       </Head>
       <Container maxWidth="xl">
-        <ListEmploye />
+        <ListAnneeExercice />
       </Container>
     </BackOfficeLayout>
   );

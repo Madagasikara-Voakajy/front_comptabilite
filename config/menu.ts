@@ -47,6 +47,12 @@ const menu = [
         link: "/tous-les-journals-de-saisie",
         icon: "",
       },
+      {
+        id: 18,
+        name: "Annee d'exercice",
+        link: "/annee-exercice",
+        icon: "",
+      },
     ],
   },
   {
@@ -110,7 +116,7 @@ const menu = [
         name: "Annexe",
         link: "/etat-financieres/annexe",
         icon: "",
-      }
+      },
     ],
   },
   {
@@ -130,7 +136,7 @@ const menu = [
         name: "Auxiliaire",
         link: "/comptes/auxiliaire",
         icon: "",
-      }
+      },
     ],
   },
   {
@@ -174,7 +180,7 @@ const menu = [
         name: "Mode de paiement",
         link: "/configurations/mode-paiement",
         icon: "",
-      }
+      },
     ],
   },
 ];
