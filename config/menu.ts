@@ -90,25 +90,25 @@ const menu = [
       {
         id: 31,
         name: "Bilan ",
-        link: "/etat-financieres/bilan ",
+        link: "/etat-financieres/bilan",
         icon: "",
       },
       {
         id: 32,
         name: "Compte de résultat",
-        link: "/etat-financieres/compte-de-resultat",
+        link: "/etat-financieres/compte-resultat",
         icon: "",
       },
       {
         id: 33,
         name: "Tableau de flux de trésorerie",
-        link: "/etat-financieres/tableau-de-flux-de-tresorerie",
+        link: "/etat-financieres/tableau-flux-tresorerie",
         icon: "",
       },
       {
         id: 34,
         name: "Tableau de variation des capitaux propres",
-        link: "/etat-financieres/tableau-de-variation-des-capitaux-propres",
+        link: "/etat-financieres/tableau-variation-capitaux-propres",
         icon: "",
       },
       {
