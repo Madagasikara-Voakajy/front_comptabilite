@@ -1,4 +1,20 @@
-export type Order = "asc" | "desc";
+import Data, { Order } from "./type-variable";
+
+export function createData(
+  iso: string,
+  nom: string,
+  separateur: string,
+  symbole: string,
+  nombre: string,
+): Data {
+  return {
+    iso,
+    nom,
+    separateur,
+    symbole,
+    nombre,
+  };
+}
 
 export function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -38,16 +54,3 @@ export function stableSort<T>(
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
-/**
- * translate table to fr
- * @param param0 object
- * @returns
- */
-export function defaultLabelDisplayedRows({ from, to, count }: any) {
-  return `${from}–${to} sur ${count !== -1 ? count : `plus que ${to}`}`;
-}
-
-export const labelRowsPerPage = "Ligne(s) par page";
-
-export const selectedItemsLabel = "séléctionné(s)";
