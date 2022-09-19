@@ -4,8 +4,6 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import { Stack, Container } from "@mui/material";
 import { useRouter } from "next/router";
-import IconButton from "@mui/material/IconButton";
-import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import { BreadcrumbSeparator } from "../../components/shared/BreadcrumbSeparator";
 
 const MvBreadcrumbs = () => {
@@ -24,7 +22,7 @@ const MvBreadcrumbs = () => {
             App
           </Link>
           <Link underline="hover" color="inherit" href="/">
-            Comptabilité
+            Recrutements
           </Link>
           {routeArray.map((route, index) =>
             index === routeArray.length ? (

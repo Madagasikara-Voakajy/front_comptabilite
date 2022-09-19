@@ -11,7 +11,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
 import React, { Fragment, useState } from "react";
@@ -21,10 +21,9 @@ import {
   IconBntNavBO,
   MenuNavbarBo,
 } from "./NavbarBackOffice";
+import Link from "@mui/material/Link";
 import Drawer from "@mui/material/Drawer";
-import {
-  ButtonProfile,
-} from "./ButtonNav";
+import { ButtonProfile } from "./ButtonNav";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import { useAppSelector } from "../../../hooks/reduxHooks";
@@ -55,16 +54,18 @@ const NavbarMobile = ({ matches }: any) => {
       <Container maxWidth="xl">
         <ToolbarBackOffice variant="dense">
           <Stack flexDirection="row" alignItems="center">
-            <IconBntNavBO onClick={toogleDrawer} aria-label="home">
-              <MenuIcon fontSize="inherit" />
-            </IconBntNavBO>
+            <Link underline="hover" color="inherit" href="/">
+              <IconBntNavBO onClick={toogleDrawer} aria-label="home">
+                <MenuIcon fontSize="inherit" />
+              </IconBntNavBO>
+            </Link>
             <NavMobileTypo
               variant="h5"
               sx={{ xs: { display: "none" } }}
               paddingX={2}
               color="GrayText"
             >
-              Employés
+              Recrutements
             </NavMobileTypo>
           </Stack>
           <MenuNavbarBo>

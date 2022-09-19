@@ -1,13 +1,17 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { customizationSlice } from './slices/customizationSlice';
-import { menuSlice } from './menu/menuSlice';
-import { menuProfileSlice } from './menu/menuprofileSlice';
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { customizationSlice } from "./features/slices/customizationSlice";
+import { menuSlice } from "./features/menu/menuSlice";
+import { menuProfileSlice } from "./features/menu/menuprofileSlice";
+import { authSlice } from "./features/auth/authSlice";
+import { notificationSlice } from "./features/notification/notificationSlice";
 
 export const store = configureStore({
   reducer: {
+    auth: authSlice.reducer,
     customization: customizationSlice.reducer,
     menu: menuSlice.reducer,
-    menuprofile: menuProfileSlice.reducer
+    menuprofile: menuProfileSlice.reducer,
+    notification: notificationSlice.reducer,
   },
 });
 

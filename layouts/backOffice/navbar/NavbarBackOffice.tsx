@@ -10,13 +10,23 @@ import { Badge, Stack, styled, useTheme } from "@mui/material";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
 import { useAppSelector } from "../../../hooks/reduxHooks";
+import Link from "@mui/material/Link";
 import {
   OneButtonLink,
   OneButtonLinkWithItems,
   ButtonProfile,
 } from "./ButtonNav";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { logout } from "../../../redux/features/auth/authSlice";
+import { useRouter } from "next/router";
 
 const NavbarBackOffice = ({ matches }: any) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handleClickLogout = () => {
+    dispatch(logout({}));
+  };
   const theme = useTheme();
   /**
    * Take all menu lists in the redux store
@@ -24,16 +34,16 @@ const NavbarBackOffice = ({ matches }: any) => {
   const navMenu = useAppSelector((state) => state.menu.value);
 
   return (
-    <AppbarBackOffice position="static" elevation={0}>
+    <AppbarBackOffice position="sticky" elevation={0}>
       <Container maxWidth="xl">
         <ToolbarBackOffice variant="dense">
           <ListMenuContainer>
-            <IconBntNavBO aria-label="home">
-              <HomeWorkIcon fontSize="inherit" />
-            </IconBntNavBO>
-            <Typography variant="h5" paddingX={2} color="GrayText">
-              Comptablité
-            </Typography>
+            <Link underline="hover" color="inherit" href="/">
+              <IconBntNavBO aria-label="home">
+                <HomeWorkIcon fontSize="inherit" />
+              </IconBntNavBO>
+            </Link>
+            <Typography variant="h5" paddingX={2} color="GrayText"></Typography>
             <ListPageContainer>
               {navMenu.map((page, index) =>
                 page.items.length === 0 ? (
@@ -45,14 +55,14 @@ const NavbarBackOffice = ({ matches }: any) => {
             </ListPageContainer>
           </ListMenuContainer>
           <MenuNavbarBo>
-            <Tooltip title="Open notification" sx={{ mx: 4 }}>
+            <Tooltip title="Pas de notification" sx={{ mx: 4 }}>
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
                 <Badge
-                  badgeContent={17}
+                  badgeContent={0}
                   color="error"
                   sx={{
                     ".MuiBadge-badge": {
@@ -64,7 +74,7 @@ const NavbarBackOffice = ({ matches }: any) => {
                 </Badge>
               </IconButton>
             </Tooltip>
-            <ButtonProfile />
+            <ButtonProfile handleClickLogout={handleClickLogout} />
           </MenuNavbarBo>
         </ToolbarBackOffice>
       </Container>
