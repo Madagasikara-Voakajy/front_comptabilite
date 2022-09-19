@@ -64,7 +64,7 @@ const menu = [
       {
         id: 21,
         name: "Toutes les opérations",
-        link: "/grand-livre/toutes-les-opérations",
+        link: "/grand-livre/toutes-les-operations",
         icon: "",
       },
       {
