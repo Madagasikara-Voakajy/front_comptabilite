@@ -1,14 +1,12 @@
 import {
   Button,
   Container,
-  IconButton,
   Stack,
   styled,
   Typography,
 } from "@mui/material";
 import Link from "next/link";
 import React from "react";
-// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -23,11 +21,7 @@ import { rows } from "./table/constante";
 import EnhancedTableToolbar from "./table/EnhancedTableToolbar";
 import EnhancedTableHead from "./table/EnhancedTableHead";
 import { getComparator, stableSort } from "./table/function";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Badge from "@mui/material/Badge";
 import Add from "@mui/icons-material/Add";
-// import { defaultLabelDisplayedRows, labelRowsPerPage } from "../../../config/table.config";
 import {
   defaultLabelDisplayedRows,
   labelRowsPerPage,
@@ -175,13 +169,12 @@ const ListJournaux = () => {
                           <TableCell align="right">{row.type}</TableCell>
                           <TableCell align="right">{row.compte}</TableCell>
                           <TableCell align="right">{row.code}</TableCell>
-                          {/* <TableCell align="right">{row.nombre}</TableCell> */}
                           <TableCell align="right">
                             <BtnActionContainer
                               direction="row"
                               justifyContent="center"
                             >
-                              <Link href="/tous-les-journals-de-saisie/1/Piéce Comptable">
+                              <Link href="/tous-les-journals-de-saisie/pieceComptable">
                                 <Button
                                   sx={{ mr: 1 }}
                                   color="accent"
@@ -192,20 +185,6 @@ const ListJournaux = () => {
                                   Piéce Comptable
                                 </Button>
                               </Link>
-                              {/* <IconButton
-                                color="primary"
-                                aria-label="Modifier"
-                                component="span"
-                              >
-                                <EditIcon />
-                              </IconButton>
-                              <IconButton
-                                color="warning"
-                                aria-label="Supprimer"
-                                component="span"
-                              >
-                                <DeleteIcon />
-                              </IconButton> */}
                             </BtnActionContainer>
                           </TableCell>
                         </TableRow>
