@@ -1,5 +1,5 @@
 import { Order } from "../../../../../config/table.config";
-// import { LeaveTypeItem } from "../../../../../../redux/features/leaveType/leaveTypeSlice";
+import { PcgItem } from "../../../../../redux/features/pcg/pcg.interface";
 
 export interface PlanComptableHeadCell {
   id: any;
@@ -11,7 +11,7 @@ export interface PlanComptableHeadCell {
 export interface PlanComptableTableProps {
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    // property: keyof LeaveTypeItem
+    property: keyof PcgItem
   ) => void;
   order: Order;
   orderBy: string;

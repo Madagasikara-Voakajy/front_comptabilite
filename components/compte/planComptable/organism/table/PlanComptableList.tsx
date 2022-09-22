@@ -8,17 +8,18 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import {
-//   useAppDispatch,
-//   useAppSelector,
-// } from "../../../../../../hooks/reduxHooks";
-// import {
-//   deleteLeaveType,
-//   editLeaveType,
-//   getLeaveType,
-//   getLeaveTypes,
-//   LeaveTypeItem,
-// } from "../../../../../../redux/features/leaveType/leaveTypeSlice";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../../hooks/reduxHooks";
+import {
+  deletePcg,
+  createPcg,
+  editPcg,
+  getPcg,
+  getPcgList,
+  updatePcg,
+} from "../../../../../redux/features/pcg";
 import {
   Order,
   defaultLabelDisplayedRows,
@@ -26,68 +27,35 @@ import {
   labelRowsPerPage,
 } from "../../../../../config/table.config";
 import { useRouter } from "next/router";
-// import useFetchLeaveTypes from "../../hooks/useFetchPlanComptable";
+import useFetchPlanComptable from "../../hooks/useFetchPlanComptable";
 import { useConfirm } from "material-ui-confirm";
 import PlanComptableTableToolbar from "./PlanComptableTableToolbar";
 import PlanComptableTableHeader from "./PlanComptableTableHeader";
-import Badge from "@mui/material/Badge";
+import { PcgItem } from "../../../../../redux/features/pcg/pcg.interface";
 
-export default function PlanComptableList() {
+export default function pcgList() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [planComptableList, setPlanComptableList] = React.useState([
-    {
-      id: "1",
-      numero_de_compterence: "1011",
-      intutile_de_compte: "Compte exemple",
-      type: "Racine"
-    },
-    {
-      id: "2",
-      numero_de_compterence: "1012",
-      intutile_de_compte: "Compte exemple 2",
-      type: "Racine"
-    },
-    {
-      id: "3",
-      numero_de_compterence: "1013",
-      intutile_de_compte: "Compte exemple 3",
-      type: "Racine"
-    },
-    {
-      id: "4",
-      numero_de_compterence: "1014",
-      intutile_de_compte: "Compte exemple 4",
-      type: "Détails"
-    },
-    {
-      id: "5",
-      numero_de_compterence: "1015",
-      intutile_de_compte: "Compte exemple 5",
-      type: "Détails"
-    }
-  ]);
-  // const dispatch: any = useAppDispatch();
-  // const { leaveTypes } = useAppSelector((state) => state.leaveType);
+  const dispatch: any = useAppDispatch();
+  const { pcgList } = useAppSelector((state) => state.pcg);
   const router = useRouter();
   const confirm = useConfirm();
 
-  // const fetchLeaveTypes = useFetchLeaveTypes();
+  const fetchPcgList = useFetchPlanComptable();
 
-  // useEffect(() => {
-  //   fetchLeaveTypes();
-  // }, [router.query]);
+  useEffect(() => {
+    fetchPcgList();
+  }, [router.query]);
 
   const handleClickEdit = async (id: any) => {
-    // await dispatch(editLeaveType({ id }));
+    await dispatch(editPcg({ id }));
   };
 
   const handleclickDelete = async (id: any) => {
     confirm({
       title: "Supprimer ce plan comptable",
-      description:
-        "Voulez-vous vraiment supprimer ce plan comptable ?",
+      description: "Voulez-vous vraiment supprimer ce plan comptable ?",
       cancellationText: "Annuler",
       confirmationText: "Supprimer",
       cancellationButtonProps: {
@@ -98,10 +66,10 @@ export default function PlanComptableList() {
       },
     })
       .then(async () => {
-        // await dispatch(deleteLeaveType({ id }));
-        // fetchLeaveTypes();
+        await dispatch(deletePcg({ id }));
+        fetchPcgList();
       })
-      .catch(() => { });
+      .catch(() => {});
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -117,9 +85,7 @@ export default function PlanComptableList() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0
-      ? Math.max(0, (1 + page) * rowsPerPage - planComptableList.length)
-      : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - pcgList.length) : 0;
 
   return (
     <TableSection>
@@ -136,12 +102,9 @@ export default function PlanComptableList() {
               <TableBody>
                 {/* if you don't need to support IE11, you can replace the `stableSort` call with:
             rows.slice().sort(getComparator(order, orderBy)) */}
-                {planComptableList
-                  .slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
-                  .map((row: any, index: any) => {
+                {pcgList
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row: PcgItem, index: any) => {
                     const labelId = `enhanced-table-checkbox-${index}`;
                     return (
                       <TableRow hover tabIndex={-1} key={row.id}>
@@ -152,7 +115,7 @@ export default function PlanComptableList() {
                           padding="normal"
                           align="left"
                         >
-                          {row.numero_de_compterence}
+                          {row.code}
                         </TableCell>
                         <TableCell
                           component="th"
@@ -161,16 +124,7 @@ export default function PlanComptableList() {
                           padding="normal"
                           align="left"
                         >
-                          {row.intutile_de_compte}
-                        </TableCell>
-                        <TableCell
-                          component="th"
-                          id={labelId}
-                          scope="row"
-                          padding="normal"
-                          align="left"
-                        >
-                          {row.type}
+                          {row.name}
                         </TableCell>
 
                         <TableCell align="right">
@@ -190,9 +144,7 @@ export default function PlanComptableList() {
                               color="warning"
                               aria-label="Supprimer"
                               component="span"
-                              onClick={() =>
-                                handleclickDelete(row.id)
-                              }
+                              onClick={() => handleclickDelete(row.id)}
                             >
                               <DeleteIcon />
                             </IconButton>
@@ -216,7 +168,7 @@ export default function PlanComptableList() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={planComptableList.length}
+            count={pcgList.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

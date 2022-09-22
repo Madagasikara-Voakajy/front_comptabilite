@@ -2,21 +2,15 @@ import { PlanComptableHeadCell } from "./planComptable.interface";
 
 export const planComptableHeadCells: readonly PlanComptableHeadCell[] = [
   {
-    id: "numero_de_compterence",
+    id: "code",
     numeric: false,
     disablePadding: false,
-    label: "Numéro de compte",
+    label: "Code",
   },
   {
-    id: "intutile_de_compte",
+    id: "name",
     numeric: false,
     disablePadding: false,
-    label: "Intutilé de compte",
+    label: "Nom",
   },
-  {
-    id: "type",
-    numeric: false,
-    disablePadding: false,
-    label: "Type",
-  }
 ];
