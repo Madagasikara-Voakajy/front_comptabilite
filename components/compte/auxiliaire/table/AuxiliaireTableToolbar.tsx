@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import { Stack, TextField, Typography } from "@mui/material";
 import { TableLoading } from "../../../shared/loading";
-// import { useAppSelector } from "../../../hooks/reduxHooks";
+import { useAppSelector } from "../../../../hooks/reduxHooks";
 import { useRouter } from "next/router";
 import { debounce } from "lodash";
 
 const AuxiliaireTableToolbar = () => {
-  // const { loading } = useAppSelector((state) => state.recruitmentRequest);
+  const { loading } = useAppSelector((state) => state.auxiliaryAccount);
   const [key, setKey] = useState<any>("");
   const router = useRouter();
 
@@ -64,7 +64,7 @@ const AuxiliaireTableToolbar = () => {
           />
         </Stack>
       </Toolbar>
-      {/* {loading && <TableLoading />} */}
+      {loading && <TableLoading />}
     </>
   );
 };

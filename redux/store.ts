@@ -5,6 +5,7 @@ import { menuProfileSlice } from "./features/menu/menuprofileSlice";
 import { authSlice } from "./features/auth/authSlice";
 import { notificationSlice } from "./features/notification/notificationSlice";
 import { pcgSlice } from "./features/pcg/pcgSlice";
+import { auxiliaryAccountSlice } from "./features/auxiliairyAccount/auxiliairyAccountSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     menuprofile: menuProfileSlice.reducer,
     notification: notificationSlice.reducer,
     pcg: pcgSlice.reducer,
+    auxiliaryAccount: auxiliaryAccountSlice.reducer,
   },
 });
 

@@ -12,64 +12,54 @@ import ArrowBack from "@mui/icons-material/ArrowBack";
 import { Check, Close } from "@mui/icons-material";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-// import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
-// import useFetchEmployes from "../hooks/useFetchAuxiliaire";
-// import useFetchPrograms from "../hooks/useFetchPrograms";
-// import { createRecruitmentRequest } from "../../../redux/features/recruitmentRequest";
-// import { updateRecruitmentRequest } from "../../../redux/features/recruitmentRequest";
-// import { cancelEdit } from "../../../redux/features/recruitmentRequest/recruitmentRequestSlice";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
+import {
+  createAuxiliairyAccount,
+  updateAuxiliairyAccount,
+  editAuxiliairyAccount,
+} from "../../../../redux/features/auxiliairyAccount";
+import { cancelEdit } from "../../../../redux/features/auxiliairyAccount/auxiliairyAccountSlice";
 import { useRouter } from "next/router";
 import OSTextField from "../../../shared/input/OSTextField";
 import OSSelectField from "../../../shared/select/OSSelectField";
 import KeyValue from "../../../shared/keyValue";
-// import { editRecruitmentRequest } from "../../../redux/features/recruitmentRequest";
 
 const AuxiliaireForm = () => {
   const router = useRouter();
   const { id }: any = router.query;
-  // const dispatch = useAppDispatch();
-  // const fetchPrograms = useFetchPrograms();
-  // const fetchEmployees = useFetchEmployes();
-  // const { programs, employees, isEditing, recruitmentRequest } = useAppSelector(
-  //   (state) => state.recruitmentRequest
-  // );
-  const typeOfRecruitment = [
-    { id: "EXTERNAL", name: "EXTERNAL" },
-    { id: "INTERNAL", name: "INTERNAL" },
-  ];
-  const status = [
-    { id: "PENDING", name: "PENDING" },
-    { id: "APPROVED", name: "APPROVED" },
-    { id: "REJECTED", name: "REJECTED" },
+  const dispatch = useAppDispatch();
+  const { isEditing, auxiliaryAccount } = useAppSelector(
+    (state) => state.auxiliaryAccount
+  );
+  const type = [
+    { id: "CUSTOMER", name: "CUSTOMER" },
+    { id: "SUPPLIER", name: "SUPPLIER" },
+    { id: "EMPLOYEE", name: "EMPLOYEE" },
+    { id: "OTHER", name: "OTHER" },
   ];
 
   React.useEffect(() => {
-    // if (id) {
-    //   dispatch(editRecruitmentRequest({ id }));
-    // }
+    if (id) {
+      dispatch(editAuxiliairyAccount({ id }));
+    }
   }, [id]);
 
-  React.useEffect(() => {
-    // fetchPrograms();
-    // fetchEmployees();
-  }, []);
-
   const handleSubmit = async (values: any) => {
-    // try {
-    //   if (isEditing) {
-    //     await dispatch(
-    //       updateRecruitmentRequest({
-    //         id: recruitmentRequest.id!,
-    //         recruitmentRequest: values,
-    //       })
-    //     );
-    //   } else {
-    //     await dispatch(createRecruitmentRequest(values));
-    //   }
-    //   router.push("/");
-    // } catch (error) {
-    //   console.log("error", error);
-    // }
+    try {
+      if (isEditing) {
+        await dispatch(
+          updateAuxiliairyAccount({
+            id: auxiliaryAccount.id!,
+            auxiliairyAccount: values,
+          })
+        );
+      } else {
+        await dispatch(createAuxiliairyAccount(values));
+      }
+      router.push("/comptes/auxiliaire");
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return (
@@ -77,38 +67,32 @@ const AuxiliaireForm = () => {
       <Formik
         enableReinitialize
         initialValues={{
-          test: "",
-          // reference: isEditing ? recruitmentRequest.reference : "",
-          // position: isEditing ? recruitmentRequest.position : "",
-          // positionProfile: isEditing ? recruitmentRequest.positionProfile : "",
-          // projectName: isEditing ? recruitmentRequest.projectName : "",
-          // numberOfPressoneToRecruit: isEditing
-          //   ? recruitmentRequest.numberOfPressoneToRecruit
-          //   : 0,
-          // typeOfRecruitment: isEditing
-          //   ? recruitmentRequest.typeOfRecruitment
-          //   : "",
-          // status: isEditing ? recruitmentRequest.status : "PENDING",
-          // reasonOfRefusal: isEditing ? recruitmentRequest.reasonOfRefusal : "",
-          // validatedByDE: isEditing ? recruitmentRequest.validatedByDE : false,
-          // validatedByCA: isEditing ? recruitmentRequest.validatedByCA : false,
-          // programId: isEditing ? recruitmentRequest.programId : "",
-          // applicantId: isEditing ? recruitmentRequest.applicantId : "",
+          name: isEditing ? auxiliaryAccount.name : "",
+          type: isEditing ? auxiliaryAccount.type : "",
+          activity: isEditing ? auxiliaryAccount.activity : "",
+          NIF: isEditing ? auxiliaryAccount.NIF : "",
+          STAT: isEditing ? auxiliaryAccount.STAT : "",
+          RCS: isEditing ? auxiliaryAccount.RCS : "",
+          coutnry: isEditing ? auxiliaryAccount.coutnry : "",
+          phone: isEditing ? auxiliaryAccount.phone : "",
+          address: isEditing ? auxiliaryAccount.address : "",
+          email: isEditing ? auxiliaryAccount.email : "",
+          postalCode: isEditing ? auxiliaryAccount.postalCode : "",
+          // defaultAccountId: isEditing ? auxiliaryAccount.defaultAccountId : "",
         }}
         validationSchema={Yup.object({
-          // reference: Yup.string().required("Champs obligatoire"),
-          // position: Yup.string().required("Champs obligatoire"),
-          // positionProfile: Yup.string().required("Champs obligatoire"),
-          // projectName: Yup.string().required("Champs obligatoire"),
-          // numberOfPressoneToRecruit:
-          //   Yup.number().required("Champs obligatoire"),
-          // typeOfRecruitment: Yup.string().required("Champs obligatoire"),
-          // status: Yup.string().required("Champs obligatoire"),
-          // reasonOfRefusal: Yup.string().required("Champs obligatoire"),
-          // validatedByDE: Yup.boolean().required("Champs obligatoire"),
-          // validatedByCA: Yup.boolean().required("Champs obligatoire"),
-          // programId: Yup.string().required("Champs obligatoire"),
-          // applicantId: Yup.string().required("Champs obligatoire"),
+          name: Yup.string().required("Champs obligatoire"),
+          type: Yup.string().required("Champs obligatoire"),
+          activity: Yup.string().required("Champs obligatoire"),
+          NIF: Yup.string().required("Champs obligatoire"),
+          STAT: Yup.string().required("Champs obligatoire"),
+          RCS: Yup.string().required("Champs obligatoire"),
+          coutnry: Yup.string().required("Champs obligatoire"),
+          phone: Yup.string().required("Champs obligatoire"),
+          address: Yup.string().required("Champs obligatoire"),
+          email: Yup.string().email().required("Champs obligatoire"),
+          postalCode: Yup.string().required("Champs obligatoire"),
+          // defaultAccountId: Yup.string().required("Champs obligatoire"),
         })}
         onSubmit={(value: any, action: any) => {
           handleSubmit(value);
@@ -145,10 +129,10 @@ const AuxiliaireForm = () => {
                       color="warning"
                       size="small"
                       startIcon={<Close />}
-                      // onClick={() => {
-                      //   formikProps.resetForm();
-                      //   dispatch(cancelEdit());
-                      // }}
+                      onClick={() => {
+                        formikProps.resetForm();
+                        dispatch(cancelEdit());
+                      }}
                     >
                       Annuler
                     </Button>
@@ -163,59 +147,42 @@ const AuxiliaireForm = () => {
 
               <FormContainer spacing={2}>
                 <CustomStack direction={"row"} spacing={2}>
-                  <OSTextField
-                    id="reference"
-                    label="Nom ou raison sociale"
-                    name="reference"
-                  />
-                  <OSTextField
-                    id="Numéro de Compte générale "
-                    label="Numéro de Compte générale "
-                    name="Numéro de Compte générale "
-                  />
-                </CustomStack>
-                <CustomStack direction={"row"} spacing={2}>
-                  <OSTextField id="Type" label="Type" name="Type" />
-                  <OSTextField
-                    id="Numéro Statistique (STAT)"
-                    label="Activité"
-                    name="Activité"
+                  <OSTextField id="name" label="Nom" name="name" />
+                  <OSSelectField
+                    id="type"
+                    label="Type"
+                    name="type"
+                    options={type}
+                    dataKey={"name"}
+                    valueKey="id"
                   />
                 </CustomStack>
                 <CustomStack direction={"row"} spacing={2}>
-                  <OSTextField
-                    id="Numéro d’Identification Fiscale (NIF)"
-                    label="Numéro d’Identification Fiscale (NIF)"
-                    name="Numéro d’Identification Fiscale (NIF)"
-                  />
-                  <OSTextField
-                    id="Numéro Statistique (STAT)"
-                    label="Numéro Statistique (STAT)"
-                    name="Numéro Statistique (STAT)"
-                  />
+                  <OSTextField id="activity" label="Activity" name="activity" />
+                  <OSTextField id="NIF" label="NIF" name="NIF" />
+                </CustomStack>
+                <CustomStack direction={"row"} spacing={2}>
+                  <OSTextField id="STAT" label="STAT" name="STAT" />
+                  <OSTextField id="RCS" label="RCS" name="RCS" />
+                </CustomStack>
+                <CustomStack direction={"row"} spacing={2}>
+                  <OSTextField id="coutnry" label="Pays" name="coutnry" />
+                  <OSTextField id="phone" label="telephone" name="phone" />
+                </CustomStack>
+                <CustomStack direction={"row"} spacing={2}>
+                  <OSTextField id="address" label="Adresse" name="address" />
+                  <OSTextField id="email" label="Email" name="email" />
                 </CustomStack>
                 <CustomStack direction={"row"} spacing={2}>
                   <OSTextField
-                    id="RCS (Registre du Commerce et de Société)"
-                    label="RCS (Registre du Commerce et de Société)"
-                    name="RCS (Registre du Commerce et de Société)"
-                  />
-                  <OSTextField id="Pays" label="Pays" name="Pays" />
-                </CustomStack>
-                <CustomStack direction={"row"} spacing={2}>
-                  <OSTextField
-                    id="Téléphone"
-                    label="Téléphone"
-                    name="Téléphone"
-                  />
-                  <OSTextField id="Adresse" label="Adresse" name="Adresse" />
-                </CustomStack>
-                <CustomStack direction={"row"} spacing={2}>
-                  <OSTextField id="Email" label="Email" name="Email" />
-                  <OSTextField
-                    id="Code Postale"
+                    id="postalCode"
                     label="Code Postale"
-                    name="Code Postale"
+                    name="postalCode"
+                  />
+                  <OSTextField
+                    id="defaultAccountId"
+                    label="Compte par defaut"
+                    name="defaultAccountId"
                   />
                 </CustomStack>
               </FormContainer>

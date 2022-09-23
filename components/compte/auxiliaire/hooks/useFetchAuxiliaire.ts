@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
-// import { useAppDispatch } from "../../../hooks/reduxHooks";
-// import { getEmployees } from "../../../redux/features/recruitmentRequest/useCase/getEmployees";
+import { useAppDispatch } from "../../../../hooks/reduxHooks";
+import { getAuxiliairyAccountList } from "../../../../redux/features/auxiliairyAccount";
 
 /**
  * @description Hook to fetch auxiliaire
  */
 const useFetchAuxiliaire = () => {
   const router = useRouter();
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   return async () => {
     let args: any = {};
@@ -19,7 +19,7 @@ const useFetchAuxiliaire = () => {
         [<string>router.query.orderBy]: router.query.order,
       };
     }
-    // await dispatch(getEmployees({ args }));
+    await dispatch(getAuxiliairyAccountList({ args }));
   };
 };
 
