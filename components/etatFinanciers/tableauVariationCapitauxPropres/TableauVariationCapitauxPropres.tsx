@@ -118,7 +118,14 @@ const TableauVariationCapitauxPropres = () => {
               variant="text"
               startIcon={<FileDownloadIcon />}
             >
-              Exporter
+              Excel
+            </Button>
+            <Button
+              color="info"
+              variant="text"
+              startIcon={<FileDownloadIcon />}
+            >
+              Pdf
             </Button>
           </Stack>
           <Typography variant="h4">Tableau de flux de trésorerie</Typography>
