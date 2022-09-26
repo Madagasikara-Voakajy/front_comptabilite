@@ -32,10 +32,10 @@ const AuxiliaireForm = () => {
     (state) => state.auxiliaryAccount
   );
   const type = [
-    { id: "CUSTOMER", name: "CUSTOMER" },
-    { id: "SUPPLIER", name: "SUPPLIER" },
+    { id: "CLIENT", name: "CLIENT" },
+    { id: "FOURNISSEUR", name: "FOURNISSEUR" },
     { id: "EMPLOYEE", name: "EMPLOYEE" },
-    { id: "OTHER", name: "OTHER" },
+    { id: "AUTRE", name: "AUTRE" },
   ];
 
   React.useEffect(() => {
@@ -83,15 +83,15 @@ const AuxiliaireForm = () => {
         validationSchema={Yup.object({
           name: Yup.string().required("Champs obligatoire"),
           type: Yup.string().required("Champs obligatoire"),
-          activity: Yup.string().required("Champs obligatoire"),
-          NIF: Yup.string().required("Champs obligatoire"),
-          STAT: Yup.string().required("Champs obligatoire"),
-          RCS: Yup.string().required("Champs obligatoire"),
-          coutnry: Yup.string().required("Champs obligatoire"),
-          phone: Yup.string().required("Champs obligatoire"),
-          address: Yup.string().required("Champs obligatoire"),
-          email: Yup.string().email().required("Champs obligatoire"),
-          postalCode: Yup.string().required("Champs obligatoire"),
+          activity: Yup.string().nullable(),
+          NIF: Yup.string().nullable(),
+          STAT: Yup.string().nullable(),
+          RCS: Yup.string().nullable(),
+          coutnry: Yup.string().nullable(),
+          phone: Yup.string().nullable(),
+          address: Yup.string().nullable(),
+          email: Yup.string().email().nullable(),
+          postalCode: Yup.string().nullable(),
           // defaultAccountId: Yup.string().required("Champs obligatoire"),
         })}
         onSubmit={(value: any, action: any) => {
