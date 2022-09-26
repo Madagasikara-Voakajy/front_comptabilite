@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import { TextField, Stack, Typography } from "@mui/material";
 import { TableLoading } from "../../../../shared/loading";
-// import { useAppSelector } from "../../../../../../hooks/reduxHooks";
+import { useAppSelector } from "../../../../../hooks/reduxHooks";
 import { useRouter } from "next/router";
 import { debounce } from "lodash";
 
 const PlanComptableTableToolbar = () => {
-  // const { loading } = useAppSelector((state) => state.leaveType);
+  const { loading } = useAppSelector((state) => state.pcg);
   const [key, setKey] = useState<any>("");
   const router = useRouter();
 
@@ -30,9 +30,7 @@ const PlanComptableTableToolbar = () => {
     router.query,
   ]);
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKey(event.target.value);
     deboncedSearch(event.target.value);
   };
@@ -66,7 +64,7 @@ const PlanComptableTableToolbar = () => {
           />
         </Stack>
       </Toolbar>
-      {/* {loading && <TableLoading />} */}
+      {loading && <TableLoading />}
     </>
   );
 };
