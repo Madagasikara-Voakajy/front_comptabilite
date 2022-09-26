@@ -1,7 +1,7 @@
 import React from 'react';
-import BackOfficeLayout from '../../../../front_end/front_comptabilite/layouts/backOffice';
 import { Container } from '@mui/material';
-import ToutesLesOperations from '../../../../front_end/front_comptabilite/components/grand-livre/grandLivre/toutesLesOperation';
+import ToutesLesOperations from '../../../components/grand-livre/grandLivre/toutesLesOperation';
+import BackOfficeLayout from '../../../layouts/backOffice';
 
 
 const Index = () => {
