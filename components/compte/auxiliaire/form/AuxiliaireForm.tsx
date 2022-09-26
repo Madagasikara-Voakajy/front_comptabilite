@@ -32,10 +32,10 @@ const AuxiliaireForm = () => {
     (state) => state.auxiliaryAccount
   );
   const type = [
-    { id: "CLIENT", name: "CLIENT" },
-    { id: "FOURNISSEUR", name: "FOURNISSEUR" },
-    { id: "EMPLOYEE", name: "EMPLOYEE" },
-    { id: "AUTRE", name: "AUTRE" },
+    { id: "CUSTOMER", name: "CLIENT" },
+    { id: "SUPPLIER", name: "FOURNISSEUR" },
+    { id: "EMPLOYEE", name: "EMPLOYÉ" },
+    { id: "OTHER", name: "AUTRE" },
   ];
 
   React.useEffect(() => {
