@@ -33,7 +33,7 @@ import PlanComptableTableToolbar from "./PlanComptableTableToolbar";
 import PlanComptableTableHeader from "./PlanComptableTableHeader";
 import { PcgItem } from "../../../../../redux/features/pcg/pcg.interface";
 
-export default function pcgList() {
+export default function PcgList() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -55,7 +55,8 @@ export default function pcgList() {
   const handleclickDelete = async (id: any) => {
     confirm({
       title: "Supprimer ce plan comptable",
-      description: "Voulez-vous vraiment supprimer ce plan comptable ?",
+      description:
+        "Voulez-vous vraiment supprimer ce plan comptable ?",
       cancellationText: "Annuler",
       confirmationText: "Supprimer",
       cancellationButtonProps: {
@@ -85,7 +86,9 @@ export default function pcgList() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - pcgList.length) : 0;
+    page > 0
+      ? Math.max(0, (1 + page) * rowsPerPage - pcgList.length)
+      : 0;
 
   return (
     <TableSection>
@@ -103,7 +106,10 @@ export default function pcgList() {
                 {/* if you don't need to support IE11, you can replace the `stableSort` call with:
             rows.slice().sort(getComparator(order, orderBy)) */}
                 {pcgList
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
                   .map((row: PcgItem, index: any) => {
                     const labelId = `enhanced-table-checkbox-${index}`;
                     return (
@@ -144,7 +150,9 @@ export default function pcgList() {
                               color="warning"
                               aria-label="Supprimer"
                               component="span"
-                              onClick={() => handleclickDelete(row.id)}
+                              onClick={() =>
+                                handleclickDelete(row.id)
+                              }
                             >
                               <DeleteIcon />
                             </IconButton>
