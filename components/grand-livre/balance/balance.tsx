@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 
 const Balance = () => {
   return (
@@ -26,7 +26,10 @@ const Balance = () => {
             </Button>
           </Link>
           <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
-            export
+            Excel
+          </Button>
+          <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
+            Pdf
           </Button>
         </Stack>
         <Typography variant="h4">Balance géneral</Typography>

@@ -22,10 +22,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Badge from "@mui/material/Badge";
 import Add from "@mui/icons-material/Add";
-// import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-// import { deleteRecruitmentRequest } from "../../redux/features/recruitmentRequest";
-// import { editRecruitmentRequest } from "../../redux/features/recruitmentRequest";
-// import { RecruitmentRequestItem } from "../../redux/features/recruitmentRequest/recruitmentRequestSlice.interface";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import {
+  deleteAuxiliairyAccount,
+  createAuxiliairyAccount,
+  editAuxiliairyAccount,
+  getAuxiliairyAccount,
+  getAuxiliairyAccountList,
+  updateAuxiliairyAccount,
+} from "../../../redux/features/auxiliairyAccount";
 import {
   defaultLabelDisplayedRows,
   getComparator,
@@ -33,79 +38,38 @@ import {
   Order,
 } from "../../../config/table.config";
 import { useRouter } from "next/router";
-// import useFetchRecruitmentRequest from "./hooks/useFetchRecruitmentRequest";
+import useFetchAuxiliaire from "./hooks/useFetchAuxiliaire";
 import { useConfirm } from "material-ui-confirm";
 import AuxiliaireTableHead from "./table/AuxiliaireTableHead";
 import AuxiliaireTableToolbar from "./table/AuxiliaireTableToolbar";
-// import { cancelEdit } from "../../redux/features/recruitmentRequest/recruitmentRequestSlice";
+import { cancelEdit } from "../../../redux/features/auxiliairyAccount/auxiliairyAccountSlice";
+import { AuxiliairyAccountItem } from "../../../redux/features/auxiliairyAccount/auxiliairyAccount.interface";
 
 const ListAuxiliaire = () => {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const auxiliaireListe: any = [
-    {
-      id: "1",
-      Raison_sociale_ou_Nom: "Rasseta Toyota",
-      Numéro_de_compte_Générale: "403",
-      Type: "Fournisseurs",
-      Activité: "Vendeur d voiture",
-      Adresse: "Antananarivo",
-    },
-    {
-      id: "2",
-      Raison_sociale_ou_Nom: "Orange",
-      Numéro_de_compte_Générale: "411",
-      Type: "Clients",
-      Activité: "Opérateur internet",
-      Adresse: "Antananarivo",
-    },
-    {
-      id: "3",
-      Raison_sociale_ou_Nom: "Hairun Technology",
-      Numéro_de_compte_Générale: "425",
-      Type: "Salariés ",
-      Activité: "Concepteur Digitale",
-      Adresse: "Antananarivo",
-    },
-    {
-      id: "4",
-      Raison_sociale_ou_Nom: "Atelier MIHAJA",
-      Numéro_de_compte_Générale: "411",
-      Type: "Fournisseurs",
-      Activité: "Concepteur Bâtiment",
-      Adresse: "Antananarivo",
-    },
-    {
-      id: "5",
-      Raison_sociale_ou_Nom: "TELMA",
-      Numéro_de_compte_Générale: "xxx",
-      Type: "Autre",
-      Activité: "Opérateur Téléphonique",
-      Adresse: "Antananarivo",
-    },
-  ];
-  // const dispatch: any = useAppDispatch();
-  // const { recruitmentRequestList } = useAppSelector(
-  //   (state) => state.recruitmentRequest
-  // );
+  const dispatch: any = useAppDispatch();
+  const { auxiliaryAccountList } = useAppSelector(
+    (state) => state.auxiliaryAccount
+  );
   const router = useRouter();
   const confirm = useConfirm();
 
-  // const fetchRecruitmentRequestList = useFetchRecruitmentRequest();
+  const fetchAuxiliairyAccountList = useFetchAuxiliaire();
 
-  // useEffect(() => {
-  //   fetchRecruitmentRequestList();
-  // }, [router.query]);
+  useEffect(() => {
+    fetchAuxiliairyAccountList();
+  }, [router.query]);
 
   const handleClickEdit = async (id: any) => {
-    // await dispatch(editRecruitmentRequest({ id }));
+    await dispatch(editAuxiliairyAccount({ id }));
   };
 
   const handleclickDelete = async (id: any) => {
     confirm({
-      title: "Supprimer le demande",
-      description: "Voulez-vous vraiment supprimer cette demande ?",
+      title: "Supprimer ce compte ",
+      description: "Voulez-vous vraiment supprimer ce compte ?",
       cancellationText: "Annuler",
       confirmationText: "Supprimer",
       cancellationButtonProps: {
@@ -116,8 +80,8 @@ const ListAuxiliaire = () => {
       },
     })
       .then(async () => {
-        // await dispatch(deleteRecruitmentRequest({ id }));
-        // fetchRecruitmentRequestList();
+        await dispatch(deleteAuxiliairyAccount({ id }));
+        fetchAuxiliairyAccountList();
       })
       .catch(() => {});
   };
@@ -159,13 +123,13 @@ const ListAuxiliaire = () => {
   }
 
   const handleAdd = () => {
-    // dispatch(cancelEdit());
+    dispatch(cancelEdit());
   };
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0
-      ? Math.max(0, (1 + page) * rowsPerPage - auxiliaireListe.length)
+      ? Math.max(0, (1 + page) * rowsPerPage - auxiliaryAccountList.length)
       : 0;
 
   return (
@@ -197,9 +161,9 @@ const ListAuxiliaire = () => {
                 <TableBody>
                   {/* if you don't need to support IE11, you can replace the `stableSort` call with:
               rows.slice().sort(getComparator(order, orderBy)) */}
-                  {auxiliaireListe
+                  {auxiliaryAccountList
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row: any, index: any) => {
+                    .map((row: AuxiliairyAccountItem, index: any) => {
                       const labelId = `enhanced-table-checkbox-${index}`;
 
                       return (
@@ -211,7 +175,7 @@ const ListAuxiliaire = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row.Raison_sociale_ou_Nom}
+                            {row.name}
                           </TableCell>
                           <TableCell
                             component="th"
@@ -220,7 +184,7 @@ const ListAuxiliaire = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row?.Numéro_de_compte_Générale}
+                            {row?.email}
                           </TableCell>
                           <TableCell
                             component="th"
@@ -229,7 +193,7 @@ const ListAuxiliaire = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row.Type}
+                            {row.phone}
                           </TableCell>
                           <TableCell
                             component="th"
@@ -238,7 +202,7 @@ const ListAuxiliaire = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row.Activité}
+                            {row.activity}
                           </TableCell>
                           <TableCell
                             component="th"
@@ -247,7 +211,7 @@ const ListAuxiliaire = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row.Adresse}
+                            {row.address}
                           </TableCell>
                           <TableCell align="right">
                             <BtnActionContainer
@@ -305,7 +269,7 @@ const ListAuxiliaire = () => {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={auxiliaireListe.length}
+              count={auxiliaryAccountList.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}

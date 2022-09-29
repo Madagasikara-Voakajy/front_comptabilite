@@ -2,25 +2,25 @@ import { AuxiliaireHeadCell } from "./auxuliaire.interface";
 
 export const auxiliaireheadCells: readonly AuxiliaireHeadCell[] = [
   {
-    id: "Raison_sociale_ou_Nom",
+    id: "name",
     numeric: false,
     disablePadding: false,
-    label: "Raison sociale ou Nom",
+    label: "Nom",
   },
   {
-    id: "Numéro_de_compte_Générale",
+    id: "email",
     numeric: false,
     disablePadding: false,
-    label: "Numéro de compte Générale",
+    label: "Email",
   },
   {
-    id: "Type",
+    id: "phone",
     numeric: false,
     disablePadding: false,
-    label: "Type",
+    label: "Téléphone",
   },
   {
-    id: "Activité",
+    id: "activity",
     numeric: false,
     disablePadding: false,
     label: "Activité ",

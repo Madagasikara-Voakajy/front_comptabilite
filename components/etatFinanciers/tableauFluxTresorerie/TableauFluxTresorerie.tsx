@@ -21,6 +21,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { columns } from "./table/tableauFluxTresorerie.constant";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const TableauFluxTresorerie = () => {
   const rows = [
@@ -98,6 +102,13 @@ const TableauFluxTresorerie = () => {
     createData("Incidence des variations de cours des devises", "-", "-"),
     createData("Variation de trésorerie", "(2,000,000.00)", "61,000,000.00"),
   ];
+
+  const [age, setAge] = React.useState("");
+
+  const handleChangeSelect = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
+
   return (
     <Container maxWidth="xl">
       <Stack>
@@ -117,7 +128,14 @@ const TableauFluxTresorerie = () => {
               variant="text"
               startIcon={<FileDownloadIcon />}
             >
-              Exporter
+              Excel
+            </Button>
+            <Button
+              color="info"
+              variant="text"
+              startIcon={<FileDownloadIcon />}
+            >
+              Pdf
             </Button>
           </Stack>
           <Typography variant="h4">Tableau de flux de trésorerie</Typography>
@@ -126,15 +144,29 @@ const TableauFluxTresorerie = () => {
       </Stack>
       <BodySection>
         <BodySectionHeader>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} alignItems={"center"}>
             <Grid item xs={12} md={4}>
               <KeyValue keyName="Période du" value={"1/1/2022"} />
-            </Grid>
-            <Grid item xs={12} md={4}>
               <KeyValue keyName="au" value={"31/12/2022"} />
             </Grid>
             <Grid item xs={12} md={4}>
               <KeyValue keyName="Unité monétaire" value={"Ariary"} />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">GRANT</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="GRANT"
+                  onChange={handleChangeSelect}
+                >
+                  <MenuItem value={10}>GRANT</MenuItem>
+                  <MenuItem value={20}>GRANT</MenuItem>
+                  <MenuItem value={30}>GRANT</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
         </BodySectionHeader>

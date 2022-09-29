@@ -1,6 +1,5 @@
 import { Order } from "../../../../config/table.config";
-// import { AuxiliaireItem } from "../../../redux/features/recruitmentRequest/recruitmentRequestSlice.interface";
-
+import { AuxiliairyAccountItem } from "../../../../redux/features/auxiliairyAccount/auxiliairyAccount.interface";
 export interface AuxiliaireHeadCell {
   disablePadding: boolean;
   id: any;
@@ -10,8 +9,8 @@ export interface AuxiliaireHeadCell {
 
 export interface AuxiliaireTableProps {
   onRequestSort: (
-    event: React.MouseEvent<unknown>
-    // property: keyof AuxiliaireItem
+    event: React.MouseEvent<unknown>,
+    property: keyof AuxiliairyAccountItem
   ) => void;
   order: Order;
   orderBy: string;

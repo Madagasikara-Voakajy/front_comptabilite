@@ -9,48 +9,32 @@ import {
 import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-// import {
-//   useAppSelector,
-//   useAppDispatch,
-// } from "../../../../../hooks/reduxHooks";
-// import {
-//   cancelEdit,
-//   createLeaveType,
-//   updateLeaveType,
-// } from "../../../../../redux/features/leaveType/leaveTypeSlice";
-
+import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
+import { createPcg, updatePcg } from "../../../../redux/features/pcg";
+import { cancelEdit } from "../../../../redux/features/pcg/pcgSlice";
 import OSTextField from "../../../shared/input/OSTextField";
 import OSSelectField from "../../../shared/select/OSSelectField";
 import useFetchPlanComptable from "../hooks/useFetchPlanComptable";
 
-
-const nature = [
-  { name: "CA", id: "CA" },
-  { name: "PA", id: "PA" },
-  { name: "AA", id: "AA" },
-];
-
 const PlanComptableForm = () => {
-  // const { isEditing, leaveType } = useAppSelector(
-  //   (state) => state.leaveType
-  // );
-  // const dispatch = useAppDispatch();
-  // const fetchLeaveTypes = useFetchLeaveTypes();
+  const { isEditing, pcg } = useAppSelector((state) => state.pcg);
+  const dispatch = useAppDispatch();
+  const fetchListPcg = useFetchPlanComptable();
 
   const handleSubmint = async (values: any) => {
     try {
-      // if (isEditing) {
-      //   delete values.id;
-      //   await dispatch(
-      //     updateLeaveType({
-      //       id: leaveType.id!,
-      //       leaveType: values,
-      //     })
-      //   );
-      // } else {
-      //   await dispatch(createLeaveType(values));
-      // }
-      // fetchLeaveTypes();
+      if (isEditing) {
+        delete values.id;
+        await dispatch(
+          updatePcg({
+            id: pcg.id!,
+            pcg: values,
+          })
+        );
+      } else {
+        await dispatch(createPcg(values));
+      }
+      fetchListPcg();
     } catch (e) {
       console.log(e);
     }
@@ -61,28 +45,20 @@ const PlanComptableForm = () => {
       <Formik
         enableReinitialize
         initialValues={
-          {
-            name: "",
-          }
-          // isEditing
-          //   ? leaveType
-          //   : {
-          //       reference: "",
-          //       name: "",
-          //       nature: "",
-          //       duration: 0,
-          //       requireAnAllocation: false,
-          //     }
+          isEditing
+            ? pcg
+            : {
+                code: "",
+                name: "",
+              }
         }
         validationSchema={Yup.object({
-          // reference: Yup.string().required("Champ obligatoire"),
-          // requireAnAllocation: Yup.boolean().required(
-          //   "Champ obligatoire"
-          // ),
+          code: Yup.string().min(6).required("Champ obligatoire"),
+          name: Yup.string().required("Champ obligatoire"),
         })}
         onSubmit={async (value: any, action) => {
-          // await handleSubmint(value);
-          // action.resetForm();
+          await handleSubmint(value);
+          action.resetForm();
         }}
       >
         {(formikProps) => (
@@ -91,19 +67,8 @@ const PlanComptableForm = () => {
               <Typography variant="h5" color="initial">
                 Formulaire (Créer/Modifier)
               </Typography>
-              <OSTextField
-                label="Code"
-                name="code"
-              ></OSTextField>
+              <OSTextField label="Code" name="code"></OSTextField>
               <OSTextField label="Nom" name="name"></OSTextField>
-              <OSSelectField
-                id="type"
-                name="type"
-                label="Type"
-                options={nature}
-                dataKey="name"
-                valueKey="id"
-              />
               <BtnContainer
                 direction="row"
                 spacing={2}
@@ -113,10 +78,10 @@ const PlanComptableForm = () => {
                   size="medium"
                   color="warning"
                   variant="text"
-                // onClick={() => {
-                //   formikProps.resetForm();
-                //   dispatch(cancelEdit());
-                // }}
+                  onClick={() => {
+                    formikProps.resetForm();
+                    dispatch(cancelEdit());
+                  }}
                 >
                   Annuler
                 </Button>

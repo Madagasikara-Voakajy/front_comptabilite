@@ -17,9 +17,18 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Nature from "./organism/nature/Nature";
 import Fonction from "./organism/fonction/Fonction";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const CompteResultat = () => {
   const [value, setValue] = React.useState(0);
+  const [age, setAge] = React.useState("");
+
+  const handleChangeSelect = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -48,7 +57,14 @@ const CompteResultat = () => {
               variant="text"
               startIcon={<FileDownloadIcon />}
             >
-              Exporter
+              Excel
+            </Button>
+            <Button
+              color="info"
+              variant="text"
+              startIcon={<FileDownloadIcon />}
+            >
+              Pdf
             </Button>
           </Stack>
           <Typography variant="h4">Compte de resultat</Typography>
@@ -57,15 +73,29 @@ const CompteResultat = () => {
       </Stack>
       <BodySection>
         <BodySectionHeader>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} alignItems={"center"}>
             <Grid item xs={12} md={4}>
               <KeyValue keyName="Période du" value={"1/1/2022"} />
-            </Grid>
-            <Grid item xs={12} md={4}>
               <KeyValue keyName="au" value={"31/12/2022"} />
             </Grid>
             <Grid item xs={12} md={4}>
               <KeyValue keyName="Unité monétaire" value={"Ariary"} />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">GRANT</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="GRANT"
+                  onChange={handleChangeSelect}
+                >
+                  <MenuItem value={10}>GRANT</MenuItem>
+                  <MenuItem value={20}>GRANT</MenuItem>
+                  <MenuItem value={30}>GRANT</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
         </BodySectionHeader>
