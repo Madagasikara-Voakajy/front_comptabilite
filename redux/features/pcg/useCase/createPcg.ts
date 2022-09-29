@@ -19,6 +19,14 @@ export const createPcg = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       if (error.response) {
+        if(error.response.data.statusCode == 409){
+            thunkAPI.dispatch(
+                enqueueSnackbar({
+                    message: "Cet code exite déja:"+ data.code,
+                    options: { variant: "error" },
+                })
+            );
+        }
         return thunkAPI.rejectWithValue(error);
       }
       throw error;
