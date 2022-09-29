@@ -19,7 +19,10 @@ import { Check, Close, Save } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { useAppSelector, useAppDispatch } from "../../../../hooks/reduxHooks";
+import {
+  useAppSelector,
+  useAppDispatch,
+} from "../../../../hooks/reduxHooks";
 import { cancelEdit } from "../../../../redux/features/currency/currencySlice";
 import {
   createCurrency,
@@ -30,7 +33,9 @@ import OSTextField from "../../../shared/input/OSTextField";
 import useFetchCurrencyListe from "../hooks/useFetchCurrency";
 
 const CurrencyForm = () => {
-  const { isEditing, currency }: any = useAppSelector((state) => state.currency);
+  const { isEditing, currency }: any = useAppSelector(
+    (state) => state.currency
+  );
   const dispatch = useAppDispatch();
   const fetchCurrencyListe = useFetchCurrencyListe();
 
@@ -40,55 +45,38 @@ const CurrencyForm = () => {
   ];
   const router = useRouter();
 
-
   const initialValue = {
     iso: "",
     symbol: "",
     name: "",
-    lastUpdated: new Date()
-      .toLocaleDateString()
-      .replaceAll("/", "-")
-      .split("-")
-      .reverse()
-      .join("-"),
     // rate: 0,
     decimalPlaces: 0,
-    symbolPosition:"BEFORE",
-    thousandSeparator:"",
+    symbolPosition: "BEFORE",
+    thousandSeparator: "",
   };
   const editValue = {
     iso: currency.iso,
     symbol: currency.symbol,
     name: currency.name,
-    lastUpdated: new Date(currency.lastUpdated ? currency.lastUpdated : "")
-      .toLocaleDateString()
-      .replaceAll("/", "-")
-      .split("-")
-      .reverse()
-      .join("-"),
-      decimalPlaces: currency.decimalPlaces,
-      symbolPosition: currency.symbolPosition,
-      thousandSeparator: currency.thousandSeparator,
+    decimalPlaces: currency.decimalPlaces,
+    symbolPosition: currency.symbolPosition,
+    thousandSeparator: currency.thousandSeparator,
   };
 
-
-
-
   const handleSubmit = async (values: any) => {
-    console.log(values);
     try {
       if (isEditing) {
-        values.lastUpdated = new Date(values.lastUpdated).toISOString();
         // set empty values to null
         Object.keys(values).forEach((key) => {
           if (values[key] === "") {
             values[key] = null;
           }
         });
-        await dispatch(updateCurrency({ id: currency.id!, currency: values }));
+        await dispatch(
+          updateCurrency({ id: currency.id!, currency: values })
+        );
         router.push("/configurations/devise");
       } else {
-        values.lastUpdated = new Date(values.lastUpdated).toISOString();
         // set empty values to null
         Object.keys(values).forEach((key) => {
           if (values[key] === "") {
@@ -104,21 +92,20 @@ const CurrencyForm = () => {
     }
   };
 
-
   return (
     <Container maxWidth="xl" sx={{ pb: 5 }}>
       <Formik
         enableReinitialize
-        initialValues={
-          isEditing  ? editValue : initialValue
-        }
+        initialValues={isEditing ? editValue : initialValue}
         validationSchema={Yup.object({
           iso: Yup.string().required("Champ obligatoire"),
           symbol: Yup.string().required("Champ obligatoire"),
           name: Yup.string().required("Champ obligatoire"),
           decimalPlaces: Yup.number().required("champ obligatoire"),
           symbolPosition: Yup.string().required("champ obligatoire"),
-          thousandSeparator: Yup.string().required("Champ obligatoire"),
+          thousandSeparator: Yup.string().required(
+            "Champ obligatoire"
+          ),
         })}
         onSubmit={async (value: any, action) => {
           await handleSubmit(value);
