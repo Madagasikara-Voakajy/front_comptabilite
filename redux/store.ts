@@ -4,6 +4,9 @@ import { menuSlice } from "./features/menu/menuSlice";
 import { menuProfileSlice } from "./features/menu/menuprofileSlice";
 import { authSlice } from "./features/auth/authSlice";
 import { notificationSlice } from "./features/notification/notificationSlice";
+import { currencySlice } from "./features/currency/currencySlice";
+
+
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +15,7 @@ export const store = configureStore({
     menu: menuSlice.reducer,
     menuprofile: menuProfileSlice.reducer,
     notification: notificationSlice.reducer,
+    currency: currencySlice.reducer,
   },
 });
 

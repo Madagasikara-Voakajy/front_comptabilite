@@ -1,15 +1,14 @@
 import React from 'react';
 import BackOfficeLayout from '../../../../layouts/backOffice';
 import { Container } from '@mui/material';
-import AddDevise from '../../../../components/configurations/devise/add/addDevise';
-
+import CurrencyForm from '../../../../components/configurations/currency/add/CurrencyForm';
 
 
 const Index = () => {
   return (
     <BackOfficeLayout>
         <Container maxWidth="xl">
-            <AddDevise />
+            <CurrencyForm />
         </Container>
     </BackOfficeLayout>
   )
