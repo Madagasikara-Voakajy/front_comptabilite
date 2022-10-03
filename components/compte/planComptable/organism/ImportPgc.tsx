@@ -31,7 +31,7 @@ const ImportPgc = () => {
     const dispatch = useAppDispatch();
     const fetchListPcg = useFetchPlanComptable();
 
-    const handleClickOpen = () => {
+    const handleClickOpen = () => { 
         setOpen(true);
     };
     
