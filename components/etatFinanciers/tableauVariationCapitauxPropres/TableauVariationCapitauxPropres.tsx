@@ -6,8 +6,11 @@ import {
   Divider,
   Typography,
   styled,
+  Autocomplete,
+  TextField,
   Box,
 } from "@mui/material";
+import Chip from '@mui/material/Chip';
 import Container from "@mui/material/Container";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -30,7 +33,15 @@ const TableauVariationCapitauxPropres = () => {
   const rows = [
     createData("Solde au 31 décembre N-2", "-", "-", "-", "-", "-"),
   ];
-
+  const top100Films = [
+    { title: 'The Shawshank Redemption', year: 1994 },
+    { title: 'The Godfather', year: 1972 },
+    { title: 'The Godfather: Part II', year: 1974 },
+    { title: 'The Dark Knight', year: 2008 },
+    { title: '12 Angry Men', year: 1957 },
+    { title: "Schindler's List", year: 1993 },
+    { title: 'Pulp Fiction', year: 1994 }
+  ]
   const rowsTwo = [
     createData("Changement de méthode comptable", "-", "-", "-", "-", "-"),
     createData("Correction d'erreurs", "-", "-", "-", "-", "-"),
@@ -144,18 +155,25 @@ const TableauVariationCapitauxPropres = () => {
             </Grid>
             <Grid item xs={12} md={4}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">GRANT</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={age}
-                  label="GRANT"
-                  onChange={handleChangeSelect}
-                >
-                  <MenuItem value={10}>GRANT</MenuItem>
-                  <MenuItem value={20}>GRANT</MenuItem>
-                  <MenuItem value={30}>GRANT</MenuItem>
-                </Select>
+              <Autocomplete
+        multiple
+        id="tags-filled"
+        options={top100Films.map((option) => option.title)}
+        freeSolo
+        renderTags={(value: readonly string[], getTagProps) =>
+          value.map((option: string, index: number) => (
+            <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+          ))
+        }
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="filled"
+            label="GRANT"
+            placeholder="GRANT"
+          />
+        )}
+      />
               </FormControl>
             </Grid>
           </Grid>
