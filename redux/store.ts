@@ -5,6 +5,7 @@ import { menuProfileSlice } from "./features/menu/menuprofileSlice";
 import { authSlice } from "./features/auth/authSlice";
 import { notificationSlice } from "./features/notification/notificationSlice";
 import { currencySlice } from "./features/currency/currencySlice";
+import { comptaFileSlice } from "./features/comptaFile/comptaFileSlice";
 
 
 
@@ -16,6 +17,7 @@ export const store = configureStore({
     menuprofile: menuProfileSlice.reducer,
     notification: notificationSlice.reducer,
     currency: currencySlice.reducer,
+    comptaFile: comptaFileSlice.reducer,
   },
 });
 

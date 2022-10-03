@@ -181,6 +181,12 @@ const menu = [
         link: "/configurations/mode-paiement",
         icon: "",
       },
+      {
+        id: 57,
+        name: "Grant",
+        link: "/configurations/grant",
+        icon: "",
+      },
     ],
   },
 ];
