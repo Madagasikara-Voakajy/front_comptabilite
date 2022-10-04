@@ -97,12 +97,12 @@ const EtatFinancier = () => {
                
                 <Autocomplete
         multiple
-        id="tags-filled"
+        id="gant"
         options={top100Films.map((option) => option.title)}
         freeSolo
         renderTags={(value: readonly string[], getTagProps) =>
           value.map((option: string, index: number) => (
-            <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+            <Chip key={index} variant="outlined" label={option} {...getTagProps({ index })} />
           ))
         }
         renderInput={(params) => (
