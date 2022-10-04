@@ -4,6 +4,7 @@ import Head from "next/head";
 import BackOfficeLayout from "../layouts/backOffice";
 import ListAnneeExercice from "../components/anneeExercice";
 import useBasePath from "../hooks/useBasePath";
+import HomeComptabilite from "../components/home";
 
 const Home: NextPage = () => {
   const basePath = useBasePath();
@@ -15,7 +16,8 @@ const Home: NextPage = () => {
         <link rel="icon" href={`${basePath}/favicon.ico`} />
       </Head>
       <Container maxWidth="xl">
-        <ListAnneeExercice />
+        {/* <ListAnneeExercice /> */}
+        <HomeComptabilite />
       </Container>
     </BackOfficeLayout>
   );
