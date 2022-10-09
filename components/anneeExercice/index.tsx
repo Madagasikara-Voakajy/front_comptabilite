@@ -17,7 +17,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { NavigationContainer } from "../configurations/fichier-comptable/add/FormFichierComptable";
 
 const ListAnneeExercice = () => {
 	const [open, setOpen] = React.useState(false);
@@ -112,5 +111,9 @@ const ListAnneeExercice = () => {
 export default ListAnneeExercice;
 
 const SectionNavigation = styled(Stack)(({ theme }) => ({}));
+
+const NavigationContainer = styled(Stack)(({ theme }) => ({
+	marginBottom: theme.spacing(2),
+}));
 
 const SectionBody = styled(Stack)(({ theme }) => ({}));

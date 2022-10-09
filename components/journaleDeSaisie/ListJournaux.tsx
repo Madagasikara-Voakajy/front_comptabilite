@@ -9,7 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
+import IconButton from "@mui/material/IconButton";
 import Data, { Order } from "./table/type-variable";
 import { rows } from "./table/constante";
 import EnhancedTableToolbar from "./table/EnhancedTableToolbar";
@@ -21,6 +21,7 @@ import {
 	labelRowsPerPage,
 } from "../../config/table.config";
 import AddIcon from "@mui/icons-material/Add";
+import { Visibility } from "@mui/icons-material";
 
 const ListJournaux = () => {
 	const [order, setOrder] = React.useState<Order>("asc");
@@ -149,7 +150,7 @@ const ListJournaux = () => {
 															direction="row"
 															justifyContent="center"
 														>
-															<Link href="/tous-les-journals-de-saisie/pieceComptable">
+															<Link href="/journals-de-saisie/pieceComptable">
 																<Button
 																	sx={{ mr: 1 }}
 																	color="accent"
@@ -159,6 +160,16 @@ const ListJournaux = () => {
 																	<AddIcon />
 																	Piéce Comptable
 																</Button>
+															</Link>
+															<Link href="/journals-de-saisie/pieceComptable">
+																<IconButton
+																	color="info"
+																	aria-label="Modifier"
+																	size="small"
+																	component="span"
+																>
+																	<Visibility />
+																</IconButton>
 															</Link>
 														</BtnActionContainer>
 													</TableCell>

@@ -6,6 +6,9 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material";
+import LinkOutlined from "@mui/icons-material/LinkOutlined";
+import Info from "@mui/icons-material/Info";
+import InfoOutlined from "@mui/icons-material/InfoOutlined";
 
 const HomeComptabilite = () => {
 	return (
@@ -18,20 +21,110 @@ const HomeComptabilite = () => {
 								<Typography sx={{ mb: 2 }} variant="h5" color="initial">
 									Gérer fichier comptable
 								</Typography>
-								<Link href="/configurations/fichier-comptable">
-									<Button variant="text" color="info">
-										Tous les fichiers comptables
+								<Typography color="GrayText" mb={2}>
+									<InfoOutlined fontSize="inherit" /> Pour gérer les fichiers,
+									journals et les pièces comptables, accéder à la page fichier
+									comptable
+								</Typography>
+								<Link href="/fichier">
+									<Button
+										variant="contained"
+										color="primary"
+										startIcon={<LinkOutlined />}
+									>
+										fichier comptable
 									</Button>
 								</Link>
 							</LinkContainer>
 						</Grid>
-						<Grid item xs={12}>
+					</Grid>
+				</Grid>
+				<Grid item xs={12} md={12} lg={8}>
+					<Grid container spacing={2}>
+						<Grid item xs={12} md={6}>
+							<LinkContainer>
+								<Typography sx={{ mb: 2 }} variant="h5" color="initial">
+									Configuration de base
+								</Typography>
+								<Box>
+									<Link href="/comptes/general">
+										<Button variant="text" color="info">
+											Compte générale (PCG)
+										</Button>
+									</Link>
+								</Box>
+								<Box>
+									<Link href="/comptes/auxiliaire">
+										<Button variant="text" color="info">
+											Compte Auxiliaire (compte tiers)
+										</Button>
+									</Link>
+								</Box>
+								<Box>
+									<Link href="/configurations/devise">
+										<Button variant="text" color="info">
+											Liste des dévises
+										</Button>
+									</Link>
+								</Box>
+								<Box>
+									<Link href="/configurations/type-journal">
+										<Button variant="text" color="info">
+											Types de journals
+										</Button>
+									</Link>
+								</Box>
+								{/* <Box>
+							<Button variant="text" color="info">
+								Types de mode de paiements
+							</Button>
+						</Box> */}
+							</LinkContainer>
+						</Grid>
+
+						<Grid item xs={12} md={6}>
+							<LinkContainer>
+								<Typography sx={{ mb: 2 }} variant="h5" color="initial">
+									Configuration états financières
+								</Typography>
+								<Box>
+									<Link href="/etat-financieres/bilan">
+										<Button variant="text" color="info">
+											Bilan passif/actif
+										</Button>
+									</Link>
+								</Box>
+								<Box>
+									<Link href="/etat-financieres/compte-resultat">
+										<Button variant="text" color="info">
+											Compte de résiltats par nature / par fonction
+										</Button>
+									</Link>
+								</Box>
+								<Box>
+									<Link href="/etat-financieres/tableau-flux-tresorerie">
+										<Button variant="text" color="info">
+											Tableau de flux de trésorerie
+										</Button>
+									</Link>
+								</Box>
+								<Box>
+									<Link href="/etat-financieres/tableau-variation-capitaux-propres">
+										<Button variant="text" color="info">
+											Variation des capitaux propres
+										</Button>
+									</Link>
+								</Box>
+							</LinkContainer>
+						</Grid>
+
+						<Grid item xs={12} md={6}>
 							<LinkContainer>
 								<Typography sx={{ mb: 2 }} variant="h5" color="initial">
 									Gérer GRANT
 								</Typography>
 								<Box>
-									<Link href="/configurations/poste-analytique">
+									<Link href="/configurations/post-analytique">
 										<Button variant="text" color="info">
 											Tous les postes Analytiques
 										</Button>
@@ -54,81 +147,6 @@ const HomeComptabilite = () => {
 							</LinkContainer>
 						</Grid>
 					</Grid>
-				</Grid>
-				<Grid item xs={12} md={6} lg={4}>
-					<LinkContainer>
-						<Typography sx={{ mb: 2 }} variant="h5" color="initial">
-							Configuration de base
-						</Typography>
-						<Box>
-							<Link href="/compte/general">
-								<Button variant="text" color="info">
-									Compte générale (PCG)
-								</Button>
-							</Link>
-						</Box>
-						<Box>
-							<Link href="/compte/auxiliaire">
-								<Button variant="text" color="info">
-									Compte Auxiliaire (compte tiers)
-								</Button>
-							</Link>
-						</Box>
-						<Box>
-							<Link href="/configurations/devise">
-								<Button variant="text" color="info">
-									Liste des dévises
-								</Button>
-							</Link>
-						</Box>
-						<Box>
-							<Link href="/configurations/type-journal">
-								<Button variant="text" color="info">
-									Types de journals
-								</Button>
-							</Link>
-						</Box>
-						{/* <Box>
-							<Button variant="text" color="info">
-								Types de mode de paiements
-							</Button>
-						</Box> */}
-					</LinkContainer>
-				</Grid>
-				<Grid item xs={12} md={6} lg={4}>
-					<LinkContainer>
-						<Typography sx={{ mb: 2 }} variant="h5" color="initial">
-							Configuration états financières
-						</Typography>
-						<Box>
-							<Link href="/etat-financieres/bilan">
-								<Button variant="text" color="info">
-									Bilan passif/actif
-								</Button>
-							</Link>
-						</Box>
-						<Box>
-							<Link href="/etat-financieres/compte-resultat">
-								<Button variant="text" color="info">
-									Compte de résiltats par nature / par fonction
-								</Button>
-							</Link>
-						</Box>
-						<Box>
-							<Link href="/etat-financieres/tableau-flux-tresorerie">
-								<Button variant="text" color="info">
-									Tableau de flux de trésorerie
-								</Button>
-							</Link>
-						</Box>
-						<Box>
-							<Link href="/etat-financieres/tableau-variation-capitaux-propres">
-								<Button variant="text" color="info">
-									Variation des capitaux propres
-								</Button>
-							</Link>
-						</Box>
-					</LinkContainer>
 				</Grid>
 			</Grid>
 		</Container>
