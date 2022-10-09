@@ -1,17 +1,14 @@
-import React from 'react';
-import BackOfficeLayout from '../../../layouts/backOffice';
-import { Container } from '@mui/material';
-import AddJournal from '../../../components/journaleDeSaisie/add/addJournal';
-
+import React from "react";
+import BackOfficeLayout from "../../../layouts/backOffice";
+import { Container } from "@mui/material";
+import AddJournal from "../../../components/journaleDeSaisie/add/addJournal";
 
 const Index = () => {
-  return (
-    <BackOfficeLayout>
-        <Container maxWidth="xl">
-          <AddJournal />
-        </Container>
-    </BackOfficeLayout>
-  )
-}
+	return (
+		<BackOfficeLayout>
+			<AddJournal />
+		</BackOfficeLayout>
+	);
+};
 
 export default Index;

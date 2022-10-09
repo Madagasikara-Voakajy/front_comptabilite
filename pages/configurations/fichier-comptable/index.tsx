@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import BackOfficeLayout from "../../../layouts/backOffice";
 import FichierComptable from "../../../components/configurations/fichier-comptable/FichierComptable";
 
-const IndexPage = () => {
+const AccountingFile = () => {
 	return (
 		<BackOfficeLayout>
 			<FichierComptable />
@@ -11,4 +11,4 @@ const IndexPage = () => {
 	);
 };
 
-export default IndexPage;
+export default AccountingFile;

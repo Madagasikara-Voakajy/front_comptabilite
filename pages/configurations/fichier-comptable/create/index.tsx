@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import BackOfficeLayout from "../../../../layouts/backOffice";
 import FormFichierComptable from "../../../../components/configurations/fichier-comptable/add/FormFichierComptable";
 
-const index = () => {
+const AccountingFileForm = () => {
 	return (
 		<BackOfficeLayout>
 			<FormFichierComptable />
@@ -11,4 +11,4 @@ const index = () => {
 	);
 };
 
-export default index;
+export default AccountingFileForm;

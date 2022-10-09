@@ -4,13 +4,11 @@ import BackOfficeLayout from "../../../layouts/backOffice";
 import ToutesLesOperations from "../../../components/grand-livre/grandLivre/toutesLesOperation";
 
 const Index = () => {
-  return (
-    <BackOfficeLayout>
-      <Container maxWidth="xl">
-        <ToutesLesOperations />
-      </Container>
-    </BackOfficeLayout>
-  );
+	return (
+		<BackOfficeLayout>
+			<ToutesLesOperations />
+		</BackOfficeLayout>
+	);
 };
 
 export default Index;

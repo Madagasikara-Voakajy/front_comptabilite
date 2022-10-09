@@ -6,9 +6,7 @@ import ListGrant from "../../../components/configurations/grant/ListGrant";
 const index = () => {
 	return (
 		<BackOfficeLayout>
-			<Container maxWidth="xl">
-				<ListGrant />
-			</Container>
+			<ListGrant />
 		</BackOfficeLayout>
 	);
 };
