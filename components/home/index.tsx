@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -17,9 +18,11 @@ const HomeComptabilite = () => {
 								<Typography sx={{ mb: 2 }} variant="h5" color="initial">
 									Gérer fichier comptable
 								</Typography>
-								<Button variant="text" color="info">
-									Tous les fichiers comptables
-								</Button>
+								<Link href="/configurations/fichier-comptable">
+									<Button variant="text" color="info">
+										Tous les fichiers comptables
+									</Button>
+								</Link>
 							</LinkContainer>
 						</Grid>
 						<Grid item xs={12}>
