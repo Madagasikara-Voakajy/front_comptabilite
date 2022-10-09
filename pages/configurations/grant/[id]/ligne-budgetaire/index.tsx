@@ -4,13 +4,11 @@ import BackOfficeLayout from "../../../../../layouts/backOffice";
 import ListLigneBudgetaire from "../../../../../components/configurations/grant/ligne-budgetaire/ListLigneBudgetaire";
 
 const index = () => {
-  return (
-    <BackOfficeLayout>
-      <Container maxWidth="xl">
-        <ListLigneBudgetaire />
-      </Container>
-    </BackOfficeLayout>
-  );
+	return (
+		<BackOfficeLayout>
+			<ListLigneBudgetaire />
+		</BackOfficeLayout>
+	);
 };
 
 export default index;

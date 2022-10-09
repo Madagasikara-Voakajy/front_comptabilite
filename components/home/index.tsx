@@ -138,7 +138,7 @@ const HomeComptabilite = () => {
 									</Link>
 								</Box>
 								<Box>
-									<Link href="/configurations/ligne-budgetaire">
+									<Link href="/configurations/grant/1/ligne-budgetaire">
 										<Button variant="text" color="info">
 											Toustes les lignes budgétaires
 										</Button>
