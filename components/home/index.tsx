@@ -31,19 +31,25 @@ const HomeComptabilite = () => {
 									Gérer GRANT
 								</Typography>
 								<Box>
-									<Button variant="text" color="info">
-										Tous les postes Analytiques
-									</Button>
+									<Link href="/configurations/poste-analytique">
+										<Button variant="text" color="info">
+											Tous les postes Analytiques
+										</Button>
+									</Link>
 								</Box>
 								<Box>
-									<Button variant="text" color="info">
-										Tous les GRANTS
-									</Button>
+									<Link href="/configurations/grant">
+										<Button variant="text" color="info">
+											Tous les GRANTS
+										</Button>
+									</Link>
 								</Box>
 								<Box>
-									<Button variant="text" color="info">
-										Toustes les lignes budgétaires
-									</Button>
+									<Link href="/configurations/ligne-budgetaire">
+										<Button variant="text" color="info">
+											Toustes les lignes budgétaires
+										</Button>
+									</Link>
 								</Box>
 							</LinkContainer>
 						</Grid>
@@ -55,30 +61,38 @@ const HomeComptabilite = () => {
 							Configuration de base
 						</Typography>
 						<Box>
-							<Button variant="text" color="info">
-								Compte générale (PCG)
-							</Button>
+							<Link href="/compte/general">
+								<Button variant="text" color="info">
+									Compte générale (PCG)
+								</Button>
+							</Link>
 						</Box>
 						<Box>
-							<Button variant="text" color="info">
-								Compte Auxiliaire (compte tiers)
-							</Button>
+							<Link href="/compte/auxiliaire">
+								<Button variant="text" color="info">
+									Compte Auxiliaire (compte tiers)
+								</Button>
+							</Link>
 						</Box>
 						<Box>
-							<Button variant="text" color="info">
-								Liste des dévises
-							</Button>
+							<Link href="/configurations/devise">
+								<Button variant="text" color="info">
+									Liste des dévises
+								</Button>
+							</Link>
 						</Box>
 						<Box>
-							<Button variant="text" color="info">
-								Types de journals
-							</Button>
+							<Link href="/configurations/type-journal">
+								<Button variant="text" color="info">
+									Types de journals
+								</Button>
+							</Link>
 						</Box>
-						<Box>
+						{/* <Box>
 							<Button variant="text" color="info">
 								Types de mode de paiements
 							</Button>
-						</Box>
+						</Box> */}
 					</LinkContainer>
 				</Grid>
 				<Grid item xs={12} md={6} lg={4}>
@@ -87,34 +101,32 @@ const HomeComptabilite = () => {
 							Configuration états financières
 						</Typography>
 						<Box>
-							<Button variant="text" color="info">
-								Bilan actif
-							</Button>
+							<Link href="/etat-financieres/bilan">
+								<Button variant="text" color="info">
+									Bilan passif/actif
+								</Button>
+							</Link>
 						</Box>
 						<Box>
-							<Button variant="text" color="info">
-								Bilan passif
-							</Button>
+							<Link href="/etat-financieres/compte-resultat">
+								<Button variant="text" color="info">
+									Compte de résiltats par nature / par fonction
+								</Button>
+							</Link>
 						</Box>
 						<Box>
-							<Button variant="text" color="info">
-								Compte de résiltats par nature
-							</Button>
+							<Link href="/etat-financieres/tableau-flux-tresorerie">
+								<Button variant="text" color="info">
+									Tableau de flux de trésorerie
+								</Button>
+							</Link>
 						</Box>
 						<Box>
-							<Button variant="text" color="info">
-								Compte de résutats par fonction
-							</Button>
-						</Box>
-						<Box>
-							<Button variant="text" color="info">
-								Tableau de flux de trésorerie
-							</Button>
-						</Box>
-						<Box>
-							<Button variant="text" color="info">
-								Variation des capitaux propres
-							</Button>
+							<Link href="/etat-financieres/tableau-variation-capitaux-propres">
+								<Button variant="text" color="info">
+									Variation des capitaux propres
+								</Button>
+							</Link>
 						</Box>
 					</LinkContainer>
 				</Grid>
