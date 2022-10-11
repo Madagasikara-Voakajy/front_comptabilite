@@ -23,14 +23,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Badge from "@mui/material/Badge";
 import Add from "@mui/icons-material/Add";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
-// import {
-//   deleteAuxiliairyAccount,
-//   createAuxiliairyAccount,
-//   editAuxiliairyAccount,
-//   getAuxiliairyAccount,
-//   getAuxiliairyAccountList,
-//   updateAuxiliairyAccount,
-// } from "../../../redux/features/auxiliairyAccount";
+import {
+  deleteBudgetLine,
+  createBudgetLine,
+  editBudgetLine,
+  getBudgetLine,
+  getBudgetLineList,
+  updateBudgetLine,
+} from "../../../../redux/features/budgetLine";
 import {
   defaultLabelDisplayedRows,
   getComparator,
@@ -42,19 +42,17 @@ import useFetchLigneBudgetaire from "./hooks/useFetchLigneBudgetaire";
 import { useConfirm } from "material-ui-confirm";
 import LigneBudgetaireTableHead from "./table/LigneBudgetaireTableHead";
 import LigneBudgetaireTableToolbar from "./table/LigneBudgetaireTableToolbar";
-// import { cancelEdit } from "../../../redux/features/auxiliairyAccount/auxiliairyAccountSlice";
-// import { AuxiliairyAccountItem } from "../../../redux/features/auxiliairyAccount/auxiliairyAccount.interface";
+import { cancelEdit } from "../../../../redux/features/budgetLine/budgetLineSlice";
+import { BudgetLineItem } from "../../../../redux/features/budgetLine/budgetLine.interface";
 
 const ListLigneBudgetaire = () => {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const dispatch: any = useAppDispatch();
-  const listLigneBudgetaire: any = [];
-  // const { listLigneBudgetaire } = useAppSelector(
-  //   (state) => state.auxiliaryAccount
-  // );
+  const { budgetLineList } = useAppSelector((state) => state.budgetLine);
   const router = useRouter();
+  const { id }: any = router.query;
   const confirm = useConfirm();
 
   const fetchLigneBudgetaireList = useFetchLigneBudgetaire();
@@ -64,7 +62,7 @@ const ListLigneBudgetaire = () => {
   }, [router.query]);
 
   const handleClickEdit = async (id: any) => {
-    // await dispatch(editAuxiliairyAccount({ id }));
+    await dispatch(editBudgetLine({ id }));
   };
 
   const handleclickDelete = async (id: any) => {
@@ -81,7 +79,7 @@ const ListLigneBudgetaire = () => {
       },
     })
       .then(async () => {
-        // await dispatch(deleteAuxiliairyAccount({ id }));
+        await dispatch(deleteBudgetLine({ id }));
         fetchLigneBudgetaireList();
       })
       .catch(() => {});
@@ -98,39 +96,14 @@ const ListLigneBudgetaire = () => {
     setPage(0);
   };
 
-  // function getColorStatus(status: any) {
-  //   switch (status) {
-  //     case "PENDING":
-  //       return "info";
-  //     case "APPROVED":
-  //       return "primary";
-  //     case "REJECTED":
-  //       return "warning";
-  //     default:
-  //       break;
-  //   }
-  // }
-  // function getTextStatus(status: any) {
-  //   switch (status) {
-  //     case "PENDING":
-  //       return "En_attente";
-  //     case "APPROVED":
-  //       return "Validé";
-  //     case "REJECTED":
-  //       return "Refusé";
-  //     default:
-  //       break;
-  //   }
-  // }
-
   const handleAdd = () => {
-    // dispatch(cancelEdit());
+    dispatch(cancelEdit());
   };
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0
-      ? Math.max(0, (1 + page) * rowsPerPage - listLigneBudgetaire.length)
+      ? Math.max(0, (1 + page) * rowsPerPage - budgetLineList.length)
       : 0;
 
   return (
@@ -141,7 +114,13 @@ const ListLigneBudgetaire = () => {
           justifyContent="space-between"
           mb={2}
         >
-          <Link href="/configurations/grant/1/ligne-budgetaire/add">
+          <Link
+            href={
+              id
+                ? `/configurations/grant/${id}/ligne-budgetaire/add`
+                : `/configurations/ligne-budgetaire/add`
+            }
+          >
             <Button
               onClick={handleAdd}
               variant="contained"
@@ -169,9 +148,9 @@ const ListLigneBudgetaire = () => {
                 <TableBody>
                   {/* if you don't need to support IE11, you can replace the `stableSort` call with:
               rows.slice().sort(getComparator(order, orderBy)) */}
-                  {listLigneBudgetaire
+                  {budgetLineList
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row: any, index: any) => {
+                    .map((row: BudgetLineItem, index: any) => {
                       const labelId = `enhanced-table-checkbox-${index}`;
 
                       return (
@@ -183,7 +162,7 @@ const ListLigneBudgetaire = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row.code_grant}
+                            {row.code}
                           </TableCell>
                           <TableCell
                             component="th"
@@ -192,16 +171,7 @@ const ListLigneBudgetaire = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row?.nom}
-                          </TableCell>
-                          <TableCell
-                            component="th"
-                            id={labelId}
-                            scope="row"
-                            padding="normal"
-                            align="left"
-                          >
-                            {row.post_analytique}
+                            {row?.grant?.code}
                           </TableCell>
 
                           <TableCell align="right">
@@ -209,18 +179,12 @@ const ListLigneBudgetaire = () => {
                               direction="row"
                               justifyContent="right"
                             >
-                              {/* <Button
-                                variant="outlined"
-                                color="accent"
-                                // onClick={handleOpen}
-                                startIcon={<Add />}
-                                size="small"
-                              >
-                                Ligne budgetaire
-                              </Button> */}
-
                               <Link
-                                href={`/configurations/grant/${row.id}/edit`}
+                                href={
+                                  id
+                                    ? `/configurations/grant/${id}/ligne-budgetaire/${row.id}/edit`
+                                    : `/configurations/ligne-budgetaire/${row.id}/edit`
+                                }
                               >
                                 <IconButton
                                   color="primary"
@@ -262,7 +226,7 @@ const ListLigneBudgetaire = () => {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={listLigneBudgetaire.length}
+              count={budgetLineList.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
@@ -271,10 +235,6 @@ const ListLigneBudgetaire = () => {
               labelRowsPerPage={labelRowsPerPage}
             />
           </Paper>
-          {/* <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      /> */}
         </Box>
       </SectionTable>
     </Container>

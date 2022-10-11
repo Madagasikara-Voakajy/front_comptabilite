@@ -5,11 +5,16 @@ import { TableLoading } from "../../../../shared/loading";
 import { useAppSelector } from "../../../../../hooks/reduxHooks";
 import { useRouter } from "next/router";
 import { debounce } from "lodash";
+import { editGrant } from "../../../../../redux/features/grant";
+import { useAppDispatch } from "../../../../../hooks/reduxHooks";
 
 const LigneBudgetaireTableToolbar = () => {
-  // const { loading } = useAppSelector((state) => state.auxiliaryAccount);
+  const { loading } = useAppSelector((state) => state.budgetLine);
+  const { grant } = useAppSelector((state) => state.grant);
+  const dispatch = useAppDispatch();
   const [key, setKey] = useState<any>("");
   const router = useRouter();
+  const { id }: any = router.query;
 
   // initial search input value
   useEffect(() => {
@@ -17,6 +22,12 @@ const LigneBudgetaireTableToolbar = () => {
       setKey(router.query.search);
     }
   }, [router.query.search]);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(editGrant({ id }));
+    }
+  }, [id]);
 
   const search = (key: string) => {
     const query = { ...router.query, search: key };
@@ -51,7 +62,7 @@ const LigneBudgetaireTableToolbar = () => {
           }}
         >
           <Typography variant="h6" id="tableTitle" component="div">
-            List des lignes budgetaires: GRANT Selectionner
+            List des lignes budgetaires {id && " : " + grant.code}
           </Typography>
           <TextField
             variant="outlined"
@@ -64,7 +75,7 @@ const LigneBudgetaireTableToolbar = () => {
           />
         </Stack>
       </Toolbar>
-      {/* {loading && <TableLoading />} */}
+      {loading && <TableLoading />}
     </>
   );
 };

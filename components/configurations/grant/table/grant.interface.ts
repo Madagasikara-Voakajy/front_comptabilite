@@ -1,5 +1,5 @@
 import { Order } from "../../../../config/table.config";
-// import { AuxiliairyAccountItem } from "../../../../redux/features/auxiliairyAccount/auxiliairyAccount.interface";
+import { GrantItem } from "../../../../redux/features/grant/grant.interface";
 export interface GrantHeadCell {
   disablePadding: boolean;
   id: any;
@@ -9,8 +9,8 @@ export interface GrantHeadCell {
 
 export interface GrantTableProps {
   onRequestSort: (
-    event: React.MouseEvent<unknown>
-    // property: keyof AuxiliairyAccountItem
+    event: React.MouseEvent<unknown>,
+    property: keyof GrantItem
   ) => void;
   order: Order;
   orderBy: string;

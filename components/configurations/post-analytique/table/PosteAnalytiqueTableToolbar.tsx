@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { debounce } from "lodash";
 
 const PosteAnalytiqueTableToolbar = () => {
-  // const { loading } = useAppSelector((state) => state.auxiliaryAccount);
+  const { loading } = useAppSelector((state) => state.postAnalytic);
   const [key, setKey] = useState<any>("");
   const router = useRouter();
 
@@ -64,7 +64,7 @@ const PosteAnalytiqueTableToolbar = () => {
           />
         </Stack>
       </Toolbar>
-      {/* {loading && <TableLoading />} */}
+      {loading && <TableLoading />}
     </>
   );
 };

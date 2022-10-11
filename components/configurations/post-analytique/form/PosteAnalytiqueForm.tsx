@@ -14,11 +14,11 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
 import {
-  createAuxiliairyAccount,
-  updateAuxiliairyAccount,
-  editAuxiliairyAccount,
-} from "../../../../redux/features/auxiliairyAccount";
-import { cancelEdit } from "../../../../redux/features/auxiliairyAccount/auxiliairyAccountSlice";
+  createPostAnalytic,
+  updatePostAnalytic,
+  editPostAnalytic,
+} from "../../../../redux/features/postAnalytic";
+import { cancelEdit } from "../../../../redux/features/postAnalytic/postAnalyticSlice";
 import { useRouter } from "next/router";
 import OSTextField from "../../../shared/input/OSTextField";
 import OSSelectField from "../../../shared/select/OSSelectField";
@@ -28,19 +28,13 @@ const PosteAnalytiqueForm = () => {
   const router = useRouter();
   const { id }: any = router.query;
   const dispatch = useAppDispatch();
-  const { isEditing, auxiliaryAccount } = useAppSelector(
-    (state) => state.auxiliaryAccount
+  const { isEditing, postAnalytic } = useAppSelector(
+    (state) => state.postAnalytic
   );
-  const type = [
-    { id: "CUSTOMER", name: "Post Analytique 1" },
-    { id: "SUPPLIER", name: "Post Analytique 2" },
-    { id: "EMPLOYEE", name: "Post Analytique 3" },
-    { id: "OTHER", name: "Post Analytique 4" },
-  ];
 
   React.useEffect(() => {
     if (id) {
-      dispatch(editAuxiliairyAccount({ id }));
+      dispatch(editPostAnalytic({ id }));
     }
   }, [id]);
 
@@ -48,15 +42,15 @@ const PosteAnalytiqueForm = () => {
     try {
       if (isEditing) {
         await dispatch(
-          updateAuxiliairyAccount({
-            id: auxiliaryAccount.id!,
-            auxiliairyAccount: values,
+          updatePostAnalytic({
+            id: postAnalytic.id!,
+            postAnalytic: values,
           })
         );
       } else {
-        await dispatch(createAuxiliairyAccount(values));
+        await dispatch(createPostAnalytic(values));
       }
-      router.push("/comptes/auxiliaire");
+      router.push("/configurations/post-analytique");
     } catch (error) {
       console.log("error", error);
     }
@@ -67,14 +61,10 @@ const PosteAnalytiqueForm = () => {
       <Formik
         enableReinitialize
         initialValues={{
-          name: isEditing ? auxiliaryAccount.name : "",
-          type: isEditing ? auxiliaryAccount.type : "",
-          activity: isEditing ? auxiliaryAccount.activity : "",
+          name: isEditing ? postAnalytic.name : "",
         }}
         validationSchema={Yup.object({
           name: Yup.string().required("Champs obligatoire"),
-          type: Yup.string().required("Champs obligatoire"),
-          activity: Yup.string().nullable(),
         })}
         onSubmit={(value: any, action: any) => {
           handleSubmit(value);
@@ -103,7 +93,6 @@ const PosteAnalytiqueForm = () => {
                       startIcon={<Check />}
                       sx={{ marginInline: 3 }}
                       type="submit"
-                      disabled
                     >
                       Enregistrer
                     </Button>
@@ -126,8 +115,7 @@ const PosteAnalytiqueForm = () => {
               </NavigationContainer>
 
               <FormContainer spacing={2}>
-                <OSTextField id="name" label="Numero" name="name" />
-                <OSTextField id="activity" label="Nom" name="activity" />
+                <OSTextField id="name" label="Nom" name="name" />
               </FormContainer>
             </Form>
           );
