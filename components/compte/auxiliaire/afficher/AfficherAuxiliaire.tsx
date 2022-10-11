@@ -3,27 +3,16 @@ import {
   Container,
   styled,
   Typography,
-  TextField,
-  FormControl,
   Stack,
   Grid,
   Divider,
-  FormHelperText,
 } from "@mui/material";
 import Link from "next/link";
-import Switch from "@mui/material/Switch";
 import React from "react";
 import ArrowBack from "@mui/icons-material/ArrowBack";
-import { Check, Close } from "@mui/icons-material";
 import KeyValue from "../../../shared/keyValue";
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
 import { useRouter } from "next/router";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import { ErrorMessage, Field } from "formik";
 import { getAuxiliairyAccount } from "../../../../redux/features/auxiliairyAccount";
 
 const AfficherAuxiliaire = () => {

@@ -4,42 +4,50 @@ import IconButton from "@mui/material/IconButton";
 import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import React from "react";
+import { Visibility } from "@mui/icons-material";
+import Link from "next/link";
 
 const OneAnneeExercice = ({ annee, dateDebut, dateFin }: any) => {
-  return (
-    <OneContainer>
-      <Typography variant="h2" color="initial">
-        {annee}
-      </Typography>
-      <Stack>
-        <Typography variant="body2" color="initial">
-          {dateDebut}
-        </Typography>
-        <Typography variant="body2" color="initial">
-          au
-        </Typography>
-        <Typography variant="body2" color="initial">
-          {dateFin}
-        </Typography>
-      </Stack>
-      <Stack direction={"row"} justifyContent={"center"}>
-        <IconButton color="secondary" aria-label="edit" component="button">
-          <Edit />
-        </IconButton>
-        <IconButton color="secondary" aria-label="delete" component="button">
-          <Delete />
-        </IconButton>
-      </Stack>
-    </OneContainer>
-  );
+	return (
+		<OneContainer>
+			<Typography variant="h4" color="initial">
+				{annee}
+			</Typography>
+			<Stack>
+				<Typography variant="body2" color="gray">
+					{`${dateDebut} au ${dateFin}`}
+				</Typography>
+			</Stack>
+			<Stack direction={"row"} justifyContent={"center"}>
+				<Link href={"/journals-de-saisie"}>
+					<IconButton
+						aria-label="open"
+						component="button"
+						sx={{ color: "#ddd" }}
+					>
+						<Visibility />
+					</IconButton>
+				</Link>
+				<IconButton aria-label="edit" component="button" sx={{ color: "#ddd" }}>
+					<Edit />
+				</IconButton>
+				<IconButton
+					aria-label="delete"
+					component="button"
+					sx={{ color: "#ddd" }}
+				>
+					<Delete />
+				</IconButton>
+			</Stack>
+		</OneContainer>
+	);
 };
 
 export default OneAnneeExercice;
 
 const OneContainer = styled(Box)(({ theme }) => ({
-  background: "white",
-  width: 300,
-  textAlign: "center",
-  borderRadius: 20,
-  margin: 5,
+	background: "white",
+	textAlign: "center",
+	borderRadius: 20,
+	paddingBlock: theme.spacing(2),
 }));
