@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import {
     Button,
@@ -7,14 +7,17 @@ import {
     Divider,
     Typography,
     styled,
+    TextField,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Link from "next/link";
 import PlanComptableForm from "./organism/PlanComptableForm";
 import PlanComptableList from "./organism/table/PlanComptableList";
+import ImportPgc from "./organism/ImportPgc";
 
 const PlanComptable = () => {
-    return (
+
+    return ( 
         <Container maxWidth="xl">
             <Stack>
                 <SectionNavigation
@@ -22,15 +25,23 @@ const PlanComptable = () => {
                     justifyContent="space-between"
                     mb={1}
                 >
-                    <Link href="/">
-                        <Button
-                            color="info"
-                            variant="text"
-                            startIcon={<ArrowBackIcon />}
-                        >
-                            Retour
-                        </Button>
-                    </Link>
+                    <Stack
+                        direction="row"
+                        justifyContent="flex-start"
+                        alignItems="flex-start"
+                        spacing={2}
+                    >
+                        <Link href="/">
+                            <Button
+                                color="info"
+                                variant="text"
+                                startIcon={<ArrowBackIcon />}
+                            >
+                                Retour 
+                            </Button>
+                        </Link>
+                        <ImportPgc/>
+                    </Stack>      
                     <Typography variant="h4">Compte</Typography>
                 </SectionNavigation>
                 <Divider />
