@@ -50,9 +50,9 @@ const LigneBudgetaireForm = () => {
     }
   }, [idlball]);
 
-  React.useEffect(() => {
-    useFetchAllGrant();
-  }, []);
+  // React.useEffect(() => {
+  //   useFetchAllGrant();
+  // }, []);
 
   const handleSubmit = async (values: any) => {
     try {
