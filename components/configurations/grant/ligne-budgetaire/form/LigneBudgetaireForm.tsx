@@ -17,52 +17,63 @@ import {
   useAppSelector,
 } from "../../../../../hooks/reduxHooks";
 import {
-  createAuxiliairyAccount,
-  updateAuxiliairyAccount,
-  editAuxiliairyAccount,
-} from "../../../../../redux/features/auxiliairyAccount";
-// import { cancelEdit } from "../../../../../../../redux/features/auxiliairyAccount/auxiliairyAccountSlice";
+  createBudgetLine,
+  updateBudgetLine,
+  editBudgetLine,
+} from "../../../../../redux/features/budgetLine";
+import { cancelEdit } from "../../../../../redux/features/budgetLine/budgetLineSlice";
 import { useRouter } from "next/router";
 import OSTextField from "../../../../shared/input/OSTextField";
 import OSSelectField from "../../../../shared/select/OSSelectField";
 import KeyValue from "../../../../shared/keyValue";
+import useFetchGrants from "../../hooks/useFetchGrants";
 
 const LigneBudgetaireForm = () => {
   const router = useRouter();
-  const { id }: any = router.query;
+  const { idlb }: any = router.query;
+  const { idlball }: any = router.query;
+  const idGrant: any = router?.query?.id;
+  const useFetchAllGrant = useFetchGrants();
   const dispatch = useAppDispatch();
-  //   const { isEditing, auxiliaryAccount } = useAppSelector(
-  //     (state) => state.auxiliaryAccount
-  //   );
-  //   const type = [
-  //     { id: "CUSTOMER", name: "Post Analytique 1" },
-  //     { id: "SUPPLIER", name: "Post Analytique 2" },
-  //     { id: "EMPLOYEE", name: "Post Analytique 3" },
-  //     { id: "OTHER", name: "Post Analytique 4" },
-  //   ];
+  const { isEditing, budgetLine } = useAppSelector((state) => state.budgetLine);
+  const { grantList } = useAppSelector((state) => state.grant);
 
   React.useEffect(() => {
-    if (id) {
-      //   dispatch(editAuxiliairyAccount({ id }));
+    if (idlb) {
+      dispatch(editBudgetLine({ id: idlb }));
     }
-  }, [id]);
+  }, [idlb]);
+
+  React.useEffect(() => {
+    if (idlball) {
+      dispatch(editBudgetLine({ id: idlball }));
+    }
+  }, [idlball]);
+
+  React.useEffect(() => {
+    useFetchAllGrant();
+  }, []);
 
   const handleSubmit = async (values: any) => {
-    // try {
-    //   if (isEditing) {
-    //     await dispatch(
-    //       updateAuxiliairyAccount({
-    //         id: auxiliaryAccount.id!,
-    //         auxiliairyAccount: values,
-    //       })
-    //     );
-    //   } else {
-    //     await dispatch(createAuxiliairyAccount(values));
-    //   }
-    //   router.push("/comptes/auxiliaire");
-    // } catch (error) {
-    //   console.log("error", error);
-    // }
+    try {
+      if (isEditing) {
+        await dispatch(
+          updateBudgetLine({
+            id: budgetLine.id!,
+            budgetLine: values,
+          })
+        );
+      } else {
+        await dispatch(createBudgetLine(values));
+      }
+      router.push(
+        idGrant
+          ? `/configurations/grant/${idGrant}/ligne-budgetaire`
+          : `/configurations/ligne-budgetaire`
+      );
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return (
@@ -70,15 +81,16 @@ const LigneBudgetaireForm = () => {
       <Formik
         enableReinitialize
         initialValues={{
-          name: "",
-          //   name: isEditing ? auxiliaryAccount.name : "",
-          //   type: isEditing ? auxiliaryAccount.type : "",
-          //   activity: isEditing ? auxiliaryAccount.activity : "",
+          code: isEditing ? budgetLine.code : "",
+          grantId: isEditing
+            ? budgetLine.grantId
+            : router?.query?.id
+            ? parseInt(idGrant)
+            : "",
         }}
         validationSchema={Yup.object({
-          name: Yup.string().required("Champs obligatoire"),
-          type: Yup.string().required("Champs obligatoire"),
-          activity: Yup.string().nullable(),
+          code: Yup.string().required("Champs obligatoire"),
+          grantId: Yup.number().required("Champs obligatoire"),
         })}
         onSubmit={(value: any, action: any) => {
           handleSubmit(value);
@@ -91,7 +103,13 @@ const LigneBudgetaireForm = () => {
               <NavigationContainer>
                 <SectionNavigation>
                   <Stack flexDirection={"row"}>
-                    <Link href="/configurations/grant/1/ligne-budgetaire">
+                    <Link
+                      href={
+                        idGrant
+                          ? `/configurations/grant/${idGrant}/ligne-budgetaire`
+                          : `/configurations/ligne-budgetaire`
+                      }
+                    >
                       <Button
                         color="info"
                         variant="text"
@@ -107,7 +125,6 @@ const LigneBudgetaireForm = () => {
                       startIcon={<Check />}
                       sx={{ marginInline: 3 }}
                       type="submit"
-                      disabled
                     >
                       Enregistrer
                     </Button>
@@ -118,7 +135,7 @@ const LigneBudgetaireForm = () => {
                       startIcon={<Close />}
                       onClick={() => {
                         formikProps.resetForm();
-                        // dispatch(cancelEdit());
+                        dispatch(cancelEdit());
                       }}
                     >
                       Annuler
@@ -133,11 +150,15 @@ const LigneBudgetaireForm = () => {
               </NavigationContainer>
 
               <FormContainer spacing={2}>
-                <OSTextField id="name" label="Code Budgetaire" name="name" />
-                <OSTextField
-                  id="activity"
-                  label="Ligne Budgetaire"
-                  name="activity"
+                <OSTextField id="code" label="Code Budgetaire" name="code" />
+                <OSSelectField
+                  id="type"
+                  disabled={idGrant ? true : false}
+                  label="Grant"
+                  name="grantId"
+                  options={grantList}
+                  dataKey={"code"}
+                  valueKey="id"
                 />
               </FormContainer>
             </Form>

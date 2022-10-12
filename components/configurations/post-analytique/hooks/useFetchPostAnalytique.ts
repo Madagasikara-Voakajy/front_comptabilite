@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import { useAppDispatch } from "../../../../hooks/reduxHooks";
+import { getPostAnalyticList } from "../../../../redux/features/postAnalytic";
 // import { getAuxiliairyAccountList } from "../../../../redux/features/auxiliairyAccount";
 
 /**
- * @description Hook to fetch grants
+ * @description Hook to fetch post analitique
  */
 const useFetchPostAnalytique = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const useFetchPostAnalytique = () => {
         [<string>router.query.orderBy]: router.query.order,
       };
     }
-    // await dispatch(getAuxiliairyAccountList({ args }));
+    await dispatch(getPostAnalyticList({ args }));
   };
 };
 

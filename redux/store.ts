@@ -7,6 +7,9 @@ import { auxiliaryAccountSlice } from "./features/auxiliairyAccount/auxiliairyAc
 import { pcgSlice } from "./features/pcg/pcgSlice";
 import { notificationSlice } from "./features/notification/notificationSlice";
 import { currencySlice } from "./features/currency/currencySlice";
+import { postAnalyticSlice } from "./features/postAnalytic/postAnalyticSlice";
+import { grantSlice } from "./features/grant/grantSlice";
+import { budgetLineSlice } from "./features/budgetLine/budgetLineSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +21,9 @@ export const store = configureStore({
     currency: currencySlice.reducer,
     auxiliaryAccount: auxiliaryAccountSlice.reducer,
     pcg: pcgSlice.reducer,
+    postAnalytic: postAnalyticSlice.reducer,
+    grant: grantSlice.reducer,
+    budgetLine: budgetLineSlice.reducer,
   },
 });
 

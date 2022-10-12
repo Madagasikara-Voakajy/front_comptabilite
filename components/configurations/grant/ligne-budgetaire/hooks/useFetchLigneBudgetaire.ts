@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import { useAppDispatch } from "../../../../../hooks/reduxHooks";
 // import { getAuxiliairyAccountList } from "../../../../redux/features/auxiliairyAccount";
+import { getBudgetLineList } from "../../../../../redux/features/budgetLine";
 
 /**
  * @description Hook to fetch ligne budgetaire
  */
 const useFetchLigneBudgetaire = () => {
   const router = useRouter();
+  const { id }: any = router.query;
   const dispatch = useAppDispatch();
 
   return async () => {
@@ -19,7 +21,19 @@ const useFetchLigneBudgetaire = () => {
         [<string>router.query.orderBy]: router.query.order,
       };
     }
-    // await dispatch(getAuxiliairyAccountList({ args }));
+    if (router.query.id) {
+      args.where = {
+        grantId: {
+          equals: parseInt(id),
+        },
+      };
+    }
+
+    args.include = {
+      grant: true,
+    };
+
+    await dispatch(getBudgetLineList({ args }));
   };
 };
 

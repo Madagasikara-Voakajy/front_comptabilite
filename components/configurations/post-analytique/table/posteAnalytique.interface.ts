@@ -1,5 +1,5 @@
 import { Order } from "../../../../config/table.config";
-// import { AuxiliairyAccountItem } from "../../../../redux/features/auxiliairyAccount/auxiliairyAccount.interface";
+import { PostAnalyticItem } from "../../../../redux/features/postAnalytic/postAnalytic.interface";
 export interface PosteAnalytiqueHeadCell {
   disablePadding: boolean;
   id: any;
@@ -9,8 +9,8 @@ export interface PosteAnalytiqueHeadCell {
 
 export interface PosteAnalytiqueTableProps {
   onRequestSort: (
-    event: React.MouseEvent<unknown>
-    // property: keyof AuxiliairyAccountItem
+    event: React.MouseEvent<unknown>,
+    property: keyof PostAnalyticItem
   ) => void;
   order: Order;
   orderBy: string;

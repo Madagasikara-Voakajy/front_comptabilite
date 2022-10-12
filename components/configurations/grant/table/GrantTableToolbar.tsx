@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { debounce } from "lodash";
 
 const GrantTableToolbar = () => {
-  // const { loading } = useAppSelector((state) => state.auxiliaryAccount);
+  const { loading } = useAppSelector((state) => state.grant);
   const [key, setKey] = useState<any>("");
   const router = useRouter();
 
@@ -64,7 +64,7 @@ const GrantTableToolbar = () => {
           />
         </Stack>
       </Toolbar>
-      {/* {loading && <TableLoading />} */}
+      {loading && <TableLoading />}
     </>
   );
 };

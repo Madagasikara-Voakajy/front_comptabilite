@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useAppDispatch } from "../../../../hooks/reduxHooks";
-// import { getAuxiliairyAccountList } from "../../../../redux/features/auxiliairyAccount";
+import { getGrantList } from "../../../../redux/features/grant";
 
 /**
  * @description Hook to fetch grants
@@ -19,7 +19,12 @@ const useFetchGrants = () => {
         [<string>router.query.orderBy]: router.query.order,
       };
     }
-    // await dispatch(getAuxiliairyAccountList({ args }));
+
+    args.include = {
+      postAnalytic: true,
+    };
+
+    await dispatch(getGrantList({ args }));
   };
 };
 
