@@ -10,6 +10,7 @@ import { currencySlice } from "./features/currency/currencySlice";
 import { postAnalyticSlice } from "./features/postAnalytic/postAnalyticSlice";
 import { grantSlice } from "./features/grant/grantSlice";
 import { budgetLineSlice } from "./features/budgetLine/budgetLineSlice";
+import { comptaFileSlice } from "./features/comptaFile/comptaFileSlice";
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     postAnalytic: postAnalyticSlice.reducer,
     grant: grantSlice.reducer,
     budgetLine: budgetLineSlice.reducer,
+    comptaFile: comptaFileSlice.reducer,
   },
 });
 
