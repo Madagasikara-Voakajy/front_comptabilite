@@ -27,7 +27,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Badge from "@mui/material/Badge";
 import Add from "@mui/icons-material/Add";
-import { defaultLabelDisplayedRows, labelRowsPerPage } from "../../../config/table.config";
+import {
+  defaultLabelDisplayedRows,
+  labelRowsPerPage,
+} from "../../../config/table.config";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ListDevise = () => {
   const [order, setOrder] = React.useState<Order>("asc");
@@ -99,11 +103,18 @@ const ListDevise = () => {
   return (
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
-        <Link href="/configurations/devise/add">
-          <Button variant="contained" startIcon={<Add />}>
-            Créer
-          </Button>
-        </Link>
+        <Stack direction="row" spacing={2}>
+          <Link href="/">
+            <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
+              Retour
+            </Button>
+          </Link>
+          <Link href="/configurations/devise/add">
+            <Button variant="contained" startIcon={<Add />}>
+              Créer
+            </Button>
+          </Link>
+        </Stack>
         <Typography variant="h4" color="GrayText">
           List des Devises
         </Typography>
@@ -147,9 +158,7 @@ const ListDevise = () => {
                         >
                           <TableCell
                             padding="checkbox"
-                            onClick={(event) =>
-                              handleClick(event, row.iso)
-                            }
+                            onClick={(event) => handleClick(event, row.iso)}
                           >
                             <Checkbox
                               color="primary"
@@ -216,7 +225,7 @@ const ListDevise = () => {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
               labelRowsPerPage={labelRowsPerPage}
-              labelDisplayedRows={defaultLabelDisplayedRows}  
+              labelDisplayedRows={defaultLabelDisplayedRows}
             />
           </Paper>
           {/* <FormControlLabel

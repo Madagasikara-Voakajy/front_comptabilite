@@ -44,6 +44,7 @@ import PosteAnalytiqueTableHead from "./table/PosteAnalytiqueTableHead";
 import POsteAnalytiqueTableToolbar from "./table/PosteAnalytiqueTableToolbar";
 import { cancelEdit } from "../../../redux/features/postAnalytic/postAnalyticSlice";
 import { PostAnalyticItem } from "../../../redux/features/postAnalytic/postAnalytic.interface";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ListPosteAnalytique = () => {
   const [page, setPage] = React.useState(0);
@@ -104,7 +105,12 @@ const ListPosteAnalytique = () => {
   return (
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
-        <Box>
+        <Stack direction="row" spacing={2}>
+          <Link href="/">
+            <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
+              Retour
+            </Button>
+          </Link>
           <Link href="/configurations/post-analytique/add">
             <Button variant="contained" size="small" startIcon={<Add />}>
               Créer
@@ -119,7 +125,7 @@ const ListPosteAnalytique = () => {
           >
             Gerer Grant
           </Button>
-        </Box>
+        </Stack>
         <Typography variant="h4">Post analytique</Typography>
       </SectionNavigation>
       <SectionTable>

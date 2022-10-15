@@ -44,6 +44,7 @@ import AuxiliaireTableHead from "./table/AuxiliaireTableHead";
 import AuxiliaireTableToolbar from "./table/AuxiliaireTableToolbar";
 import { cancelEdit } from "../../../redux/features/auxiliairyAccount/auxiliairyAccountSlice";
 import { AuxiliairyAccountItem } from "../../../redux/features/auxiliairyAccount/auxiliairyAccount.interface";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ListAuxiliaire = () => {
   const [page, setPage] = React.useState(0);
@@ -135,16 +136,23 @@ const ListAuxiliaire = () => {
   return (
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
-        <Link href="/comptes/auxiliaire/add">
-          <Button
-            onClick={handleAdd}
-            variant="contained"
-            size="small"
-            startIcon={<Add />}
-          >
-            Créer
-          </Button>
-        </Link>
+        <Stack direction="row" spacing={2}>
+          <Link href="/">
+            <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
+              Retour
+            </Button>
+          </Link>
+          <Link href="/comptes/auxiliaire/add">
+            <Button
+              onClick={handleAdd}
+              variant="contained"
+              size="small"
+              startIcon={<Add />}
+            >
+              Créer
+            </Button>
+          </Link>
+        </Stack>
         <Typography variant="h4">Compte Auxiliaire</Typography>
       </SectionNavigation>
       <SectionTable>

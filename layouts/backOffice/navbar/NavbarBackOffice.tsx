@@ -23,7 +23,7 @@ import { useRouter } from "next/router";
 const NavbarBackOffice = ({ matches }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-
+  const [navMenu, setNavMenu] = React.useState([]);
   const handleClickLogout = () => {
     dispatch(logout({}));
   };
@@ -31,7 +31,29 @@ const NavbarBackOffice = ({ matches }: any) => {
   /**
    * Take all menu lists in the redux store
    */
-  const navMenu = useAppSelector((state) => state.menu.value);
+  const { value }: any = useAppSelector((state) => state.menu);
+
+  React.useEffect(() => {
+    setNavMenu(value);
+  }, [value]);
+
+  React.useEffect(() => {
+    manageDisplayMenu();
+  }, []);
+
+  const manageDisplayMenu = () => {
+    switch (router.pathname) {
+      case "/":
+        setNavMenu([]);
+        break;
+      case "/fichier":
+        setNavMenu([]);
+        break;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <AppbarBackOffice position="sticky" elevation={0}>
@@ -45,8 +67,8 @@ const NavbarBackOffice = ({ matches }: any) => {
             </Link>
             <Typography variant="h5" paddingX={2} color="GrayText"></Typography>
             <ListPageContainer>
-              {navMenu.map((page, index) =>
-                page.items.length === 0 ? (
+              {navMenu.map((page: any, index) =>
+                page?.items?.length === 0 ? (
                   <OneButtonLink page={page} key={index} />
                 ) : (
                   <OneButtonLinkWithItems page={page} key={index} />
