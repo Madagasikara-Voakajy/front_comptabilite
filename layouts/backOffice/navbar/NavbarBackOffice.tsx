@@ -32,7 +32,7 @@ const NavbarBackOffice = ({ matches }: any) => {
    * Take all menu lists in the redux store
    */
   const { value }: any = useAppSelector((state) => state.menu);
-
+  // const {} = useAppSelector((state) => state.)
   React.useEffect(() => {
     setNavMenu(value);
   }, [value]);
@@ -42,6 +42,7 @@ const NavbarBackOffice = ({ matches }: any) => {
   }, []);
 
   const manageDisplayMenu = () => {
+    console.log(router.pathname);
     switch (router.pathname) {
       case "/":
         setNavMenu([]);
@@ -49,8 +50,12 @@ const NavbarBackOffice = ({ matches }: any) => {
       case "/fichier":
         setNavMenu([]);
         break;
-
+      case "/fichier/[id]/annee-exercice":
+        console.log(value);
+        setNavMenu(value);
+        break;
       default:
+        setNavMenu([]);
         break;
     }
   };

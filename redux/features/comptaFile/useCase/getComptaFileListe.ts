@@ -8,8 +8,10 @@ export const getComptaFileListe = createAsyncThunk(
       const params = {
         args: JSON.stringify(data.args),
       };
-      const response = await axios.get("/compta/file");
-        
+      const response = await axios.get("/compta/file", {
+        params,
+      });
+
       return response.data;
     } catch (error: any) {
       if (error.response) {
