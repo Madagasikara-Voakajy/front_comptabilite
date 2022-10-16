@@ -40,33 +40,6 @@ export default function TypeJournalList() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const useFetchPCG = useFetchPlanComptable();
-  const [typeJournalList, setTypeJournalList] = React.useState([
-    {
-      id: "1",
-      nom: "Vente",
-      compte_par_defaut: "403",
-    },
-    {
-      id: "2",
-      nom: "Achats",
-      compte_par_defaut: "401",
-    },
-    {
-      id: "3",
-      nom: "Espèces",
-      compte_par_defaut: "1011",
-    },
-    {
-      id: "4",
-      nom: "Banque",
-      compte_par_defaut: "7002",
-    },
-    {
-      id: "5",
-      nom: "Divers",
-      compte_par_defaut: "301",
-    },
-  ]);
   const dispatch: any = useAppDispatch();
   const { journalTypeList } = useAppSelector((state) => state.journalType);
   const router = useRouter();
