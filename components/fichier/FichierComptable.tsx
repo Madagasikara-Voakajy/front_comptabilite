@@ -68,7 +68,7 @@ const FichierComptable = () => {
           </SectionBtnAdd>
         </Grid>
         {comptaFileListe.map((comptaFile: ComptaFileItem) => (
-          <Grid item xs={12} md={6} mb={3}>
+          <Grid item xs={12} md={6} mb={3} key={comptaFile?.id}>
             <SectionDetails>
               <SectionDetailsTitle>
                 <Typography variant="h5" color="black">

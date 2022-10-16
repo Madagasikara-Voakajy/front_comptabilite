@@ -2,13 +2,13 @@ import { TypeJournalHeadCell } from "./typeJournal.interface";
 
 export const typeJournalHeadCells: readonly TypeJournalHeadCell[] = [
   {
-    id: "nom",
+    id: "type",
     numeric: false,
     disablePadding: false,
-    label: "Nom",
+    label: "type",
   },
   {
-    id: "compte_par_defaut",
+    id: "defaultAccountId",
     numeric: false,
     disablePadding: false,
     label: "Compte par defaut",

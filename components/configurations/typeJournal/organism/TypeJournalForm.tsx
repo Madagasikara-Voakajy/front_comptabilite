@@ -9,47 +9,43 @@ import {
 import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-// import {
-//   useAppSelector,
-//   useAppDispatch,
-// } from "../../../../../hooks/reduxHooks";
-// import {
-//   cancelEdit,
-//   createLeaveType,
-//   updateLeaveType,
-// } from "../../../../../redux/features/leaveType/leaveTypeSlice";
-
+import { useAppSelector, useAppDispatch } from "../../../../hooks/reduxHooks";
+import {
+  createJournalType,
+  updateJournalType,
+} from "../../../../redux/features/journalType";
+import { cancelEdit } from "../../../../redux/features/journalType/journalTypeSlice";
 import OSTextField from "../../../shared/input/OSTextField";
 import OSSelectField from "../../../shared/select/OSSelectField";
-import useFetchPlanComptable from "../hooks/useFetchTypeJournal";
-
+import useFetchTypeJournal from "../hooks/useFetchTypeJournal";
 const nature = [
-  { name: "CA", id: "CA" },
-  { name: "PA", id: "PA" },
-  { name: "AA", id: "AA" },
+  { name: "CA", id: 1 },
+  { name: "PA", id: 2 },
+  { name: "AA", id: 3 },
 ];
 
 const TypeJournalForm = () => {
-  // const { isEditing, leaveType } = useAppSelector(
-  //   (state) => state.leaveType
-  // );
-  // const dispatch = useAppDispatch();
-  // const fetchLeaveTypes = useFetchLeaveTypes();
+  const { isEditing, journalType } = useAppSelector(
+    (state) => state.journalType
+  );
+  const { pcgList } = useAppSelector((state) => state.pcg);
+  const dispatch = useAppDispatch();
+  const fetchJournalTypes = useFetchTypeJournal();
 
   const handleSubmint = async (values: any) => {
     try {
-      // if (isEditing) {
-      //   delete values.id;
-      //   await dispatch(
-      //     updateLeaveType({
-      //       id: leaveType.id!,
-      //       leaveType: values,
-      //     })
-      //   );
-      // } else {
-      //   await dispatch(createLeaveType(values));
-      // }
-      // fetchLeaveTypes();
+      if (isEditing) {
+        delete values.id;
+        await dispatch(
+          updateJournalType({
+            id: journalType.id!,
+            journalType: values,
+          })
+        );
+      } else {
+        await dispatch(createJournalType(values));
+      }
+      fetchJournalTypes();
     } catch (e) {
       console.log(e);
     }
@@ -60,28 +56,20 @@ const TypeJournalForm = () => {
       <Formik
         enableReinitialize
         initialValues={
-          {
-            name: "",
-          }
-          // isEditing
-          //   ? leaveType
-          //   : {
-          //       reference: "",
-          //       name: "",
-          //       nature: "",
-          //       duration: 0,
-          //       requireAnAllocation: false,
-          //     }
+          isEditing
+            ? journalType
+            : {
+                type: "",
+                defaultAccountId: 0,
+              }
         }
         validationSchema={Yup.object({
-          // reference: Yup.string().required("Champ obligatoire"),
-          // requireAnAllocation: Yup.boolean().required(
-          //   "Champ obligatoire"
-          // ),
+          type: Yup.string().required("Champ obligatoire"),
+          defaultAccountId: Yup.number().required("Champ obligatoire"),
         })}
         onSubmit={async (value: any, action) => {
-          // await handleSubmint(value);
-          // action.resetForm();
+          await handleSubmint(value);
+          action.resetForm();
         }}
       >
         {(formikProps) => (
@@ -92,11 +80,11 @@ const TypeJournalForm = () => {
               </Typography>
               <OSTextField label="Type" name="type"></OSTextField>
               <OSSelectField
-                id="compte"
-                name="compte"
-                label="compte par defaut"
-                options={nature}
-                dataKey="name"
+                id="defaultAccountId"
+                name="defaultAccountId"
+                label="Compte par defaut"
+                options={pcgList}
+                dataKey="code"
                 valueKey="id"
               />
               <BtnContainer
@@ -108,10 +96,10 @@ const TypeJournalForm = () => {
                   size="medium"
                   color="warning"
                   variant="text"
-                  // onClick={() => {
-                  //   formikProps.resetForm();
-                  //   dispatch(cancelEdit());
-                  // }}
+                  onClick={() => {
+                    formikProps.resetForm();
+                    dispatch(cancelEdit());
+                  }}
                 >
                   Annuler
                 </Button>

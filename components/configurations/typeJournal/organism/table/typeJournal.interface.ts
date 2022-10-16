@@ -1,5 +1,5 @@
 import { Order } from "../../../../../config/table.config";
-// import { LeaveTypeItem } from "../../../../../../redux/features/leaveType/leaveTypeSlice";
+import { JournalTypeItem } from "../../../../../redux/features/journalType/journalType.interface";
 
 export interface TypeJournalHeadCell {
   id: any;
@@ -10,8 +10,8 @@ export interface TypeJournalHeadCell {
 
 export interface TypeJournalTableProps {
   onRequestSort: (
-    event: React.MouseEvent<unknown>
-    // property: keyof LeaveTypeItem
+    event: React.MouseEvent<unknown>,
+    property: keyof JournalTypeItem
   ) => void;
   order: Order;
   orderBy: string;

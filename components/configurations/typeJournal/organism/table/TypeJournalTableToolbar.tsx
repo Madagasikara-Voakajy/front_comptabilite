@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import { TextField, Stack, Typography } from "@mui/material";
 import { TableLoading } from "../../../../shared/loading";
-// import { useAppSelector } from "../../../../../../hooks/reduxHooks";
+import { useAppSelector } from "../../../../../hooks/reduxHooks";
 import { useRouter } from "next/router";
 import { debounce } from "lodash";
 
 const TypeJournalTableToolbar = () => {
-  // const { loading } = useAppSelector((state) => state.leaveType);
+  const { loading } = useAppSelector((state) => state.journalType);
   const [key, setKey] = useState<any>("");
   const router = useRouter();
 
@@ -64,7 +64,7 @@ const TypeJournalTableToolbar = () => {
           />
         </Stack>
       </Toolbar>
-      {/* {loading && <TableLoading />} */}
+      {loading && <TableLoading />}
     </>
   );
 };
