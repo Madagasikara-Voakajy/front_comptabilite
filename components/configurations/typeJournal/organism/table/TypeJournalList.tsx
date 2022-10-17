@@ -49,8 +49,11 @@ export default function TypeJournalList() {
 
   useEffect(() => {
     fetchJournalType();
-    useFetchPCG();
   }, [router.query]);
+
+  useEffect(() => {
+    useFetchPCG;
+  }, []);
 
   const handleClickEdit = async (id: any) => {
     await dispatch(editJournalType({ id }));

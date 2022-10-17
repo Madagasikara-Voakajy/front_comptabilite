@@ -19,11 +19,13 @@ import useFetchComptaFileListe from "./hooks/useFetchComptaFile";
 import { ComptaFileItem } from "../../redux/features/comptaFile/comptaFileSlice.interface";
 import useFetchCurrencyListe from "../configurations/currency/hooks/useFetchCurrency";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import useFetchTypeJournal from "../configurations/typeJournal/hooks/useFetchTypeJournal";
 
 const FichierComptable = () => {
   const { comptaFileListe } = useAppSelector((state) => state.comptaFile);
   const fetchComptaFileListe = useFetchComptaFileListe();
   const fetchAllCurrency = useFetchCurrencyListe();
+  // const fetchJournalType = useFetchTypeJournal();
 
   useEffect(() => {
     fetchComptaFileListe();
@@ -32,6 +34,10 @@ const FichierComptable = () => {
   useEffect(() => {
     fetchAllCurrency();
   }, []);
+
+  // useEffect(() => {
+  //   fetchJournalType();
+  // }, []);
 
   const basePath = useBasePath();
   return (
