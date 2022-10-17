@@ -12,6 +12,7 @@ export interface ComptaFileItem {
   postalCode?: string;
   fiscalYearType?: string;
   currencyId?: string;
+  [x: string]: any;
 }
 
 export interface ComptaFileInitialState {

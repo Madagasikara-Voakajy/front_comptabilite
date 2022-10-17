@@ -33,8 +33,7 @@ import { deleteCurrency, editCurrency } from "../../../redux/features/currency";
 import CurrencyTableToolbar from "./organism/table/CurrencyToolbar";
 import CurrencyTableHeader from "./organism/table/CurrencyTableHeader";
 import { CurrencyItem } from "../../../redux/features/currency/currencySlice.interface";
-
-
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ListCurrency = () => {
   const [page, setPage] = React.useState(0);
@@ -88,18 +87,23 @@ const ListCurrency = () => {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0
-      ? Math.max(0, (1 + page) * rowsPerPage - currencyListe.length)
-      : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - currencyListe.length) : 0;
 
   return (
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
-        <Link href="/configurations/devise/add">
-          <Button variant="contained" size="small" startIcon={<Add />}>
-            Créer
-          </Button>
-        </Link>
+        <Stack direction="row" spacing={2}>
+          <Link href="/">
+            <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
+              Retour
+            </Button>
+          </Link>
+          <Link href="/configurations/devise/add">
+            <Button variant="contained" size="small" startIcon={<Add />}>
+              Créer
+            </Button>
+          </Link>
+        </Stack>
         <Typography variant="h4">Devise</Typography>
       </SectionNavigation>
       <SectionTable>
@@ -183,14 +187,14 @@ const ListCurrency = () => {
                               direction="row"
                               justifyContent="center"
                             >
-                                <IconButton
-                                  color="primary"
-                                  aria-label="Modifier"
-                                  component="span"
-                                  onClick={() => handleClickEdit(row.id)}
-                                >
-                                  <EditIcon />
-                                </IconButton>
+                              <IconButton
+                                color="primary"
+                                aria-label="Modifier"
+                                component="span"
+                                onClick={() => handleClickEdit(row.id)}
+                              >
+                                <EditIcon />
+                              </IconButton>
                               <IconButton
                                 color="warning"
                                 aria-label="Supprimer"

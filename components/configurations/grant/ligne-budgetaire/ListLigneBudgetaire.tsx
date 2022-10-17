@@ -44,6 +44,7 @@ import LigneBudgetaireTableHead from "./table/LigneBudgetaireTableHead";
 import LigneBudgetaireTableToolbar from "./table/LigneBudgetaireTableToolbar";
 import { cancelEdit } from "../../../../redux/features/budgetLine/budgetLineSlice";
 import { BudgetLineItem } from "../../../../redux/features/budgetLine/budgetLine.interface";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ListLigneBudgetaire = () => {
   const [page, setPage] = React.useState(0);
@@ -114,22 +115,29 @@ const ListLigneBudgetaire = () => {
           justifyContent="space-between"
           mb={2}
         >
-          <Link
-            href={
-              id
-                ? `/configurations/grant/${id}/ligne-budgetaire/add`
-                : `/configurations/ligne-budgetaire/add`
-            }
-          >
-            <Button
-              onClick={handleAdd}
-              variant="contained"
-              size="small"
-              startIcon={<Add />}
+          <Stack direction="row" spacing={2}>
+            <Link href="/">
+              <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
+                Retour
+              </Button>
+            </Link>
+            <Link
+              href={
+                id
+                  ? `/configurations/grant/${id}/ligne-budgetaire/add`
+                  : `/configurations/ligne-budgetaire/add`
+              }
             >
-              Créer
-            </Button>
-          </Link>
+              <Button
+                onClick={handleAdd}
+                variant="contained"
+                size="small"
+                startIcon={<Add />}
+              >
+                Créer
+              </Button>
+            </Link>
+          </Stack>
           <Typography variant="h4">Ligne budgetaire</Typography>
         </SectionNavigation>
         <Divider />

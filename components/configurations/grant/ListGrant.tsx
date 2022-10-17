@@ -44,6 +44,7 @@ import GrantTableHead from "./table/GrantTableHead";
 import GrantTableToolbar from "./table/GrantTableToolbar";
 import { cancelEdit } from "../../../redux/features/grant/grantSlice";
 import { GrantItem } from "../../../redux/features/grant/grant.interface";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ListGrant = () => {
   const [page, setPage] = React.useState(0);
@@ -111,16 +112,23 @@ const ListGrant = () => {
           justifyContent="space-between"
           mb={2}
         >
-          <Link href="/configurations/grant/add">
-            <Button
-              onClick={handleAdd}
-              variant="contained"
-              size="small"
-              startIcon={<Add />}
-            >
-              Créer
-            </Button>
-          </Link>
+          <Stack direction="row" spacing={2}>
+            <Link href="/">
+              <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
+                Retour
+              </Button>
+            </Link>
+            <Link href="/configurations/grant/add">
+              <Button
+                onClick={handleAdd}
+                variant="contained"
+                size="small"
+                startIcon={<Add />}
+              >
+                Créer
+              </Button>
+            </Link>
+          </Stack>
           <Typography variant="h4">GRANTS</Typography>
         </SectionNavigation>
         <Divider />

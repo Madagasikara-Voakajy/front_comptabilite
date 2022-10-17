@@ -19,11 +19,13 @@ import {
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { useRouter } from "next/router";
+import { JournalTypeItem } from "../../../redux/features/journalType/journalType.interface";
+import useFetchTypeJournal from "../../../components/configurations/typeJournal/hooks/useFetchTypeJournal";
 
 const NavbarBackOffice = ({ matches }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-
+  const [navMenu, setNavMenu] = React.useState([]);
   const handleClickLogout = () => {
     dispatch(logout({}));
   };
@@ -31,7 +33,66 @@ const NavbarBackOffice = ({ matches }: any) => {
   /**
    * Take all menu lists in the redux store
    */
-  const navMenu = useAppSelector((state) => state.menu.value);
+  const { value }: any = useAppSelector((state) => state.menu);
+  const { journalTypeList } = useAppSelector((state) => state.journalType);
+  const fetchJournalType = useFetchTypeJournal();
+
+  React.useEffect(() => {
+    setNavMenu(value);
+  }, [value]);
+
+  React.useEffect(() => {
+    fetchJournalType();
+  }, []);
+
+  React.useEffect(() => {
+    manageDisplayMenu();
+  }, []);
+
+  const manageDisplayMenu = () => {
+    console.log(router.pathname);
+
+    switch (router.pathname) {
+      case "/":
+        setNavMenu([]);
+        break;
+      case "/fichier":
+        setNavMenu([]);
+        break;
+      case "/fichier/[id]/annee-exercice":
+        let newValue: any = [];
+        value?.map((val: any, index: number) => {
+          var newobject = {
+            id: val.id,
+            name: val.name,
+            link: val.link,
+            icon: val.icon,
+            items: [...val?.items] as any,
+          };
+          if (val.id == 1) {
+            if (journalTypeList.length > 0) {
+              journalTypeList.map((jt: JournalTypeItem, index: number) => {
+                const oneItem: any = {
+                  id: jt.id,
+                  name: jt.type,
+                  link: `${router.pathname}/journal-de-saisie?id=${jt.id}&type=${jt.type}`,
+                  icon: "",
+                };
+                newobject.items.unshift(oneItem);
+              });
+            }
+          }
+          newValue.push(newobject);
+        });
+        console.log("**********", newValue);
+        // console.log(journalTypeList);
+        setNavMenu(newValue);
+        break;
+      default:
+        setNavMenu([]);
+        break;
+    }
+  };
 
   return (
     <AppbarBackOffice position="sticky" elevation={0}>
@@ -45,8 +106,8 @@ const NavbarBackOffice = ({ matches }: any) => {
             </Link>
             <Typography variant="h5" paddingX={2} color="GrayText"></Typography>
             <ListPageContainer>
-              {navMenu.map((page, index) =>
-                page.items.length === 0 ? (
+              {navMenu.map((page: any, index) =>
+                page?.items?.length === 0 ? (
                   <OneButtonLink page={page} key={index} />
                 ) : (
                   <OneButtonLinkWithItems page={page} key={index} />

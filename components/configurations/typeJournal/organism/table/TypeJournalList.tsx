@@ -8,17 +8,18 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import {
-//   useAppDispatch,
-//   useAppSelector,
-// } from "../../../../../../hooks/reduxHooks";
-// import {
-//   deleteLeaveType,
-//   editLeaveType,
-//   getLeaveType,
-//   getLeaveTypes,
-//   LeaveTypeItem,
-// } from "../../../../../../redux/features/leaveType/leaveTypeSlice";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../../hooks/reduxHooks";
+import {
+  deleteJournalType,
+  createJournalType,
+  editJournalType,
+  getJournalType,
+  getJournalTypeList,
+  updateJournalType,
+} from "../../../../../redux/features/journalType";
 import {
   Order,
   defaultLabelDisplayedRows,
@@ -26,62 +27,42 @@ import {
   labelRowsPerPage,
 } from "../../../../../config/table.config";
 import { useRouter } from "next/router";
-// import useFetchLeaveTypes from "../../hooks/useFetchPlanComptable";
+import useFetchTypeJournal from "../../hooks/useFetchTypeJournal";
 import { useConfirm } from "material-ui-confirm";
 import TypeJournalTableToolbar from "./TypeJournalTableToolbar";
 import TypeJournalTableHeader from "./TypeJournalTableHeader";
 import Badge from "@mui/material/Badge";
+import { JournalTypeItem } from "../../../../../redux/features/journalType/journalType.interface";
+import useFetchPlanComptable from "../../../../compte/planComptable/hooks/useFetchPlanComptable";
 
 export default function TypeJournalList() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [typeJournalList, setTypeJournalList] = React.useState([
-    {
-      id: "1",
-      nom: "Vente",
-      compte_par_defaut: "403",
-    },
-    {
-      id: "2",
-      nom: "Achats",
-      compte_par_defaut: "401",
-    },
-    {
-      id: "3",
-      nom: "Espèces",
-      compte_par_defaut: "1011",
-    },
-    {
-      id: "4",
-      nom: "Banque",
-      compte_par_defaut: "7002",
-    },
-    {
-      id: "5",
-      nom: "Divers",
-      compte_par_defaut: "301",
-    },
-  ]);
-  // const dispatch: any = useAppDispatch();
-  // const { leaveTypes } = useAppSelector((state) => state.leaveType);
+  const useFetchPCG = useFetchPlanComptable();
+  const dispatch: any = useAppDispatch();
+  const { journalTypeList } = useAppSelector((state) => state.journalType);
   const router = useRouter();
   const confirm = useConfirm();
 
-  // const fetchLeaveTypes = useFetchLeaveTypes();
+  const fetchJournalType = useFetchTypeJournal();
 
-  // useEffect(() => {
-  //   fetchLeaveTypes();
-  // }, [router.query]);
+  useEffect(() => {
+    fetchJournalType();
+  }, [router.query]);
+
+  useEffect(() => {
+    useFetchPCG;
+  }, []);
 
   const handleClickEdit = async (id: any) => {
-    // await dispatch(editLeaveType({ id }));
+    await dispatch(editJournalType({ id }));
   };
 
   const handleclickDelete = async (id: any) => {
     confirm({
-      title: "Supprimer ce plan comptable",
-      description: "Voulez-vous vraiment supprimer ce plan comptable ?",
+      title: "Supprimer ce type de journal",
+      description: "Voulez-vous vraiment supprimer ce type de journal ?",
       cancellationText: "Annuler",
       confirmationText: "Supprimer",
       cancellationButtonProps: {
@@ -92,8 +73,8 @@ export default function TypeJournalList() {
       },
     })
       .then(async () => {
-        // await dispatch(deleteLeaveType({ id }));
-        // fetchLeaveTypes();
+        await dispatch(deleteJournalType({ id }));
+        fetchJournalType();
       })
       .catch(() => {});
   };
@@ -112,7 +93,7 @@ export default function TypeJournalList() {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0
-      ? Math.max(0, (1 + page) * rowsPerPage - TypeJournalList.length)
+      ? Math.max(0, (1 + page) * rowsPerPage - journalTypeList.length)
       : 0;
 
   return (
@@ -130,7 +111,7 @@ export default function TypeJournalList() {
               <TableBody>
                 {/* if you don't need to support IE11, you can replace the `stableSort` call with:
             rows.slice().sort(getComparator(order, orderBy)) */}
-                {typeJournalList.map((row: any, index: any) => {
+                {journalTypeList.map((row: JournalTypeItem, index: any) => {
                   const labelId = `enhanced-table-checkbox-${index}`;
                   return (
                     <TableRow hover tabIndex={-1} key={row.id}>
@@ -141,7 +122,7 @@ export default function TypeJournalList() {
                         padding="normal"
                         align="left"
                       >
-                        {row.nom}
+                        {row.type}
                       </TableCell>
                       <TableCell
                         component="th"
@@ -150,7 +131,9 @@ export default function TypeJournalList() {
                         padding="normal"
                         align="left"
                       >
-                        {row.compte_par_defaut}
+                        {row?.defaultAccount?.code}
+                        {"/"}
+                        {row?.defaultAccount?.name}
                       </TableCell>
                       <TableCell align="right">
                         <BtnActionContainer
@@ -193,7 +176,7 @@ export default function TypeJournalList() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={typeJournalList.length}
+            count={journalTypeList.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { getComptaFileListe } from "../../../redux/features/comptaFile";
 
-
 const useFetchComptaFileListe = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -53,6 +52,10 @@ const useFetchComptaFileListe = () => {
           break;
       }
     }
+
+    args.include = {
+      currency: true,
+    };
     dispatch(getComptaFileListe({ args }));
   };
 };

@@ -5,54 +5,54 @@ const menu = [
     link: "/",
     icon: "history_edu",
     items: [
-      {
-        id: 11,
-        name: "Achat",
-        link: "/achat",
-        icon: "",
-      },
-      {
-        id: 12,
-        name: "Vente",
-        link: "/vente",
-        icon: "",
-      },
-      {
-        id: 13,
-        name: "Banque",
-        link: "/banque",
-        icon: "",
-      },
-      {
-        id: 14,
-        name: "Caisse",
-        link: "/caisse",
-        icon: "",
-      },
-      {
-        id: 15,
-        name: "Opération diverse",
-        link: "/operation-diverse",
-        icon: "",
-      },
-      {
-        id: 16,
-        name: "Paie",
-        link: "/paie",
-        icon: "",
-      },
+      // {
+      //   id: 11,
+      //   name: "Achat",
+      //   link: "/achat",
+      //   icon: "",
+      // },
+      // {
+      //   id: 12,
+      //   name: "Vente",
+      //   link: "/vente",
+      //   icon: "",
+      // },
+      // {
+      //   id: 13,
+      //   name: "Banque",
+      //   link: "/banque",
+      //   icon: "",
+      // },
+      // {
+      //   id: 14,
+      //   name: "Caisse",
+      //   link: "/caisse",
+      //   icon: "",
+      // },
+      // {
+      //   id: 15,
+      //   name: "Opération diverse",
+      //   link: "/operation-diverse",
+      //   icon: "",
+      // },
+      // {
+      //   id: 16,
+      //   name: "Paie",
+      //   link: "/paie",
+      //   icon: "",
+      // },
       {
         id: 17,
         name: "Tous les journals de saisie",
         link: "/tous-les-journals-de-saisie",
         icon: "",
       },
-      {
-        id: 18,
-        name: "Annee d'exercice",
-        link: "/annee-exercice",
-        icon: "",
-      },
+      // {
+      //   id: 18,
+      //   name: "Annee d'exercice",
+      //   link: "/annee-exercice",
+      //   icon: "",
+      // },
     ],
   },
   {
@@ -119,70 +119,70 @@ const menu = [
       },
     ],
   },
-  {
-    id: 4,
-    name: "comptes",
-    link: "/comptes",
-    icon: "contacts",
-    items: [
-      {
-        id: 41,
-        name: "Général",
-        link: "/comptes/general",
-        icon: "",
-      },
-      {
-        id: 42,
-        name: "Auxiliaire",
-        link: "/comptes/auxiliaire",
-        icon: "",
-      },
-    ],
-  },
-  {
-    id: 5,
-    name: "configurations",
-    link: "/configurations",
-    icon: "settings",
-    items: [
-      {
-        id: 51,
-        name: "Fichier comptable",
-        link: "/configurations/fichier-comptable",
-        icon: "",
-      },
-      {
-        id: 52,
-        name: "Année d’exercice",
-        link: "/configurations/annee-exercice",
-        icon: "",
-      },
-      {
-        id: 53,
-        name: "Année fiscale",
-        link: "/configurations/annee-fiscale",
-        icon: "",
-      },
-      {
-        id: 54,
-        name: "Devise",
-        link: "/configurations/devise",
-        icon: "",
-      },
-      {
-        id: 55,
-        name: "Type de journal",
-        link: "/configurations/type-journal",
-        icon: "",
-      },
-      {
-        id: 56,
-        name: "Mode de paiement",
-        link: "/configurations/mode-paiement",
-        icon: "",
-      },
-    ],
-  },
+  // {
+  //   id: 4,
+  //   name: "comptes",
+  //   link: "/comptes",
+  //   icon: "contacts",
+  //   items: [
+  //     {
+  //       id: 41,
+  //       name: "Général",
+  //       link: "/comptes/general",
+  //       icon: "",
+  //     },
+  //     {
+  //       id: 42,
+  //       name: "Auxiliaire",
+  //       link: "/comptes/auxiliaire",
+  //       icon: "",
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 5,
+  //   name: "configurations",
+  //   link: "/configurations",
+  //   icon: "settings",
+  //   items: [
+  //     {
+  //       id: 51,
+  //       name: "Fichier comptable",
+  //       link: "/configurations/fichier-comptable",
+  //       icon: "",
+  //     },
+  //     {
+  //       id: 52,
+  //       name: "Année d’exercice",
+  //       link: "/configurations/annee-exercice",
+  //       icon: "",
+  //     },
+  //     {
+  //       id: 53,
+  //       name: "Année fiscale",
+  //       link: "/configurations/annee-fiscale",
+  //       icon: "",
+  //     },
+  //     {
+  //       id: 54,
+  //       name: "Devise",
+  //       link: "/configurations/devise",
+  //       icon: "",
+  //     },
+  //     {
+  //       id: 55,
+  //       name: "Type de journal",
+  //       link: "/configurations/type-journal",
+  //       icon: "",
+  //     },
+  //     {
+  //       id: 56,
+  //       name: "Mode de paiement",
+  //       link: "/configurations/mode-paiement",
+  //       icon: "",
+  //     },
+  //   ],
+  // },
 ];
 
 export default menu;

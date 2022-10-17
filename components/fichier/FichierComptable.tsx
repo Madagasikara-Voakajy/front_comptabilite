@@ -9,7 +9,7 @@ import {
   styled,
   Box,
 } from "@mui/material";
-import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import Add from "@mui/icons-material/Add";
 import Link from "next/link";
 import useBasePath from "../../hooks/useBasePath";
@@ -18,20 +18,26 @@ import { useAppSelector } from "../../hooks/reduxHooks";
 import useFetchComptaFileListe from "./hooks/useFetchComptaFile";
 import { ComptaFileItem } from "../../redux/features/comptaFile/comptaFileSlice.interface";
 import useFetchCurrencyListe from "../configurations/currency/hooks/useFetchCurrency";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import useFetchTypeJournal from "../configurations/typeJournal/hooks/useFetchTypeJournal";
 
 const FichierComptable = () => {
-
   const { comptaFileListe } = useAppSelector((state) => state.comptaFile);
   const fetchComptaFileListe = useFetchComptaFileListe();
   const fetchAllCurrency = useFetchCurrencyListe();
+  // const fetchJournalType = useFetchTypeJournal();
 
   useEffect(() => {
     fetchComptaFileListe();
-  },[]);
+  }, []);
 
   useEffect(() => {
     fetchAllCurrency();
   }, []);
+
+  // useEffect(() => {
+  //   fetchJournalType();
+  // }, []);
 
   const basePath = useBasePath();
   return (
@@ -42,11 +48,18 @@ const FichierComptable = () => {
           justifyContent="space-between"
           mb={1}
         >
-          <Link href={"/fichier/create"}>
-            <Button variant="contained" startIcon={<Add />} size="small">
-              Créer fichier comptable
-            </Button>
-          </Link>
+          <Stack direction="row" spacing={2}>
+            <Link href="/">
+              <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
+                Retour
+              </Button>
+            </Link>
+            <Link href={"/fichier/create"}>
+              <Button variant="contained" startIcon={<Add />} size="small">
+                Créer fichier comptable
+              </Button>
+            </Link>
+          </Stack>
           <Typography variant="h4">Fichiers comptables</Typography>
         </SectionNavigation>
         <Divider />
@@ -61,7 +74,7 @@ const FichierComptable = () => {
           </SectionBtnAdd>
         </Grid>
         {comptaFileListe.map((comptaFile: ComptaFileItem) => (
-          <Grid item xs={12} md={6} mb={3}>
+          <Grid item xs={12} md={6} mb={3} key={comptaFile?.id}>
             <SectionDetails>
               <SectionDetailsTitle>
                 <Typography variant="h5" color="black">
@@ -69,13 +82,19 @@ const FichierComptable = () => {
                 </Typography>
               </SectionDetailsTitle>
               <SectionDetailsContent spacing={2} my={2}>
-				<KeyValue keyName= "Nom de l'entreprise" value= {comptaFile.companyName}/>
-				<KeyValue keyName= "activité" value= {comptaFile.activity}/>
+                <KeyValue
+                  keyName="Nom de l'entreprise"
+                  value={comptaFile.companyName}
+                />
+                <KeyValue keyName="activité" value={comptaFile.activity} />
                 <KeyValue
                   keyName="Numéro d’Identification Fiscale (NIF)"
                   value={comptaFile.NIF}
                 />
-                <KeyValue keyName="Numéro Statistique (STAT)" value={comptaFile.STAT} />
+                <KeyValue
+                  keyName="Numéro Statistique (STAT)"
+                  value={comptaFile.STAT}
+                />
                 <KeyValue
                   keyName="RCS (Registre du Commerce et de Société)"
                   value={comptaFile.RCS}
@@ -84,9 +103,15 @@ const FichierComptable = () => {
                 <KeyValue keyName="Téléphone" value={comptaFile.phone} />
                 <KeyValue keyName="Adresse" value={comptaFile.address} />
                 <KeyValue keyName="Email" value={comptaFile.email} />
-                <KeyValue keyName="Code Postale" value={comptaFile.postalCode} />
-				<KeyValue keyName="Type d'année fiscale" value={comptaFile.fiscalYearType} />
-				<KeyValue keyName="Devise" value={comptaFile.currencyId} />
+                <KeyValue
+                  keyName="Code Postale"
+                  value={comptaFile.postalCode}
+                />
+                <KeyValue
+                  keyName="Type d'année fiscale"
+                  value={comptaFile.fiscalYearType}
+                />
+                <KeyValue keyName="Devise" value={comptaFile?.currency?.name} />
               </SectionDetailsContent>
               <SectionDetailsFooter spacing={2} direction="row">
                 <Link href={`/fichier/${comptaFile.id}/detail`}>
@@ -95,11 +120,15 @@ const FichierComptable = () => {
                   </Button>
                 </Link>
                 <Link href={"/fichier/journal"}>
-                  <Button variant="text" color="info" startIcon={<SettingsApplicationsIcon />}>
+                  <Button
+                    variant="text"
+                    color="info"
+                    startIcon={<SettingsApplicationsIcon />}
+                  >
                     Journal
                   </Button>
                 </Link>
-                <Link href={"/fichier/1/annee-exercice"}>
+                <Link href={`/fichier/${comptaFile?.id}/annee-exercice`}>
                   <Button variant="contained" color="primary">
                     Ouvrir
                   </Button>

@@ -17,6 +17,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ListAnneeExercice = () => {
   const [open, setOpen] = React.useState(false);
@@ -111,14 +112,21 @@ const ListAnneeExercice = () => {
           justifyContent="space-between"
           mb={2}
         >
-          <Button
-            onClick={handleClickOpen}
-            variant="contained"
-            size="small"
-            startIcon={<Add />}
-          >
-            Créer Année d’exercice
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Link href="/fichier">
+              <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
+                Retour
+              </Button>
+            </Link>
+            <Button
+              onClick={handleClickOpen}
+              variant="contained"
+              size="small"
+              startIcon={<Add />}
+            >
+              Créer Année d’exercice
+            </Button>
+          </Stack>
           <Typography variant="h4">Année d’exercice</Typography>
         </SectionNavigation>
         <Divider />
