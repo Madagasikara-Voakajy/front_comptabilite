@@ -42,7 +42,6 @@ const OneAnneeExercice = ({ year, locked, fileId }: any) => {
   };
 
   const handleClickEdit = async (id: any) => {
-    // router.push(`/annee-exercice/${fiscal.id}/edit`);
     await dispatch(editFiscal({ id }));
   };
 
@@ -61,7 +60,7 @@ const OneAnneeExercice = ({ year, locked, fileId }: any) => {
       {/* </Stack> */}
       <Stack direction={"row"} justifyContent={"center"}>
         {/* <Link href={`/annee-exercice/${fiscal.id}/detail`}> */}
-        <Link href={"/journals-de-saisie"}>
+        <Link href={"/journal"}>
           <IconButton
             aria-label="open"
             component="button"

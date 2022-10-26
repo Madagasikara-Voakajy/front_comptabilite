@@ -42,7 +42,9 @@ export default function FiscalForm() {
   const { isEditing, fiscal } = useAppSelector((state) => state.fiscal);
 
   const { comptaFileListe } = useAppSelector((state) => state.comptaFile);
+
   const fetchComptaFileListe = useFetchComptaFileListe();
+  
   const fetchFiscalListe = useFetchFiscalListe();
   
   useEffect(() => {
@@ -65,7 +67,6 @@ export default function FiscalForm() {
       } else {
         await dispatch(createFiscal(values));
       }
-      // route.push("/fichier/[id]/annee-exercice");
       fetchFiscalListe();
     } catch (error) {
       console.log("error", error);
@@ -88,7 +89,6 @@ export default function FiscalForm() {
         }
         validationSchema={Yup.object({
           year: Yup.string().required("Champ obligatoire"),
-          // locked: Yup.string().required("Champ obligatoire"),
           fileId: Yup.string().required("Champ obligatoire"),
         })}
         onSubmit={(value: any, action: any) => {
