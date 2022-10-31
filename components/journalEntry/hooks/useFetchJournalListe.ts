@@ -2,15 +2,13 @@ import { useRouter } from "next/router";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { getJournalEntryListe } from "../../../redux/features/journal-entry";
 
-
 const useFetchJournalEntryListe = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   return () => {
     let args: any = {};
     if (router.query.search) {
-      args.where = {
-      };
+      args.where = {};
     }
     if (router.query.orderBy && router.query.order) {
       args.orderBy = {
@@ -25,7 +23,8 @@ const useFetchJournalEntryListe = () => {
       // }
     }
     args.include = {
-      defaultAccount: true,
+      journal: true,
+      fiscalYear: true,
     };
     dispatch(getJournalEntryListe({ args }));
   };

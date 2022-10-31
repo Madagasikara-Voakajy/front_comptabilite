@@ -30,7 +30,10 @@ import { useConfirm } from "material-ui-confirm";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Visibility } from "@mui/icons-material";
 import useFetchJournalEntryListe from "./hooks/useFetchJournalListe";
-import { deleteJournalEntry, getJournalEntry } from "../../redux/features/journal-entry";
+import {
+  deleteJournalEntry,
+  getJournalEntry,
+} from "../../redux/features/journal-entry";
 import { JournalEntryItem } from "../../redux/features/journal-entry/JournalEntrySlice.interface";
 import JournalEntryTableToolbar from "./organism/table/JournalToolbar";
 import JournalEntryTableHeader from "./organism/table/JournalTableHeader";
@@ -48,34 +51,9 @@ const ListJournalEntry = () => {
   const router = useRouter();
   const confirm = useConfirm();
 
-  const { id }: any = router.query;
-
-  // const fetchJournalListe = useFetchJournalListe();
-  // useEffect(() => {
-  //   fetchJournalListe();
-  // }, []);
-
-  // const fetchfiscalListe = useFetchFiscalListe();
-  // useEffect(() => {
-  //   fetchfiscalListe();
-  // }, []);
+  const idFile: any = router.query.id;
 
   const fetchJournalEntryListe = useFetchJournalEntryListe();
-
-  // useEffect(() => {
-  //   getAllData();
-  // }, [id]);
-
-  // const getAllData = () => {
-  //   const args: any = {
-  //     include: {
-  //       fiscal: true,
-  //       journal:true,
-  //     },
-  //   };
-  //   dispatch(getJournalEntry({ id, args }));
-  // };
-
 
   useEffect(() => {
     fetchJournalEntryListe();
@@ -101,9 +79,8 @@ const ListJournalEntry = () => {
       .catch(() => {});
   };
 
-
   const handleClickEdit = async (id: any) => {
-    router.push(`/journalEntry/${id}/`);
+    router.push(`/fichier/${idFile}/journal-entry/${id}/edit`);
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -127,12 +104,12 @@ const ListJournalEntry = () => {
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
         <Stack direction="row" spacing={2}>
-          <Link href="/">
+          <Link href="/fichier">
             <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
               Retour
             </Button>
           </Link>
-          <Link href="/journalEntry/add">
+          <Link href={`/fichier/${idFile}/journal-entry/add`}>
             <Button variant="contained" size="small" startIcon={<Add />}>
               Ajouter
             </Button>
@@ -209,7 +186,7 @@ const ListJournalEntry = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row.journalId}
+                            {row?.journal?.name}
                           </TableCell>
                           <TableCell
                             component="th"
@@ -218,7 +195,7 @@ const ListJournalEntry = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row.fiscalYearId}
+                            {row?.fiscalYear?.year}
                             {/* { row.fiscal?.year} */}
                           </TableCell>
                           <TableCell align="right">
@@ -226,14 +203,18 @@ const ListJournalEntry = () => {
                               direction="row"
                               justifyContent="center"
                             >
-                              <IconButton
-                                color="primary"
-                                aria-label="Modifier"
-                                component="span"
-                                onClick={() => handleClickEdit(row.id)}
+                              <Link
+                                href={`/fichier/${idFile}/journal-entry/${row.id}/edit`}
                               >
-                                <EditIcon />
-                              </IconButton>
+                                <IconButton
+                                  color="primary"
+                                  aria-label="Modifier"
+                                  component="span"
+                                  // onClick={() => handleClickEdit(row.id)}
+                                >
+                                  <EditIcon />
+                                </IconButton>
+                              </Link>
                               <IconButton
                                 color="warning"
                                 aria-label="Supprimer"

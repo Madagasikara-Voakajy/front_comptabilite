@@ -8,8 +8,8 @@ export const getJournalEntryListe = createAsyncThunk(
       const params = {
         args: JSON.stringify(data.args),
       };
-      const response = await axios.get("/compta/journal-entry");
-        
+      const response = await axios.get("/compta/journal-entry", { params });
+
       return response.data;
     } catch (error: any) {
       if (error.response) {

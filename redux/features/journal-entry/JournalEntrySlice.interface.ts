@@ -7,11 +7,12 @@ export interface JournalEntryItem {
   reference?: string;
   journalId?: number;
   fiscalYearId?: number;
+  [x: string]: any;
 }
 
 export interface JournalEntryInitialState {
   journalEntryListe: JournalEntryItem[];
-  journalEntry: {};
+  journalEntry: JournalEntryItem;
   isEditing: boolean;
   loading: boolean;
   [key: string]: any;

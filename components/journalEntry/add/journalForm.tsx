@@ -20,59 +20,39 @@ import OSTextField from "../../shared/input/OSTextField";
 import {
   createJournalEntry,
   getJournalEntry,
+  editJournalEntry,
   updateJournalEntry,
 } from "../../../redux/features/journal-entry";
 import OSDatePicker from "../../shared/date/OSDatePicker";
-// import useFetchJournalListe from "../../journal/hooks/useFetchJournalListe"
 import useFetchFiscalListe from "../../anneeExercice/hooks/useFetchFiscalListe";
-import useFetchJournalListe from "../hooks/useFetchJournalList1";
+import useFetchJournalListe from "../../journal/hooks/useFetchJournalListe";
 
 const JournalEntryForm = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-
-  const { isEditing, journalEntry, journalListe }: any = useAppSelector(
+  const { id, idje }: any = router.query;
+  const { isEditing, journalEntry } = useAppSelector(
     (state) => state.journalEntry
   );
-
-  
   const { fiscalListe } = useAppSelector((state) => state.fiscal);
-  
-  // const { journalListe } = useAppSelector((state) => state.journal);
-  // const fetchJournalListe = useFetchJournalListe();
-  
-  const fetchfiscalListe = useFetchFiscalListe();
+  const { journalListe } = useAppSelector((state) => state.journal);
   const fetchJournalListe = useFetchJournalListe();
-  
-  // const { id }: any = router.query;
-  // const getAffiche = () => {
-  //   const args : any = {
-  //     include: {
-  //       journal: true,
-  //       fiscal: true,
-  //     }
-  //   }
-  //   dispatch(getJournalEntry({ id, args}));
-  // };
+  const fetchfiscalListe = useFetchFiscalListe();
 
-  // useEffect(() => {
-  //   getAffiche();
-  // }, [id]);
+  useEffect(() => {
+    if (idje) {
+      dispatch(editJournalEntry({ id: idje }));
+    }
+  }, [router.query]);
 
   useEffect(() => {
     fetchJournalListe();
-  },[]);
-
-
-  useEffect(() => {
     fetchfiscalListe();
-  },[]);
-
-  
+  }, []);
 
   const handleSubmit = async (values: any) => {
     try {
-      values.number= +values.number
+      values.number = +values.number;
       if (isEditing) {
         await dispatch(
           updateJournalEntry({
@@ -83,7 +63,7 @@ const JournalEntryForm = () => {
       } else {
         await dispatch(createJournalEntry(values));
       }
-      router.push("/journalEntry");
+      router.push(`/fichier/${id}/journal-entry`);
     } catch (error) {
       console.log("error", error);
     }
@@ -93,17 +73,13 @@ const JournalEntryForm = () => {
     <Container maxWidth="xl" sx={{ pb: 5 }}>
       <Formik
         enableReinitialize
-        initialValues={
-          isEditing
-            ? journalEntry
-            : {
-                number: isEditing ? journalEntry?.number : "1",
-                date: isEditing ? journalEntry?.date : new Date(),
-                reference: isEditing ? journalEntry?.reference : "",
-                journalId: isEditing ? journalEntry?.journalId : "",
-                fiscalYearId: isEditing ? journalEntry?.fiscalYearId : "",
-              }
-        }
+        initialValues={{
+          number: isEditing ? journalEntry?.number : "",
+          date: isEditing ? journalEntry.date : "",
+          reference: isEditing ? journalEntry?.reference : "",
+          journalId: isEditing ? journalEntry?.journalId : "",
+          fiscalYearId: isEditing ? journalEntry?.fiscalYearId : "",
+        }}
         validationSchema={Yup.object({
           number: Yup.number().required("Champ obligatoire"),
           date: Yup.date().required("Champ obligatoire"),
@@ -121,7 +97,7 @@ const JournalEntryForm = () => {
             <NavigationContainer>
               <SectionNavigation>
                 <Stack flexDirection={"row"}>
-                  <Link href="/journalEntry">
+                  <Link href={`/fichier/${id}/journal-entry`}>
                     <Button
                       color="info"
                       variant="text"
@@ -177,9 +153,9 @@ const JournalEntryForm = () => {
               <OSDatePicker
                 fullWidth
                 label="Date"
-                value={formikProps.values.deliveryDate}
+                value={formikProps.values.date}
                 onChange={(value: any) =>
-                  formikProps.setFieldValue("deliveryDate", value)
+                  formikProps.setFieldValue("date", value)
                 }
               />
               <OSTextField
