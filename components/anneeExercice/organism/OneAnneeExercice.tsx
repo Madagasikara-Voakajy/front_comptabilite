@@ -12,12 +12,12 @@ import useFetchFiscalListe from "../hooks/useFetchFiscalListe";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { useRouter } from "next/router";
 
-const OneAnneeExercice = ({ year, locked, fileId }: any) => {
+const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
   const confirm = useConfirm();
 
   const router = useRouter();
 
-  const { fiscal } = useAppSelector((state) => state.fiscal);
+  // const { fiscal } = useAppSelector((state) => state.fiscal);
 
   const dispatch = useAppDispatch();
 
@@ -75,7 +75,7 @@ const OneAnneeExercice = ({ year, locked, fileId }: any) => {
           component="button"
           sx={{ color: "#ddd" }}
           onClick={() => {
-            handleClickEdit(fiscal.id);
+            handleClickEdit(fiscalId);
           }}
         >
           <Edit />
@@ -85,7 +85,7 @@ const OneAnneeExercice = ({ year, locked, fileId }: any) => {
           component="button"
           sx={{ color: "#ddd" }}
           onClick={() => {
-            handleClickDelete(fiscal.id);
+            handleClickDelete(fiscalId);
           }}
         >
           <Delete />

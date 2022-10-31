@@ -25,7 +25,6 @@ import FiscalForm from "./add/addAnnee";
 const ListAnneeExercice = () => {
   const [open, setOpen] = React.useState(false);
 
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -41,7 +40,6 @@ const ListAnneeExercice = () => {
   useEffect(() => {
     fetchFiscalListe();
   }, []);
-
 
   return (
     <Container maxWidth="xl">
@@ -74,11 +72,12 @@ const ListAnneeExercice = () => {
       <SectionBody>
         <Grid container spacing={3}>
           {fiscalListe.map((fiscal: FiscalItem, index: any) => (
-            <Grid item xs={12} md={6} key={index}>
+            <Grid item xs={12} md={4} key={index}>
               <OneAnneeExercice
                 year={fiscal.year}
                 locked={fiscal.locked}
                 fileId={fiscal.fileId}
+                fiscalId={fiscal.id}
               />
             </Grid>
           ))}
@@ -87,7 +86,10 @@ const ListAnneeExercice = () => {
 
       {/* Dialog */}
       <Dialog open={open} onClose={handleClose}>
-        <FiscalForm />
+        <FiscalForm
+          // handleClickOpen={handleClickOpen}
+          handleClose={handleClose}
+        />
       </Dialog>
     </Container>
   );
