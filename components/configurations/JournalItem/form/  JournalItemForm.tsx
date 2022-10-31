@@ -27,6 +27,8 @@ import useFetchAuxiliaire from "../../../compte/auxiliaire/hooks/useFetchAuxilia
 import useFetchCurrencyListe from "../../currency/hooks/useFetchCurrency";
 import PcgList from "../../../compte/planComptable/organism/table/PlanComptableList";
 import useFetchPlanComptable from "../../../compte/planComptable/hooks/useFetchPlanComptable";
+import useFetchJournalListe from "../../../journal/hooks/useFetchJournalListe";
+import useFetchJournalEntryListe from "../../../journalEntry/hooks/useFetchJournalListe";
 
 const JournalItemForm = () => {
   const router = useRouter();
@@ -52,7 +54,8 @@ const JournalItemForm = () => {
   const { currencyListe } = useAppSelector((state) => state.currency);
   const fetchCurrency = useFetchCurrencyListe();
 
-  // const {jour} = useAppSelector((state) => state.jou);
+  const { journalEntryListe } = useAppSelector((state) => state.journalEntry);
+  const fetchJournalEntry = useFetchJournalEntryListe();
 
   React.useEffect(() => {
     if (id) {
@@ -63,6 +66,7 @@ const JournalItemForm = () => {
   React.useEffect(() => {
     fetchAuxiliaryAccount();
     fetchCurrency();
+    fetchJournalEntry();
     fetchPcg();
   }, []);
 
@@ -83,25 +87,6 @@ const JournalItemForm = () => {
       console.log("error", error);
     }
   };
-
-  const journalENTRY = [
-    {
-      id: 9,
-      number: 54,
-      date: "2022-10-23T13:28:17.451Z",
-      reference: "string1",
-      journalId: 6,
-      fiscalYearId: 4,
-    },
-    {
-      id: 1,
-      number: 120,
-      date: "2022-10-20T06:39:39.446Z",
-      reference: "string2",
-      journalId: 5,
-      fiscalYearId: 2,
-    },
-  ];
 
   return (
     <Container maxWidth="xl" sx={{ pb: 5 }}>
@@ -226,7 +211,7 @@ const JournalItemForm = () => {
                   id="type"
                   label="Journal"
                   name="journalEntryId" //INITIAL VALUE
-                  options={journalENTRY}
+                  options={journalEntryListe}
                   dataKey={"reference"}
                   valueKey="id"
                 />
