@@ -74,11 +74,13 @@ const HomeComptabilite = () => {
                     </Button>
                   </Link>
                 </Box>
-                {/* <Box>
-							<Button variant="text" color="info">
-								Types de mode de paiements
-							</Button>
-						</Box> */}
+                <Box>
+                  <Link href="/configurations/journal-item">
+                    <Button variant="text" color="warning">
+                      Journal item
+                    </Button>
+                  </Link>
+                </Box>
               </LinkContainer>
             </Grid>
 
