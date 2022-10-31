@@ -4,6 +4,7 @@ export interface JournalItem {
   code?: string;
   fileId?: number;
   typeId?: number;
+  [x: string]: any;
 }
 
 export interface JournalInitialState {

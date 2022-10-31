@@ -20,7 +20,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Add from "@mui/icons-material/Add";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { defaultLabelDisplayedRows,getComparator, labelRowsPerPage } from "../../config/table.config";
+import {
+  defaultLabelDisplayedRows,
+  getComparator,
+  labelRowsPerPage,
+} from "../../config/table.config";
 import { useRouter } from "next/router";
 import { useConfirm } from "material-ui-confirm";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -32,8 +36,6 @@ import { Visibility } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import { deletejournal } from "../../redux/features/journal";
 
-
-
 const ListJournal = () => {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -41,6 +43,7 @@ const ListJournal = () => {
   const dispatch: any = useAppDispatch();
   const { journalListe } = useAppSelector((state) => state.journal);
   const router = useRouter();
+  const { id, idae }: any = router.query;
   const confirm = useConfirm();
 
   const fetchJournalListe = useFetchJournalListe();
@@ -48,7 +51,6 @@ const ListJournal = () => {
   useEffect(() => {
     fetchJournalListe();
   }, [router.query]);
-
 
   const handleclickDelete = async (id: any) => {
     confirm({
@@ -94,7 +96,7 @@ const ListJournal = () => {
               Retour
             </Button>
           </Link>
-          <Link href="/journal/add">
+          <Link href={`/fichier/${id}/annee-exercice/${idae}/journal/add`}>
             <Button variant="contained" size="small" startIcon={<Add />}>
               Créer
             </Button>
@@ -150,7 +152,7 @@ const ListJournal = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row.fileId}
+                            {row?.file?.companyName}
                           </TableCell>
                           <TableCell
                             component="th"
@@ -159,34 +161,36 @@ const ListJournal = () => {
                             padding="normal"
                             align="left"
                           >
-                            {row.typeId}
+                            {row?.type?.type}
                           </TableCell>
                           <TableCell align="right">
                             <BtnActionContainer
                               direction="row"
                               justifyContent="center"
                             >
-															<Link href="/journal/pieceComptable">
-																<Button
-																	sx={{ mr: 1 }}
-																	color="accent"
-																	variant="outlined"
-																	size="small"
-																>
-																	<AddIcon />
-																	Piéce Comptable
-																</Button>
-															</Link>
-															<Link href={`/journal/${row.id}`}>
-																<IconButton
-																	color="info"
-																	aria-label="Modifier"
-																	size="small"
-																	component="span"
-																>
-																	<Visibility />
-																</IconButton>
-															</Link>
+                              <Link href="/journal/pieceComptable">
+                                <Button
+                                  sx={{ mr: 1 }}
+                                  color="accent"
+                                  variant="outlined"
+                                  size="small"
+                                >
+                                  <AddIcon />
+                                  Piéce Comptable
+                                </Button>
+                              </Link>
+                              {/* <Link
+                                href={`/fichier/${id}/annee-exercice/${idae}/journal/${row.id}/details`}
+                              >
+                                <IconButton
+                                  color="info"
+                                  aria-label="Modifier"
+                                  size="small"
+                                  component="span"
+                                >
+                                  <Visibility />
+                                </IconButton>
+                              </Link> */}
                               <IconButton
                                 color="warning"
                                 aria-label="Supprimer"

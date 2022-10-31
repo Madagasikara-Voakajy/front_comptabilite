@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import {
+  Box,
   DialogActions,
   DialogContent,
   DialogTitle,
@@ -24,32 +25,26 @@ import useFetchComptaFileListe from "../../fichier/hooks/useFetchComptaFile";
 import OSSelectField from "../../shared/select/OSSelectField";
 import useFetchFiscalListe from "../hooks/useFetchFiscalListe";
 
-export default function FiscalForm() {
+const FiscalForm = ({ handleClose }: any) => {
   const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const router = useRouter();
+  const fileIdQ: any = router.query.id;
 
   const route = useRouter();
 
   const dispatch = useAppDispatch();
 
-  const { isEditing, fiscal } = useAppSelector((state) => state.fiscal);
+  const { isEditing, fiscal }: any = useAppSelector((state) => state.fiscal);
 
   const { comptaFileListe } = useAppSelector((state) => state.comptaFile);
 
   const fetchComptaFileListe = useFetchComptaFileListe();
-  
+
   const fetchFiscalListe = useFetchFiscalListe();
-  
+
   useEffect(() => {
     fetchComptaFileListe();
-  },[]);
+  }, []);
 
   useEffect(() => {
     fetchFiscalListe();
@@ -68,14 +63,14 @@ export default function FiscalForm() {
         await dispatch(createFiscal(values));
       }
       fetchFiscalListe();
+      handleClose();
     } catch (error) {
       console.log("error", error);
     }
   };
 
-
   return (
-    <Container maxWidth="xl" sx={{ paddingBottom: 8 }}>
+    <Box>
       <Formik
         enableReinitialize
         initialValues={
@@ -84,12 +79,13 @@ export default function FiscalForm() {
             : {
                 year: isEditing ? fiscal?.year : "",
                 locked: isEditing ? fiscal?.locked : false,
-                fileId: isEditing ? fiscal?.fileId : "",
+                fileId: +fileIdQ,
               }
         }
         validationSchema={Yup.object({
           year: Yup.string().required("Champ obligatoire"),
-          fileId: Yup.string().required("Champ obligatoire"),
+          // locked: Yup.string().required("Champ obligatoire"),
+          // fileId: Yup.string().required("Champ obligatoire"),
         })}
         onSubmit={(value: any, action: any) => {
           handleSubmit(value);
@@ -101,38 +97,38 @@ export default function FiscalForm() {
             <Form>
               <DialogTitle>
                 {/* Formulaire (Créer/Modifier) */}
-                { isEditing ? "Modifier" : "Formulaire" } Année d'exercice
-                </DialogTitle>
+                {isEditing ? "Modifier" : "Formulaire"} Année d'exercice
+              </DialogTitle>
               <DialogContent>
-                <FormContainer spacing={2}>
+                <FormContainer spacing={2} mt={2}>
                   <OSTextField
                     id="outlined-basic"
                     label="Année d'exercice"
                     name="year"
                     type="number"
                   />
-                  <OSSelectField
+                  {/* <OSSelectField
                   id="outlined-basic"
                   name="fileId"
                   label="file"
                   options={comptaFileListe}
                   dataKey="NIF"
                   valueKey="id"
-                  />
+                  /> */}
                 </FormContainer>
               </DialogContent>
               <DialogActions>
                 <Button
                   color="warning"
-                  // onClick={handleClose}
                   onClick={() => {
                     formikProps.resetForm();
                     dispatch(cancelEdit());
+                    handleClose();
                   }}
                 >
                   Annuler
                 </Button>
-                <Button variant="contained" onClick={handleClose} type="submit">
+                <Button variant="contained" type="submit">
                   Enregistrer
                 </Button>
               </DialogActions>
@@ -140,9 +136,11 @@ export default function FiscalForm() {
           );
         }}
       </Formik>
-    </Container>
+    </Box>
   );
-}
+};
+
+export default FiscalForm;
 
 export const CustomStack = styled(Stack)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
@@ -151,8 +149,8 @@ export const CustomStack = styled(Stack)(({ theme }) => ({
 }));
 
 const FormContainer = styled(Stack)(({ theme }) => ({
-  padding: 30,
-  borderRadius: 20,
+  // padding: 30,
+  // borderRadius: 20,
   background: "#fff",
 }));
 

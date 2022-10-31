@@ -12,12 +12,11 @@ import useFetchFiscalListe from "../hooks/useFetchFiscalListe";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { useRouter } from "next/router";
 
-const OneAnneeExercice = ({ year, locked, fileId }: any) => {
+const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
   const confirm = useConfirm();
-
   const router = useRouter();
-
-  const { fiscal } = useAppSelector((state) => state.fiscal);
+  const { id }: any = router.query;
+  // const { fiscal } = useAppSelector((state) => state.fiscal);
 
   const dispatch = useAppDispatch();
 
@@ -59,8 +58,7 @@ const OneAnneeExercice = ({ year, locked, fileId }: any) => {
       </Typography>
       {/* </Stack> */}
       <Stack direction={"row"} justifyContent={"center"}>
-        {/* <Link href={`/annee-exercice/${fiscal.id}/detail`}> */}
-        <Link href={"/journal"}>
+        <Link href={`/fichier/${id}/annee-exercice/${fiscalId}/journal`}>
           <IconButton
             aria-label="open"
             component="button"
@@ -74,7 +72,7 @@ const OneAnneeExercice = ({ year, locked, fileId }: any) => {
           component="button"
           sx={{ color: "#ddd" }}
           onClick={() => {
-            handleClickEdit(fiscal.id);
+            handleClickEdit(fiscalId);
           }}
         >
           <Edit />
@@ -84,7 +82,7 @@ const OneAnneeExercice = ({ year, locked, fileId }: any) => {
           component="button"
           sx={{ color: "#ddd" }}
           onClick={() => {
-            handleClickDelete(fiscal.id);
+            handleClickDelete(fiscalId);
           }}
         >
           <Delete />

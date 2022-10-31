@@ -21,7 +21,7 @@ import { createJournal, updateJournal } from "../../../redux/features/journal";
 
 const JournalForm = () => {
   const router = useRouter();
-
+  const { id, idae }: any = router.query;
   const { isEditing, journal }: any = useAppSelector((state) => state.journal);
 
   const { comptaFileListe } = useAppSelector((state) => state.comptaFile);
@@ -42,7 +42,7 @@ const JournalForm = () => {
       } else {
         await dispatch(createJournal(values));
       }
-      router.push("/journal");
+      router.push(`/fichier/${id}/annee-exercice/${idae}/journal`);
     } catch (error) {
       console.log("error", error);
     }
@@ -52,14 +52,15 @@ const JournalForm = () => {
     <Container maxWidth="xl" sx={{ pb: 5 }}>
       <Formik
         enableReinitialize
-        initialValues={isEditing 
-          ? journal
-          :{
-            name: isEditing ? journal?.name: "",
-            code: isEditing ? journal?.code: "",
-            fileId: isEditing ? journal?.fileId: "",
-            typeId: isEditing ? journal?.typeId: "",
-          }
+        initialValues={
+          isEditing
+            ? journal
+            : {
+                name: isEditing ? journal?.name : "",
+                code: isEditing ? journal?.code : "",
+                fileId: +id,
+                typeId: isEditing ? journal?.typeId : "",
+              }
         }
         validationSchema={Yup.object({
           name: Yup.string().required("Champ obligatoire"),
@@ -140,9 +141,10 @@ const JournalForm = () => {
               <OSSelectField
                 id="outlined-basic"
                 label="File"
+                disabled
                 name="fileId"
                 options={comptaFileListe}
-                dataKey="NIF"
+                dataKey="companyName"
                 valueKey="id"
               />
               <OSSelectField
@@ -150,7 +152,7 @@ const JournalForm = () => {
                 name="typeId"
                 label="Type"
                 options={journalTypeList}
-                dataKey="defaultAccountId"
+                dataKey="type"
                 valueKey="id"
               />
             </FormContainer>
