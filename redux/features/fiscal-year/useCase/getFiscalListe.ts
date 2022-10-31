@@ -8,8 +8,8 @@ export const getFiscalListe = createAsyncThunk(
       const params = {
         args: JSON.stringify(data.args),
       };
-      const response = await axios.get("/compta/fiscal-year");
-        
+      const response = await axios.get("/compta/fiscal-year", { params });
+
       return response.data;
     } catch (error: any) {
       if (error.response) {

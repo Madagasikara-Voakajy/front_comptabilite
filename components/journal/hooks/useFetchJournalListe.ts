@@ -2,9 +2,9 @@ import { useRouter } from "next/router";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { getJournalListe } from "../../../redux/features/journal";
 
-
 const useFetchJournalListe = () => {
   const router = useRouter();
+  const { id }: any = router.query;
   const dispatch = useAppDispatch();
   return () => {
     let args: any = {};
@@ -53,6 +53,20 @@ const useFetchJournalListe = () => {
           break;
       }
     }
+
+    if (id) {
+      args.where = {
+        fileId: {
+          equals: +id,
+        },
+      };
+    }
+
+    args.include = {
+      file: true,
+      type: true,
+    };
+
     dispatch(getJournalListe({ args }));
   };
 };
