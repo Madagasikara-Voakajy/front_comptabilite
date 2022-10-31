@@ -14,9 +14,8 @@ import { useRouter } from "next/router";
 
 const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
   const confirm = useConfirm();
-
   const router = useRouter();
-
+  const { id }: any = router.query;
   // const { fiscal } = useAppSelector((state) => state.fiscal);
 
   const dispatch = useAppDispatch();
@@ -42,7 +41,6 @@ const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
   };
 
   const handleClickEdit = async (id: any) => {
-    // router.push(`/annee-exercice/${fiscal.id}/edit`);
     await dispatch(editFiscal({ id }));
   };
 
@@ -60,8 +58,7 @@ const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
       </Typography>
       {/* </Stack> */}
       <Stack direction={"row"} justifyContent={"center"}>
-        {/* <Link href={`/annee-exercice/${fiscal.id}/detail`}> */}
-        <Link href={"/journals-de-saisie"}>
+        <Link href={`/fichier/${id}/annee-exercice/${fiscalId}/journal`}>
           <IconButton
             aria-label="open"
             component="button"

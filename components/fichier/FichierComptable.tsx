@@ -25,7 +25,6 @@ const FichierComptable = () => {
   const { comptaFileListe } = useAppSelector((state) => state.comptaFile);
   const fetchComptaFileListe = useFetchComptaFileListe();
   const fetchAllCurrency = useFetchCurrencyListe();
-  // const fetchJournalType = useFetchTypeJournal();
 
   useEffect(() => {
     fetchComptaFileListe();
@@ -119,13 +118,13 @@ const FichierComptable = () => {
                     Détails
                   </Button>
                 </Link>
-                <Link href={"/fichier/journal"}>
+                <Link href={"/journalEntry"}>
                   <Button
                     variant="text"
                     color="info"
                     startIcon={<SettingsApplicationsIcon />}
                   >
-                    Journal
+                    Journal de Saisie
                   </Button>
                 </Link>
                 <Link href={`/fichier/${comptaFile?.id}/annee-exercice`}>

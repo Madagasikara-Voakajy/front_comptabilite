@@ -37,7 +37,9 @@ const FiscalForm = ({ handleClose }: any) => {
   const { isEditing, fiscal }: any = useAppSelector((state) => state.fiscal);
 
   const { comptaFileListe } = useAppSelector((state) => state.comptaFile);
+
   const fetchComptaFileListe = useFetchComptaFileListe();
+
   const fetchFiscalListe = useFetchFiscalListe();
 
   useEffect(() => {
