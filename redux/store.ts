@@ -12,6 +12,8 @@ import { grantSlice } from "./features/grant/grantSlice";
 import { budgetLineSlice } from "./features/budgetLine/budgetLineSlice";
 import { comptaFileSlice } from "./features/comptaFile/comptaFileSlice";
 import { journalTypeSlice } from "./features/journalType/journalTypeSlice";
+import { fiscalSlice } from "./features/fiscal-year/fiscalSlice";
+// import { journalSlice } from "./features/journal/journalSlice";
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +30,8 @@ export const store = configureStore({
     budgetLine: budgetLineSlice.reducer,
     comptaFile: comptaFileSlice.reducer,
     journalType: journalTypeSlice.reducer,
+    fiscal: fiscalSlice.reducer,
+    // journal: journalSlice.reducer,
   },
 });
 
