@@ -1,5 +1,4 @@
 import { Box, Stack, styled, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
@@ -8,13 +7,14 @@ import { Visibility } from "@mui/icons-material";
 import Link from "next/link";
 import { useConfirm } from "material-ui-confirm";
 import { deleteFiscal, editFiscal } from "../../../redux/features/fiscal-year";
-import useFetchFiscalListe from "../hooks/useFetchFiscalListe";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { useRouter } from "next/router";
+import useFetchFiscalListe from "../hooks/useFetchFiscalListe";
 
 const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
   const confirm = useConfirm();
   const router = useRouter();
+  const fetchFiscalListe = useFetchFiscalListe();
   const { id }: any = router.query;
   // const { fiscal } = useAppSelector((state) => state.fiscal);
 
@@ -35,7 +35,7 @@ const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
     })
       .then(async () => {
         await dispatch(deleteFiscal({ id }));
-        useFetchFiscalListe();
+        fetchFiscalListe();
       })
       .catch(() => {});
   };
@@ -59,11 +59,7 @@ const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
       {/* </Stack> */}
       <Stack direction={"row"} justifyContent={"center"}>
         <Link href={`/fichier/${id}/annee-exercice/${fiscalId}/journal`}>
-          <IconButton
-            aria-label="open"
-            component="button"
-            sx={{ color: "#ddd" }}
-          >
+          <IconButton aria-label="open" component="button" sx={{ color: "#ddd" }}>
             <Visibility />
           </IconButton>
         </Link>
