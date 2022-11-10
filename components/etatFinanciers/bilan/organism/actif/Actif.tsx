@@ -5,9 +5,18 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Box } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
 import { createData } from "./table/actif.function";
 import { columns } from "./table/actif.constant";
+import Button from "@mui/material/Button";
+import TableModal from "../../modal/modal";
 
 const Actif = () => {
   const rows = [
@@ -70,6 +79,16 @@ const Actif = () => {
     ),
   ];
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [open, setOpen] = React.useState(false);
+
   return (
     <Box>
       <TableContainer>
@@ -112,6 +131,9 @@ const Actif = () => {
                       </TableCell>
                     );
                   })}
+                  <Button variant="text" color="info" onClick={handleClickOpen}>
+                    PCG
+                  </Button>
                 </TableRow>
               );
             })}
@@ -120,7 +142,28 @@ const Actif = () => {
               <TableCell align="left">15,000,000.00</TableCell>
               <TableCell align="center">5,000,000.00 </TableCell>
               <TableCell align="center">10,000,000.00 </TableCell>
-              <TableCell align="center">-</TableCell>
+              <TableCell align="right">
+                -
+                <Button variant="text" color="info" onClick={handleClickOpen}>
+                  PCG
+                </Button>
+                <Dialog open={open} onClose={handleClose} maxWidth="xl">
+                  <DialogActions>
+                    <DialogTitle variant="h6">
+                      Ajouter compte PCG liée à: nom de la ligne séléctionné
+                    </DialogTitle>
+                    <Button color="warning" onClick={handleClose}>
+                      Annuler
+                    </Button>
+                    <Button variant="text" onClick={handleClose}>
+                      Enregistrer
+                    </Button>
+                  </DialogActions>
+                  <DialogContent>
+                    <TableModal />
+                  </DialogContent>
+                </Dialog>
+              </TableCell>
             </TableRow>
             <TableRow hover tabIndex={-1}>
               <TableCell colSpan={5}> </TableCell>
