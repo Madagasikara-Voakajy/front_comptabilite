@@ -99,7 +99,7 @@ const HomeComptabilite = () => {
                 <Box>
                   <Link href="/etat-financieres/compte-resultat">
                     <Button variant="text" color="info">
-                      Compte de résiltats par nature / par fonction
+                      Compte de résultats par nature / par fonction
                     </Button>
                   </Link>
                 </Box>

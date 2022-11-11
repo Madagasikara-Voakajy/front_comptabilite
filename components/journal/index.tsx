@@ -179,9 +179,7 @@ const ListJournal = () => {
                                   Piéce Comptable
                                 </Button>
                               </Link>
-                              {/* <Link
-                                href={`/fichier/${id}/annee-exercice/${idae}/journal/${row.id}/details`}
-                              >
+                              <Link href="/rapprochement">
                                 <IconButton
                                   color="info"
                                   aria-label="Modifier"
@@ -190,7 +188,7 @@ const ListJournal = () => {
                                 >
                                   <Visibility />
                                 </IconButton>
-                              </Link> */}
+                              </Link>
                               <IconButton
                                 color="warning"
                                 aria-label="Supprimer"
