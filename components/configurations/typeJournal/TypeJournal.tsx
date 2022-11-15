@@ -12,8 +12,11 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Link from "next/link";
 import TypeJournalForm from "./organism/TypeJournalForm";
 import TypeJournalList from "./organism/table/TypeJournalList";
+import { useRouter } from "next/router";
 
 const TypeJournal = () => {
+  const router = useRouter();
+  const { idfile }: any = router.query;
   return (
     <Container maxWidth="xl">
       <Stack>
@@ -22,7 +25,7 @@ const TypeJournal = () => {
           justifyContent="space-between"
           mb={1}
         >
-          <Link href="/">
+          <Link href={`/${idfile}/open-file`}>
             <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
               Retour
             </Button>

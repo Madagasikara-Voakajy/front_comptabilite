@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 // import useFetchComptaFileListe from "../hooks/useFetchComptaFile";
 import {
   createComptaFile,
+  editComptaFile,
   updateComptaFile,
 } from "../../../redux/features/comptaFile";
 import { Form, Formik } from "formik";
@@ -25,10 +26,9 @@ import OSTextField from "../../shared/input/OSTextField";
 import useFetchCurrencyListe from "../../configurations/currency/hooks/useFetchCurrency";
 
 const FormFichierComptable = () => {
-
   const route = useRouter();
-
-  const { currencyListe }:any = useAppSelector((state) => state.currency);
+  const { idfile }: any = route.query;
+  const { currencyListe }: any = useAppSelector((state) => state.currency);
 
   const { isEditing, comptaFile }: any = useAppSelector(
     (state) => state.comptaFile
@@ -38,11 +38,17 @@ const FormFichierComptable = () => {
 
   const fetchAllCurrency = useFetchCurrencyListe();
 
-  useEffect(() =>{
-	fetchAllCurrency();
+  useEffect(() => {
+    fetchAllCurrency();
   }, []);
 
-//   const fetchComptaFileListe = useFetchComptaFileListe();
+  useEffect(() => {
+    if (idfile) {
+      dispatch(editComptaFile({ id: idfile }));
+    }
+  }, [route.query]);
+
+  //   const fetchComptaFileListe = useFetchComptaFileListe();
 
   const typeFiscale = [
     { id: "CY", name: "CY", desc: "CY" },
@@ -61,7 +67,7 @@ const FormFichierComptable = () => {
       } else {
         await dispatch(createComptaFile(values));
       }
-      route.push("/fichier");
+      route.push("/");
     } catch (error) {
       console.log("error", error);
     }
@@ -114,7 +120,7 @@ const FormFichierComptable = () => {
               <NavigationContainer>
                 <SectionNavigation>
                   <Stack flexDirection={"row"}>
-                    <Link href="/fichier">
+                    <Link href="/">
                       <Button
                         color="info"
                         variant="text"

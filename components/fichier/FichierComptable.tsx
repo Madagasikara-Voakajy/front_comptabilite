@@ -48,12 +48,12 @@ const FichierComptable = () => {
           mb={1}
         >
           <Stack direction="row" spacing={2}>
-            <Link href="/">
+            {/* <Link href="/">
               <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
                 Retour
               </Button>
-            </Link>
-            <Link href={"/fichier/create"}>
+            </Link> */}
+            <Link href={"/create"}>
               <Button variant="contained" startIcon={<Add />} size="small">
                 Créer fichier comptable
               </Button>
@@ -113,7 +113,7 @@ const FichierComptable = () => {
                 <KeyValue keyName="Devise" value={comptaFile?.currency?.name} />
               </SectionDetailsContent>
               <SectionDetailsFooter spacing={2} direction="row">
-                <Link href={`/fichier/${comptaFile.id}/detail`}>
+                <Link href={`/${comptaFile.id}/details`}>
                   <Button variant="text" color="primary">
                     Détails
                   </Button>
@@ -127,7 +127,7 @@ const FichierComptable = () => {
                     Journal de Saisie
                   </Button>
                 </Link>
-                <Link href={`/fichier/${comptaFile?.id}/annee-exercice`}>
+                <Link href={`/${comptaFile?.id}/open-file`}>
                   <Button variant="contained" color="primary">
                     Ouvrir
                   </Button>

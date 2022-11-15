@@ -25,15 +25,15 @@ import {
 } from "../../../redux/features/comptaFile";
 import { useConfirm } from "material-ui-confirm";
 import useFetchComptaFileListe from "../hooks/useFetchComptaFile";
-import DeleteIcon from '@mui/icons-material/Delete';
-import ArticleIcon from '@mui/icons-material/Article';
+import DeleteIcon from "@mui/icons-material/Delete";
+import ArticleIcon from "@mui/icons-material/Article";
 
 const DetailsFichierComptable = () => {
   const router = useRouter();
 
   const dispatch: any = useAppDispatch();
 
-  const { id }: any = router.query;
+  const { idfile }: any = router.query;
 
   const { comptaFile }: any = useAppSelector((state) => state.comptaFile);
 
@@ -43,7 +43,7 @@ const DetailsFichierComptable = () => {
 
   useEffect(() => {
     getDetailsComptaFile();
-  }, [id]);
+  }, [idfile]);
 
   const getDetailsComptaFile = () => {
     const args: any = {
@@ -51,15 +51,10 @@ const DetailsFichierComptable = () => {
         currency: true,
       },
     };
-    dispatch(getComptaFile({ id, args }));
+    dispatch(getComptaFile({ id: idfile, args }));
   };
 
-  const handleClickEdit = async (id: any) => {
-    router.push(`/fichier/${id}/edit`);
-  };
-
-
-  const handleClickDelete = async (id: any) => {
+  const handleClickDelete = async (idfile: any) => {
     confirm({
       title: "Supprimer le fournisseur",
       description: "Voulez-vous vraiment supprimer ce fournisseur ?",
@@ -73,7 +68,7 @@ const DetailsFichierComptable = () => {
       },
     })
       .then(async () => {
-        await dispatch(deleteComptaFile({ id }));
+        await dispatch(deleteComptaFile({ id: idfile }));
         fetchComptaFileListe();
       })
       .catch(() => {});
@@ -88,22 +83,18 @@ const DetailsFichierComptable = () => {
           mb={1}
         >
           <Stack flexDirection={"row"}>
-            <Link href="/fichier">
+            <Link href="/">
               <Button color="info" variant="text" startIcon={<ArrowBack />}>
                 Retour
               </Button>
             </Link>
-            <Link href={`/fichier/1`}>
+            <Link href={`/${idfile}/edit`}>
               <Button
                 variant="contained"
                 color="primary"
                 size="small"
                 startIcon={<Edit />}
                 sx={{ marginInline: 3 }}
-                // type="submit"
-                onClick={() => {
-                  handleClickEdit(comptaFile.id);
-                }}
               >
                 Modifier
               </Button>
@@ -119,15 +110,15 @@ const DetailsFichierComptable = () => {
               </Button>
             </Link>
             <Button
-            variant="text"
-            color="warning"
-            startIcon={< DeleteIcon />}
-            sx={{ marginInline: 3 }}
-            component="span"
-            size="small"
-            onClick={() => {
-              handleClickDelete(comptaFile.id);
-            }}
+              variant="text"
+              color="warning"
+              startIcon={<DeleteIcon />}
+              sx={{ marginInline: 3 }}
+              component="span"
+              size="small"
+              onClick={() => {
+                handleClickDelete(comptaFile.idfile);
+              }}
             >
               Supprimer
             </Button>

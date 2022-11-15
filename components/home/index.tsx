@@ -9,8 +9,12 @@ import { styled } from "@mui/material";
 import LinkOutlined from "@mui/icons-material/LinkOutlined";
 import Info from "@mui/icons-material/Info";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
+import { useRouter } from "next/router";
 
 const HomeComptabilite = () => {
+  const router = useRouter();
+  const { idfile }: any = router.query;
+
   return (
     <Container maxWidth="xl">
       <Grid container spacing={2}>
@@ -26,7 +30,7 @@ const HomeComptabilite = () => {
                   journals et les pièces comptables, accéder à la page fichier
                   comptable
                 </Typography>
-                <Link href="/fichier">
+                <Link href="/">
                   <Button
                     variant="contained"
                     color="primary"
@@ -47,36 +51,49 @@ const HomeComptabilite = () => {
                   Configuration de base
                 </Typography>
                 <Box>
-                  <Link href="/comptes/general">
+                  <Link href={`/${idfile}/open-file/comptes/general`}>
                     <Button variant="text" color="info">
                       Compte générale (PCG)
                     </Button>
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/comptes/auxiliaire">
+                  <Link href={`/${idfile}/open-file/comptes/auxiliaire`}>
                     <Button variant="text" color="info">
                       Compte Auxiliaire (compte tiers)
                     </Button>
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/configurations/devise">
+                  <Link
+                    href={`/${idfile}/open-file/configurations/annee-fiscale`}
+                  >
+                    <Button variant="text" color="info">
+                      Année fiscale
+                    </Button>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link href={`/${idfile}/open-file/configurations/devise`}>
                     <Button variant="text" color="info">
                       Liste des dévises
                     </Button>
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/configurations/type-journal">
+                  <Link
+                    href={`/${idfile}/open-file/configurations/type-journal`}
+                  >
                     <Button variant="text" color="info">
                       Types de journals
                     </Button>
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/configurations/journal-item">
-                    <Button variant="text" color="warning">
+                  <Link
+                    href={`/${idfile}/open-file/configurations/journal-item`}
+                  >
+                    <Button variant="text" color="info">
                       Journal item
                     </Button>
                   </Link>
@@ -90,28 +107,34 @@ const HomeComptabilite = () => {
                   Configuration états financières
                 </Typography>
                 <Box>
-                  <Link href="/etat-financieres/bilan">
+                  <Link href={`/${idfile}/open-file/etat-financieres/bilan`}>
                     <Button variant="text" color="info">
                       Bilan passif/actif
                     </Button>
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/etat-financieres/compte-resultat">
+                  <Link
+                    href={`/${idfile}/open-file/etat-financieres/compte-resultat`}
+                  >
                     <Button variant="text" color="info">
                       Compte de résiltats par nature / par fonction
                     </Button>
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/etat-financieres/tableau-flux-tresorerie">
+                  <Link
+                    href={`/${idfile}/open-file/etat-financieres/tableau-flux-tresorerie`}
+                  >
                     <Button variant="text" color="info">
                       Tableau de flux de trésorerie
                     </Button>
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/etat-financieres/tableau-variation-capitaux-propres">
+                  <Link
+                    href={`/${idfile}/open-file/etat-financieres/tableau-variation-capitaux-propres`}
+                  >
                     <Button variant="text" color="info">
                       Variation des capitaux propres
                     </Button>
@@ -126,21 +149,25 @@ const HomeComptabilite = () => {
                   Gérer GRANT
                 </Typography>
                 <Box>
-                  <Link href="/configurations/post-analytique">
+                  <Link
+                    href={`/${idfile}/open-file/configurations/post-analytique`}
+                  >
                     <Button variant="text" color="info">
                       Tous les postes Analytiques
                     </Button>
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/configurations/grant">
+                  <Link href={`/${idfile}/open-file/configurations/grant`}>
                     <Button variant="text" color="info">
                       Tous les GRANTS
                     </Button>
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/configurations/ligne-budgetaire">
+                  <Link
+                    href={`/${idfile}/open-file/configurations/ligne-budgetaire`}
+                  >
                     <Button variant="text" color="info">
                       Toustes les lignes budgétaires
                     </Button>

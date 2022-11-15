@@ -27,6 +27,7 @@ import KeyValue from "../../../shared/keyValue";
 const AuxiliaireForm = () => {
   const router = useRouter();
   const { id }: any = router.query;
+  const { idfile }: any = router.query;
   const dispatch = useAppDispatch();
   const { isEditing, auxiliaryAccount } = useAppSelector(
     (state) => state.auxiliaryAccount
@@ -56,7 +57,7 @@ const AuxiliaireForm = () => {
       } else {
         await dispatch(createAuxiliairyAccount(values));
       }
-      router.push("/comptes/auxiliaire");
+      router.push(`/${idfile}/open-file/comptes/auxiliaire`);
     } catch (error) {
       console.log("error", error);
     }
@@ -105,7 +106,7 @@ const AuxiliaireForm = () => {
               <NavigationContainer>
                 <SectionNavigation>
                   <Stack flexDirection={"row"}>
-                    <Link href="/comptes/auxiliaire/">
+                    <Link href={`/${idfile}/open-file/comptes/auxiliaire`}>
                       <Button
                         color="info"
                         variant="text"
