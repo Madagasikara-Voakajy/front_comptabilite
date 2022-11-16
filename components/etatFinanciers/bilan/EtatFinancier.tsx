@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import Link from "next/link";
-import React from "react";
+import React, { Fragment } from "react";
 import KeyValue from "../../shared/keyValue";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -104,11 +104,13 @@ const EtatFinancier = () => {
                   freeSolo
                   renderTags={(value: readonly string[], getTagProps) =>
                     value.map((option: string, index: number) => (
-                      <Chip
-                        variant="outlined"
-                        label={option}
-                        {...getTagProps({ index })}
-                      />
+                      <Fragment key={index}>
+                        <Chip
+                          variant="outlined"
+                          label={option}
+                          {...getTagProps({ index })}
+                        />
+                      </Fragment>
                     ))
                   }
                   renderInput={(params) => (

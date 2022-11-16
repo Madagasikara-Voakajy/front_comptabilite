@@ -44,6 +44,7 @@ const ListJournal = () => {
   const { journalListe } = useAppSelector((state) => state.journal);
   const router = useRouter();
   const { id, idae }: any = router.query;
+  const { idfile }: any = router.query;
   const confirm = useConfirm();
 
   const fetchJournalListe = useFetchJournalListe();
@@ -91,12 +92,14 @@ const ListJournal = () => {
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
         <Stack direction="row" spacing={2}>
-          <Link href="/">
+          <Link href={`/${idfile}/open-file/annee-exercice`}>
             <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
               Retour
             </Button>
           </Link>
-          <Link href={`/fichier/${id}/annee-exercice/${idae}/journal/add`}>
+          <Link
+            href={`/${idfile}/open-file/annee-exercice/${idae}/journal/add`}
+          >
             <Button variant="contained" size="small" startIcon={<Add />}>
               Créer
             </Button>

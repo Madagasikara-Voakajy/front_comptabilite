@@ -118,7 +118,7 @@ const FichierComptable = () => {
                     Détails
                   </Button>
                 </Link>
-                <Link href={`/fichier/${comptaFile?.id}/journal-entry`}>
+                <Link href={`/${comptaFile?.id}/journal-entry`}>
                   <Button
                     variant="text"
                     color="info"

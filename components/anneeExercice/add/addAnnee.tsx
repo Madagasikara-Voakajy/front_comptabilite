@@ -29,6 +29,7 @@ const FiscalForm = ({ handleClose }: any) => {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
   const fileIdQ: any = router.query.id;
+  const { idfile }: any = router.query;
 
   const route = useRouter();
 
@@ -79,7 +80,7 @@ const FiscalForm = ({ handleClose }: any) => {
             : {
                 year: isEditing ? fiscal?.year : "",
                 locked: isEditing ? fiscal?.locked : false,
-                fileId: +fileIdQ,
+                fileId: +idfile,
               }
         }
         validationSchema={Yup.object({

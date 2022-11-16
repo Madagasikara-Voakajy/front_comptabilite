@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Button,
   Grid,
@@ -105,11 +105,13 @@ const CompteResultat = () => {
                   freeSolo
                   renderTags={(value: readonly string[], getTagProps) =>
                     value.map((option: string, index: number) => (
-                      <Chip
-                        variant="outlined"
-                        label={option}
-                        {...getTagProps({ index })}
-                      />
+                      <Fragment key={index}>
+                        <Chip
+                          variant="outlined"
+                          label={option}
+                          {...getTagProps({ index })}
+                        />
+                      </Fragment>
                     ))
                   }
                   renderInput={(params) => (

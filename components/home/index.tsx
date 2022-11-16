@@ -5,11 +5,13 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { styled } from "@mui/material";
+import { Stack, Divider, styled } from "@mui/material";
 import LinkOutlined from "@mui/icons-material/LinkOutlined";
 import Info from "@mui/icons-material/Info";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import { useRouter } from "next/router";
+import EventAvailable from "@mui/icons-material/EventAvailable";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const HomeComptabilite = () => {
   const router = useRouter();
@@ -17,26 +19,42 @@ const HomeComptabilite = () => {
 
   return (
     <Container maxWidth="xl">
-      <Grid container spacing={2}>
+      <SectionNavigation direction="row" justifyContent="space-between" mb={1}>
+        <Stack
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          spacing={2}
+        >
+          <Link href={`/`}>
+            <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
+              Retour
+            </Button>
+          </Link>
+        </Stack>
+        <Typography variant="h4"></Typography>
+      </SectionNavigation>
+      <Divider />
+      <Grid container spacing={2} mt={2}>
         <Grid item xs={12} md={6} lg={4}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <LinkContainer>
                 <Typography sx={{ mb: 2 }} variant="h5" color="initial">
-                  Gérer fichier comptable
+                  Gestion des année d'exercice
                 </Typography>
                 <Typography color="GrayText" mb={2}>
-                  <InfoOutlined fontSize="inherit" /> Pour gérer les fichiers,
-                  journals et les pièces comptables, accéder à la page fichier
-                  comptable
+                  <InfoOutlined fontSize="inherit" /> Pour gérer les année
+                  d'exercice, journals et les pièces comptables, accéder à cette
+                  page
                 </Typography>
-                <Link href="/">
+                <Link href={`/${idfile}/open-file/annee-exercice`}>
                   <Button
                     variant="contained"
                     color="primary"
-                    startIcon={<LinkOutlined />}
+                    startIcon={<EventAvailable />}
                   >
-                    fichier comptable
+                    Année d'exercice
                   </Button>
                 </Link>
               </LinkContainer>
@@ -183,6 +201,8 @@ const HomeComptabilite = () => {
 };
 
 export default HomeComptabilite;
+
+export const SectionNavigation = styled(Stack)(({}) => ({}));
 
 const LinkContainer = styled(Box)(({ theme }) => ({
   padding: 30,

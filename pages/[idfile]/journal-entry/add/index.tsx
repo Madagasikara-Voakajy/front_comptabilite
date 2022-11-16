@@ -1,11 +1,11 @@
 import React from "react";
+import JournalEntryForm from "../../../../components/journalEntry/add/journalForm";
 import BackOfficeLayout from "../../../../layouts/backOffice";
-import ListJournalEntry from "../../../../components/journalEntry";
 
 const index = () => {
   return (
     <BackOfficeLayout>
-      <ListJournalEntry />
+      <JournalEntryForm />
     </BackOfficeLayout>
   );
 };
