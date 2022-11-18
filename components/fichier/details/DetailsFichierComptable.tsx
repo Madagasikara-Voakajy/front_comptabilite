@@ -25,8 +25,8 @@ import {
 } from "../../../redux/features/comptaFile";
 import { useConfirm } from "material-ui-confirm";
 import useFetchComptaFileListe from "../hooks/useFetchComptaFile";
-import DeleteIcon from '@mui/icons-material/Delete';
-import ArticleIcon from '@mui/icons-material/Article';
+import DeleteIcon from "@mui/icons-material/Delete";
+import ArticleIcon from "@mui/icons-material/Article";
 
 const DetailsFichierComptable = () => {
   const router = useRouter();
@@ -57,7 +57,6 @@ const DetailsFichierComptable = () => {
   const handleClickEdit = async (id: any) => {
     router.push(`/fichier/${id}/edit`);
   };
-
 
   const handleClickDelete = async (id: any) => {
     confirm({
@@ -108,7 +107,7 @@ const DetailsFichierComptable = () => {
                 Modifier
               </Button>
             </Link>
-            <Link href={"/fichier/journal"}>
+            <Link href={"/amortissement"}>
               <Button
                 variant="text"
                 color="info"
@@ -119,15 +118,15 @@ const DetailsFichierComptable = () => {
               </Button>
             </Link>
             <Button
-            variant="text"
-            color="warning"
-            startIcon={< DeleteIcon />}
-            sx={{ marginInline: 3 }}
-            component="span"
-            size="small"
-            onClick={() => {
-              handleClickDelete(comptaFile.id);
-            }}
+              variant="text"
+              color="warning"
+              startIcon={<DeleteIcon />}
+              sx={{ marginInline: 3 }}
+              component="span"
+              size="small"
+              onClick={() => {
+                handleClickDelete(comptaFile.id);
+              }}
             >
               Supprimer
             </Button>

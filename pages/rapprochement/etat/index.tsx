@@ -1,11 +1,11 @@
 import React from "react";
-import SectionRapprochement from "../../../components/rapprochement/compte/RapprochementSection";
+import Etat from "../../../components/rapprochement/etat/actif/etat";
 import BackOfficeLayout from "../../../layouts/backOffice";
 
 const JournalSaisie = () => {
   return (
     <BackOfficeLayout>
-      <SectionRapprochement />
+      <Etat />
     </BackOfficeLayout>
   );
 };
