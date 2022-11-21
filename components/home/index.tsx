@@ -193,6 +193,34 @@ const HomeComptabilite = () => {
                 </Box>
               </LinkContainer>
             </Grid>
+            <Grid item xs={12} md={6}>
+              <LinkContainer>
+                <Typography sx={{ mb: 2 }} variant="h5" color="initial">
+                  Rapprochement
+                </Typography>
+                <Box>
+                  <Link href={`/${idfile}/open-file/rapprochement`}>
+                    <Button variant="text" color="info">
+                      journal de saisie
+                    </Button>
+                  </Link>
+                </Box>
+              </LinkContainer>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <LinkContainer>
+                <Typography sx={{ mb: 2 }} variant="h5" color="initial">
+                  Amourtissement
+                </Typography>
+                <Box>
+                  <Link href={`/${idfile}/open-file/amortissement`}>
+                    <Button variant="text" color="info">
+                      Liste de tous les matériels achetés
+                    </Button>
+                  </Link>
+                </Box>
+              </LinkContainer>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
