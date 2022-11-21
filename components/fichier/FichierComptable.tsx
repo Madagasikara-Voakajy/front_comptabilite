@@ -118,7 +118,7 @@ const FichierComptable = () => {
                     Détails
                   </Button>
                 </Link>
-                <Link href={`/${comptaFile?.id}/journal-entry`}>
+                {/* <Link href={`/${comptaFile?.id}/journal-entry`}>
                   <Button
                     variant="text"
                     color="info"
@@ -126,7 +126,7 @@ const FichierComptable = () => {
                   >
                     Journal de Saisie
                   </Button>
-                </Link>
+                </Link> */}
                 <Link href={`/${comptaFile?.id}/open-file`}>
                   <Button variant="contained" color="primary">
                     Ouvrir

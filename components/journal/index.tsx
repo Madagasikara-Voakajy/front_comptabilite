@@ -44,7 +44,7 @@ const ListJournal = () => {
   const { journalListe } = useAppSelector((state) => state.journal);
   const router = useRouter();
   const { id, idae }: any = router.query;
-  const { idfile }: any = router.query;
+  const { idfile, idj }: any = router.query;
   const confirm = useConfirm();
 
   const fetchJournalListe = useFetchJournalListe();
@@ -171,7 +171,9 @@ const ListJournal = () => {
                               direction="row"
                               justifyContent="center"
                             >
-                              <Link href="/journal/pieceComptable">
+                              <Link
+                                href={`/${idfile}/open-file/annee-exercice/${idae}/journal/${row.id}/pieceComptable`}
+                              >
                                 <Button
                                   sx={{ mr: 1 }}
                                   color="accent"
