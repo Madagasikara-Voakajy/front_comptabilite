@@ -53,6 +53,7 @@ const ListGrant = () => {
   const dispatch: any = useAppDispatch();
   const { grantList } = useAppSelector((state) => state.grant);
   const router = useRouter();
+  const { idfile }: any = router.query;
   const confirm = useConfirm();
 
   const fetchGrantList = useFetchGrants();
@@ -113,12 +114,12 @@ const ListGrant = () => {
           mb={2}
         >
           <Stack direction="row" spacing={2}>
-            <Link href="/">
+            <Link href={`/${idfile}/open-file`}>
               <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
                 Retour
               </Button>
             </Link>
-            <Link href="/configurations/grant/add">
+            <Link href={`/${idfile}/open-file/configurations/grant/add`}>
               <Button
                 onClick={handleAdd}
                 variant="contained"
@@ -179,7 +180,7 @@ const ListGrant = () => {
                               justifyContent="right"
                             >
                               <Link
-                                href={`/configurations/grant/${row.id}/ligne-budgetaire`}
+                                href={`/${idfile}/open-file/configurations/grant/${row.id}/ligne-budgetaire`}
                               >
                                 <Button
                                   variant="outlined"
@@ -193,7 +194,7 @@ const ListGrant = () => {
                               </Link>
 
                               <Link
-                                href={`/configurations/grant/${row.id}/edit`}
+                                href={`/${idfile}/open-file/configurations/grant/${row.id}/edit`}
                               >
                                 <IconButton
                                   color="primary"

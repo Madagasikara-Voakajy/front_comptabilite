@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Button,
   Grid,
@@ -10,7 +10,7 @@ import {
   TextField,
   Box,
 } from "@mui/material";
-import Chip from '@mui/material/Chip';
+import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -24,19 +24,22 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useRouter } from "next/router";
 
 const CompteResultat = () => {
   const [value, setValue] = React.useState(0);
   const [age, setAge] = React.useState("");
+  const router = useRouter();
+  const { idfile }: any = router.query;
   const top100Films = [
-    { title: 'The Shawshank Redemption', year: 1994 },
-    { title: 'The Godfather', year: 1972 },
-    { title: 'The Godfather: Part II', year: 1974 },
-    { title: 'The Dark Knight', year: 2008 },
-    { title: '12 Angry Men', year: 1957 },
+    { title: "The Shawshank Redemption", year: 1994 },
+    { title: "The Godfather", year: 1972 },
+    { title: "The Godfather: Part II", year: 1974 },
+    { title: "The Dark Knight", year: 2008 },
+    { title: "12 Angry Men", year: 1957 },
     { title: "Schindler's List", year: 1993 },
-    { title: 'Pulp Fiction', year: 1994 }
-  ]
+    { title: "Pulp Fiction", year: 1994 },
+  ];
 
   const handleChangeSelect = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
@@ -59,7 +62,7 @@ const CompteResultat = () => {
           mb={1}
         >
           <Stack direction={"row"} spacing={4}>
-            <Link href="/">
+            <Link href={`/${idfile}/open-file`}>
               <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
                 Retour
               </Button>
@@ -95,25 +98,31 @@ const CompteResultat = () => {
             </Grid>
             <Grid item xs={12} md={4}>
               <FormControl fullWidth>
-              <Autocomplete
-        multiple
-        id="tags-filled"
-        options={top100Films.map((option) => option.title)}
-        freeSolo
-        renderTags={(value: readonly string[], getTagProps) =>
-          value.map((option: string, index: number) => (
-            <Chip key={index} variant="outlined" label={option} {...getTagProps({ index })} />
-          ))
-        }
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="filled"
-            label="GRANT"
-            placeholder="GRANT"
-          />
-        )}
-      />
+                <Autocomplete
+                  multiple
+                  id="tags-filled"
+                  options={top100Films.map((option) => option.title)}
+                  freeSolo
+                  renderTags={(value: readonly string[], getTagProps) =>
+                    value.map((option: string, index: number) => (
+                      <Fragment key={index}>
+                        <Chip
+                          variant="outlined"
+                          label={option}
+                          {...getTagProps({ index })}
+                        />
+                      </Fragment>
+                    ))
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="filled"
+                      label="GRANT"
+                      placeholder="GRANT"
+                    />
+                  )}
+                />
               </FormControl>
             </Grid>
           </Grid>

@@ -55,6 +55,7 @@ const ListAuxiliaire = () => {
     (state) => state.auxiliaryAccount
   );
   const router = useRouter();
+  const { idfile }: any = router.query;
   const confirm = useConfirm();
 
   const fetchAuxiliairyAccountList = useFetchAuxiliaire();
@@ -137,12 +138,12 @@ const ListAuxiliaire = () => {
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
         <Stack direction="row" spacing={2}>
-          <Link href="/">
+          <Link href={`/${idfile}/open-file`}>
             <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
               Retour
             </Button>
           </Link>
-          <Link href="/comptes/auxiliaire/add">
+          <Link href={`/${idfile}/open-file/comptes/auxiliaire/add`}>
             <Button
               onClick={handleAdd}
               variant="contained"
@@ -226,7 +227,9 @@ const ListAuxiliaire = () => {
                               direction="row"
                               justifyContent="right"
                             >
-                              <Link href={`/comptes/auxiliaire/${row.id}`}>
+                              <Link
+                                href={`/${idfile}/open-file/comptes/auxiliaire/${row.id}`}
+                              >
                                 <IconButton
                                   color="accent"
                                   aria-label="Details"
@@ -236,7 +239,9 @@ const ListAuxiliaire = () => {
                                   <VisibilityIcon />
                                 </IconButton>
                               </Link>
-                              <Link href={`/comptes/auxiliaire/${row.id}/edit`}>
+                              <Link
+                                href={`/${idfile}/open-file/comptes/auxiliaire/${row.id}/edit`}
+                              >
                                 <IconButton
                                   color="primary"
                                   aria-label="Modifier"

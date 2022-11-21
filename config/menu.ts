@@ -2,7 +2,7 @@ const menu = [
   {
     id: 1,
     name: "Journal de saisies",
-    link: "/",
+    link: "Journal de saisies",
     icon: "history_edu",
     items: [
       // {
@@ -44,15 +44,15 @@ const menu = [
       {
         id: 17,
         name: "Tous les journals de saisie",
-        link: "/tous-les-journals-de-saisie",
+        link: "/[idfile]/open-file/journalEntry",
         icon: "",
       },
-      // {
-      //   id: 18,
-      //   name: "Annee d'exercice",
-      //   link: "/annee-exercice",
-      //   icon: "",
-      // },
+      {
+        id: 18,
+        name: "Annee d'exercice",
+        link: "/[idfile]/open-file/annee-exercice",
+        icon: "",
+      },
     ],
   },
   {
@@ -64,19 +64,19 @@ const menu = [
       {
         id: 21,
         name: "Toutes les opérations",
-        link: "/grand-livre/toutes-les-operations",
+        link: "/[idfile]/open-file/grand-livre/toutes-les-operations",
         icon: "",
       },
       {
         id: 22,
         name: "Auxiliaire",
-        link: "/grand-livre/auxiliaire",
+        link: "/[idfile]/open-file/grand-livre/auxiliaire",
         icon: "",
       },
       {
         id: 23,
         name: "Balance générale",
-        link: "/grand-livre/balance-generale",
+        link: "/[idfile]/open-file/grand-livre/balance-generale",
         icon: "",
       },
     ],
@@ -90,99 +90,99 @@ const menu = [
       {
         id: 31,
         name: "Bilan ",
-        link: "/etat-financieres/bilan",
+        link: "/[idfile]/open-file/etat-financieres/bilan",
         icon: "",
       },
       {
         id: 32,
         name: "Compte de résultat",
-        link: "/etat-financieres/compte-resultat",
+        link: "/[idfile]/open-file/etat-financieres/compte-resultat",
         icon: "",
       },
       {
         id: 33,
         name: "Tableau de flux de trésorerie",
-        link: "/etat-financieres/tableau-flux-tresorerie",
+        link: "/[idfile]/open-file/etat-financieres/tableau-flux-tresorerie",
         icon: "",
       },
       {
         id: 34,
         name: "Tableau de variation des capitaux propres",
-        link: "/etat-financieres/tableau-variation-capitaux-propres",
+        link: "/[idfile]/open-file/etat-financieres/tableau-variation-capitaux-propres",
+        icon: "",
+      },
+      // {
+      //   id: 35,
+      //   name: "Annexe",
+      //   link: "/etat-financieres/annexe",
+      //   icon: "",
+      // },
+    ],
+  },
+  {
+    id: 4,
+    name: "comptes",
+    link: "/comptes",
+    icon: "contacts",
+    items: [
+      {
+        id: 41,
+        name: "Général",
+        link: "/[idfile]/open-file/comptes/general",
         icon: "",
       },
       {
-        id: 35,
-        name: "Annexe",
-        link: "/etat-financieres/annexe",
+        id: 42,
+        name: "Auxiliaire",
+        link: "/[idfile]/open-file/comptes/auxiliaire",
         icon: "",
       },
     ],
   },
-  // {
-  //   id: 4,
-  //   name: "comptes",
-  //   link: "/comptes",
-  //   icon: "contacts",
-  //   items: [
-  //     {
-  //       id: 41,
-  //       name: "Général",
-  //       link: "/comptes/general",
-  //       icon: "",
-  //     },
-  //     {
-  //       id: 42,
-  //       name: "Auxiliaire",
-  //       link: "/comptes/auxiliaire",
-  //       icon: "",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 5,
-  //   name: "configurations",
-  //   link: "/configurations",
-  //   icon: "settings",
-  //   items: [
-  //     {
-  //       id: 51,
-  //       name: "Fichier comptable",
-  //       link: "/configurations/fichier-comptable",
-  //       icon: "",
-  //     },
-  //     {
-  //       id: 52,
-  //       name: "Année d’exercice",
-  //       link: "/configurations/annee-exercice",
-  //       icon: "",
-  //     },
-  //     {
-  //       id: 53,
-  //       name: "Année fiscale",
-  //       link: "/configurations/annee-fiscale",
-  //       icon: "",
-  //     },
-  //     {
-  //       id: 54,
-  //       name: "Devise",
-  //       link: "/configurations/devise",
-  //       icon: "",
-  //     },
-  //     {
-  //       id: 55,
-  //       name: "Type de journal",
-  //       link: "/configurations/type-journal",
-  //       icon: "",
-  //     },
-  //     {
-  //       id: 56,
-  //       name: "Mode de paiement",
-  //       link: "/configurations/mode-paiement",
-  //       icon: "",
-  //     },
-  //   ],
-  // },
+  {
+    id: 5,
+    name: "configurations",
+    link: "/configurations",
+    icon: "settings",
+    items: [
+      // {
+      //   id: 51,
+      //   name: "Fichier comptable",
+      //   link: "/configurations/fichier-comptable",
+      //   icon: "",
+      // },
+      {
+        id: 52,
+        name: "Année d’exercice",
+        link: "/[idfile]/open-file/annee-exercice",
+        icon: "",
+      },
+      {
+        id: 53,
+        name: "Année fiscale",
+        link: "/[idfile]/open-file/configurations/annee-fiscale",
+        icon: "",
+      },
+      {
+        id: 54,
+        name: "Devise",
+        link: "/[idfile]/open-file/configurations/devise",
+        icon: "",
+      },
+      {
+        id: 55,
+        name: "Type de journal",
+        link: "/[idfile]/open-file/configurations/type-journal",
+        icon: "",
+      },
+      {
+        id: 56,
+        name: "Mode de paiement",
+        link: "#",
+        icon: "",
+      },
+    ],
+  },
 ];
 
 export default menu;

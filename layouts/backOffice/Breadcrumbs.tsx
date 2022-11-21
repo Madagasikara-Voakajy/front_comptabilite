@@ -21,7 +21,7 @@ const MvBreadcrumbs = () => {
           <Link underline="hover" color="inherit" href="/">
             App
           </Link>
-          <Link underline="hover" color="inherit" href="/">
+          <Link underline="hover" color="inherit" href="/comptabilite">
             Comptabilité
           </Link>
           {routeArray.map((route, index) =>

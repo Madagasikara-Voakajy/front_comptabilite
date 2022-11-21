@@ -21,8 +21,11 @@ import { FiscalItem } from "../../redux/features/fiscal-year/fiscalSlice.interfa
 import { useAppSelector } from "../../hooks/reduxHooks";
 import useFetchFiscalListe from "./hooks/useFetchFiscalListe";
 import FiscalForm from "./add/addAnnee";
+import { useRouter } from "next/router";
 
 const ListAnneeExercice = () => {
+  const router = useRouter();
+  const { idfile }: any = router.query;
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -50,7 +53,7 @@ const ListAnneeExercice = () => {
           mb={2}
         >
           <Stack direction="row" spacing={2}>
-            <Link href="/fichier">
+            <Link href={`/${idfile}/open-file`}>
               <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
                 Retour
               </Button>
@@ -78,6 +81,8 @@ const ListAnneeExercice = () => {
                 locked={fiscal.locked}
                 fileId={fiscal.fileId}
                 fiscalId={fiscal.id}
+                handleClickOpen={handleClickOpen}
+                handleClose={handleClose}
               />
             </Grid>
           ))}

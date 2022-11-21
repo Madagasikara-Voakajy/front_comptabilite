@@ -54,6 +54,7 @@ const ListLigneBudgetaire = () => {
   const { budgetLineList } = useAppSelector((state) => state.budgetLine);
   const router = useRouter();
   const { id }: any = router.query;
+  const { idfile }: any = router.query;
   const confirm = useConfirm();
 
   const fetchLigneBudgetaireList = useFetchLigneBudgetaire();
@@ -116,7 +117,13 @@ const ListLigneBudgetaire = () => {
           mb={2}
         >
           <Stack direction="row" spacing={2}>
-            <Link href="/">
+            <Link
+              href={
+                id
+                  ? `/${idfile}/open-file/configurations/grant`
+                  : `/${idfile}/open-file`
+              }
+            >
               <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
                 Retour
               </Button>
@@ -124,8 +131,8 @@ const ListLigneBudgetaire = () => {
             <Link
               href={
                 id
-                  ? `/configurations/grant/${id}/ligne-budgetaire/add`
-                  : `/configurations/ligne-budgetaire/add`
+                  ? `/${idfile}/open-file/configurations/grant/${id}/ligne-budgetaire/add`
+                  : `/${idfile}/open-file/configurations/ligne-budgetaire/add`
               }
             >
               <Button
@@ -190,8 +197,8 @@ const ListLigneBudgetaire = () => {
                               <Link
                                 href={
                                   id
-                                    ? `/configurations/grant/${id}/ligne-budgetaire/${row.id}/edit`
-                                    : `/configurations/ligne-budgetaire/${row.id}/edit`
+                                    ? `/${idfile}/open-file/configurations/grant/${id}/ligne-budgetaire/${row.id}/edit`
+                                    : `/${idfile}/open-file/configurations/ligne-budgetaire/${row.id}/edit`
                                 }
                               >
                                 <IconButton

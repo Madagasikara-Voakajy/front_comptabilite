@@ -32,6 +32,7 @@ const LigneBudgetaireForm = () => {
   const router = useRouter();
   const { idlb }: any = router.query;
   const { idlball }: any = router.query;
+  const { idfile }: any = router.query;
   const idGrant: any = router?.query?.id;
   const useFetchAllGrant = useFetchGrants();
   const dispatch = useAppDispatch();
@@ -68,8 +69,8 @@ const LigneBudgetaireForm = () => {
       }
       router.push(
         idGrant
-          ? `/configurations/grant/${idGrant}/ligne-budgetaire`
-          : `/configurations/ligne-budgetaire`
+          ? `/${idfile}/open-file/configurations/grant/${idGrant}/ligne-budgetaire`
+          : `/${idfile}/open-file/configurations/ligne-budgetaire`
       );
     } catch (error) {
       console.log("error", error);
@@ -106,8 +107,8 @@ const LigneBudgetaireForm = () => {
                     <Link
                       href={
                         idGrant
-                          ? `/configurations/grant/${idGrant}/ligne-budgetaire`
-                          : `/configurations/ligne-budgetaire`
+                          ? `/${idfile}/open-file/configurations/grant/${idGrant}/ligne-budgetaire`
+                          : `/${idfile}/open-file/configurations/ligne-budgetaire`
                       }
                     >
                       <Button

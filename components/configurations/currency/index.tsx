@@ -42,6 +42,7 @@ const ListCurrency = () => {
   const dispatch: any = useAppDispatch();
   const { currencyListe } = useAppSelector((state) => state.currency);
   const router = useRouter();
+  const { idfile }: any = router.query;
   const confirm = useConfirm();
 
   const fetchCurrencyListe = useFetchCurrencyListe();
@@ -49,10 +50,6 @@ const ListCurrency = () => {
   useEffect(() => {
     fetchCurrencyListe();
   }, [router.query]);
-
-  const handleClickEdit = async (id: any) => {
-    router.push(`/configurations/devise/${id}/edit`);
-  };
 
   const handleclickDelete = async (id: any) => {
     confirm({
@@ -93,12 +90,12 @@ const ListCurrency = () => {
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
         <Stack direction="row" spacing={2}>
-          <Link href="/">
+          <Link href={`/${idfile}/open-file`}>
             <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
               Retour
             </Button>
           </Link>
-          <Link href="/configurations/devise/add">
+          <Link href={`/${idfile}/open-file/configurations/devise/add`}>
             <Button variant="contained" size="small" startIcon={<Add />}>
               Créer
             </Button>
@@ -187,14 +184,17 @@ const ListCurrency = () => {
                               direction="row"
                               justifyContent="center"
                             >
-                              <IconButton
-                                color="primary"
-                                aria-label="Modifier"
-                                component="span"
-                                onClick={() => handleClickEdit(row.id)}
+                              <Link
+                                href={`/${idfile}/open-file/configurations/devise/${row.id}/edit`}
                               >
-                                <EditIcon />
-                              </IconButton>
+                                <IconButton
+                                  color="primary"
+                                  aria-label="Modifier"
+                                  component="span"
+                                >
+                                  <EditIcon />
+                                </IconButton>
+                              </Link>
                               <IconButton
                                 color="warning"
                                 aria-label="Supprimer"

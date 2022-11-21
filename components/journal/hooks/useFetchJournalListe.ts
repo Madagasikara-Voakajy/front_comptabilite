@@ -5,6 +5,7 @@ import { getJournalListe } from "../../../redux/features/journal";
 const useFetchJournalListe = () => {
   const router = useRouter();
   const { id }: any = router.query;
+  const { idfile }: any = router.query;
   const dispatch = useAppDispatch();
   return () => {
     let args: any = {};
@@ -57,7 +58,7 @@ const useFetchJournalListe = () => {
     if (id) {
       args.where = {
         fileId: {
-          equals: +id,
+          equals: +idfile,
         },
       };
     }

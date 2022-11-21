@@ -37,6 +37,7 @@ import { JournalItemItem } from "../../../redux/features/journalItem/journalItem
 import useFetchJournalItems from "./hooks/useFetchJournalItems";
 import JournalItemTableToolbar from "./table/JournalItemTableToolbar";
 import JournalItemTableHead from "./table/JournalItemTableHead";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const JournalItem = () => {
   const [page, setPage] = React.useState(0);
@@ -45,6 +46,7 @@ const JournalItem = () => {
   const dispatch: any = useAppDispatch();
   const { journalItemList } = useAppSelector((state) => state.journalItem);
   const router = useRouter();
+  const { idfile }: any = router.query;
   const confirm = useConfirm();
 
   const fetchJournalItemList = useFetchJournalItems();
@@ -112,7 +114,12 @@ const JournalItem = () => {
           mb={2}
         >
           <Stack direction="row" spacing={2}>
-            <Link href="/configurations/journal-item/add">
+            <Link href={`/${idfile}/open-file`}>
+              <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
+                Retour
+              </Button>
+            </Link>
+            <Link href={`/${idfile}/open-file/configurations/journal-item/add`}>
               <Button
                 onClick={handleAdd}
                 variant="contained"
@@ -275,7 +282,7 @@ const JournalItem = () => {
                               justifyContent="right"
                             >
                               <Link
-                                href={`/configurations/journal-item/${row.id}/edit`}
+                                href={`/${idfile}/open-file/configurations/journal-item/${row.id}/edit`}
                               >
                                 <IconButton
                                   color="primary"

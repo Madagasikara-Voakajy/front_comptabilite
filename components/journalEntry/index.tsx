@@ -52,6 +52,7 @@ const ListJournalEntry = () => {
   const confirm = useConfirm();
 
   const idFile: any = router.query.id;
+  const { idfile }: any = router.query;
 
   const fetchJournalEntryListe = useFetchJournalEntryListe();
 
@@ -109,7 +110,7 @@ const ListJournalEntry = () => {
               Retour
             </Button>
           </Link>
-          <Link href={`/fichier/${idFile}/journal-entry/add`}>
+          <Link href={`/${idfile}/journal-entry/add`}>
             <Button variant="contained" size="small" startIcon={<Add />}>
               Ajouter
             </Button>
@@ -204,7 +205,7 @@ const ListJournalEntry = () => {
                               justifyContent="center"
                             >
                               <Link
-                                href={`/fichier/${idFile}/journal-entry/${row.id}/edit`}
+                                href={`/${idfile}/journal-entry/${row.id}/edit`}
                               >
                                 <IconButton
                                   color="primary"

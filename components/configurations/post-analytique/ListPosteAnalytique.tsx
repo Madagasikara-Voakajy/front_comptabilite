@@ -53,6 +53,7 @@ const ListPosteAnalytique = () => {
   const dispatch: any = useAppDispatch();
   const { postAnalyticList } = useAppSelector((state) => state.postAnalytic);
   const router = useRouter();
+  const { idfile }: any = router.query;
   const confirm = useConfirm();
 
   const fetchPosteAnlaitiqueList = useFetchPostAnalytique();
@@ -106,25 +107,34 @@ const ListPosteAnalytique = () => {
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
         <Stack direction="row" spacing={2}>
-          <Link href="/">
+          <Link href={`/${idfile}/open-file`}>
             <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
               Retour
             </Button>
           </Link>
-          <Link href="/configurations/post-analytique/add">
-            <Button variant="contained" size="small" startIcon={<Add />}>
+          <Link
+            href={`/${idfile}/open-file/configurations/post-analytique/add`}
+          >
+            <Button
+              onClick={() => dispatch(cancelEdit())}
+              variant="contained"
+              size="small"
+              startIcon={<Add />}
+            >
               Créer
             </Button>
           </Link>
-          <Button
-            variant="text"
-            color="info"
-            // onClick={handleOpen}
-            size="small"
-            sx={{ marginLeft: 2 }}
-          >
-            Gerer Grant
-          </Button>
+          <Link href={`/${idfile}/open-file/configurations/grant`}>
+            <Button
+              variant="text"
+              color="info"
+              // onClick={handleOpen}
+              size="small"
+              sx={{ marginLeft: 2 }}
+            >
+              Gerer Grant
+            </Button>
+          </Link>
         </Stack>
         <Typography variant="h4">Post analytique</Typography>
       </SectionNavigation>
@@ -165,7 +175,7 @@ const ListPosteAnalytique = () => {
                               justifyContent="right"
                             >
                               <Link
-                                href={`/configurations/post-analytique/${row.id}/edit`}
+                                href={`/${idfile}/open-file/configurations/post-analytique/${row.id}/edit`}
                               >
                                 <IconButton
                                   color="primary"
