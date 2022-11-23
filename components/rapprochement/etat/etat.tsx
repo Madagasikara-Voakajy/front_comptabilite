@@ -59,7 +59,6 @@ const Etat = () => {
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
         <Stack direction="row" spacing={2}>
-          {/* <Link href={`/${idfile}/open-file/rapprochement`}> */}
           <Link href={`/comptabilite/${idfile}/open-file/rapprochement/compte`}>
             <Button variant="text" color="info" startIcon={<ArrowBackIcon />}>
               retour
