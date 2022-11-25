@@ -1,12 +1,8 @@
 import { Stack, styled, TextField } from "@mui/material";
 import React from "react";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-// import { CustomStack } from "../../../configurations/devise/add/addDevise";
+import { SelectChangeEvent } from "@mui/material/Select";
 
-const SectionForm = () => {
+const SectionFormOne = () => {
   const [age, setAge] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -16,8 +12,9 @@ const SectionForm = () => {
   return (
     <FormContainer spacing={2}>
       <CustomStack
-      direction={{ xs:"column", sm:"column", md:"row"}}
-      spacing={{xs: 2, sm:2, md:1}}>
+        direction={{ xs: "column", sm: "column", md: "row" }}
+        spacing={{ xs: 2, sm: 2, md: 1 }}
+      >
         <TextField
           id="outlined-basic"
           fullWidth
@@ -44,9 +41,9 @@ const FormContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export const CustomStack = styled(Stack)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]:{
-    flexwrap:"wrap"
-  }
+  [theme.breakpoints.down("sm")]: {
+    flexwrap: "wrap",
+  },
 }));
 
-export default SectionForm;
+export default SectionFormOne;

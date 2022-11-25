@@ -1,11 +1,6 @@
 import React from "react";
 import { Order } from "./two-type-variable";
-import {
-  Box,
-  Paper,
-  Stack,
-  styled,
-} from "@mui/material";
+import { Box, Paper, Stack, styled } from "@mui/material";
 import OneTableHeader from "./TwoTableHeader";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import { getComparator, stableSort } from "./two-function";
 import TwoData from "./two-type-variable";
 import { tworows } from "./two-constant";
+import SectionFormOne from "../../SectionFormOne";
 
 const OneList = () => {
   const [order, setOrder] = React.useState<Order>("asc");
@@ -88,6 +84,7 @@ const OneList = () => {
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
           {/* <OneTableToolbar numSelected={selected.length} /> */}
+          <SectionFormOne />
           <TableContainer>
             <Table
               // sx={{ minWidth: 750 }}
@@ -146,7 +143,6 @@ const OneList = () => {
                           id={labelId}
                           scope="row"
                           padding="normal"
-
                         >
                           {row.journal}
                         </TableCell>
@@ -166,18 +162,20 @@ const OneList = () => {
                         >
                           {row.compte}
                         </TableCell>
-                        <TableCell  
+                        <TableCell
                           component="th"
                           id={labelId}
                           scope="row"
-                          padding="normal">
+                          padding="normal"
+                        >
                           {row.auxiliaire}
                         </TableCell>
-                        <TableCell  
+                        <TableCell
                           component="th"
                           id={labelId}
                           scope="row"
-                          padding="normal">
+                          padding="normal"
+                        >
                           {row.libelle}
                         </TableCell>
                       </TableRow>
@@ -201,8 +199,7 @@ const OneList = () => {
   );
 };
 
-const BtnAddContainer = styled(Stack)(({ theme }) => ({
-}));
+const BtnAddContainer = styled(Stack)(({ theme }) => ({}));
 
 const BtnActionContainer = styled(Stack)(({ theme }) => ({}));
 

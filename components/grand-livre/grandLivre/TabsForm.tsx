@@ -5,7 +5,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TwoList from "./tables/tableTwo/TwoList";
 import OneList from "./tables/tableOne/OneList";
-import SectionForm from "./SectionForm";
+// import SectionFormOne from "./SectionFormOne";
+// import SectionForm from "./SectionFormOne";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -61,7 +62,7 @@ const TabsForm = () => {
           <Tab label="AUXILIAIRES" {...a11yProps(1)} />
         </Tabs>
       </Box>
-          <SectionForm />
+      {/* <SectionFormOne /> */}
       <TabPanel value={value} index={0}>
         <TwoList />
       </TabPanel>
