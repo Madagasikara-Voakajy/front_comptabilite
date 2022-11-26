@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Button,
   Grid,
@@ -26,10 +26,349 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import useFetchGrants from "../../configurations/grant/hooks/useFetchGrants";
 import { useAppSelector } from "../../../hooks/reduxHooks";
+import { useRouter } from "next/router";
+import {
+  Document,
+  Font,
+  Page,
+  PDFDownloadLink,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+} from "@react-pdf/renderer";
+import useBasePath from "../../../hooks/useBasePath";
+import OneRowDetailCRParNature from "./print/OneRowDetailCRParNature";
+import OneRowDetailCRParFonction from "./print/OneRowDetailCRParFonction";
+
+Font.register({
+  family: "Open Sans",
+  fonts: [
+    {
+      src: "https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-regular.ttf",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-600.ttf",
+      fontWeight: 600,
+    },
+  ],
+});
+
+const styles = StyleSheet.create({
+  page: {
+    padding: 15,
+  },
+  table: {
+    width: "100%",
+    marginTop: 15,
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    fontSize: 9,
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  col: {
+    display: "flex",
+    flexDirection: "column",
+    fontSize: 9,
+  },
+  rowBody: {
+    display: "flex",
+    flexDirection: "row",
+    fontSize: 9,
+    border: "1px solid #000",
+    borderTop: "none",
+  },
+  header: {
+    border: "1px solid #000",
+    backgroundColor: "#D5D8DC",
+  },
+  bold: {
+    fontWeight: "normal",
+  },
+  b: {
+    border: "1px solid #000",
+  },
+  b_left: {
+    borderLeft: "1px solid #000",
+  },
+  b_top: {
+    borderTop: "1px solid #000",
+  },
+  b_right: {
+    borderRight: "1px solid #000",
+  },
+  row_60: {
+    width: "60%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  row_50: {
+    width: "50%",
+  },
+  row_40: {
+    width: "40%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  row_30: {
+    width: "33%",
+  },
+  row_25: {
+    width: "25%",
+    textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  row_75: {
+    width: "75%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  row_70: {
+    width: "70%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  font_10: {
+    fontSize: 10,
+  },
+  font_7: {
+    fontSize: 7,
+  },
+  t_center: {
+    textAlign: "center",
+  },
+  p_y: {
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  p_left: {
+    paddingLeft: 10,
+  },
+  p_5: {
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  p_top_5: {
+    paddingTop: 5,
+  },
+  p_top_10: {
+    paddingTop: 10,
+  },
+  p_left: {
+    paddingLeft: 10,
+  },
+  logo: {
+    width: 100,
+    height: 90,
+  },
+  pageNumber: {
+    position: "absolute",
+    fontSize: 10,
+    bottom: 30,
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    color: "grey",
+  },
+});
 
 const CompteResultat = () => {
+  const dataParNature = [
+    {
+      col1: "Chiffre d'affaires",
+      col2: "3,000,000.00",
+      col3: "1,000,000.00",
+    },
+    {
+      col1: "Production stockée",
+      col2: "-",
+      col3: "-",
+    },
+    {
+      col1: "Production immobilisée",
+      col2: "5,000,000.00",
+      col3: "5,000,000.00",
+    },
+    {
+      col1: "I- Production de l'exercice",
+      col2: "3,000,000.00",
+      col3: "1,000,000.00",
+    },
+    {
+      col1: "Achats consommés",
+      col2: "3,000,000.00",
+      col3: "1,000,000.00",
+    },
+    {
+      col1: "Services extérieurs et autres consommations",
+      col2: "-",
+      col3: "-",
+    },
+  ];
+  const dataParFonction = [
+    {
+      col1: "Produit des activités ordinaires",
+      col2: "-",
+      col3: "-",
+    },
+    {
+      col1: "Coût des ventes",
+      col2: "-",
+      col3: "-",
+    },
+    {
+      col1: "I- MARGE BRUTE",
+      col2: "5,000,000.00",
+      col3: "1,000,000.00",
+    },
+    {
+      col1: "Autres produits opérationnels",
+      col2: "3,000,000.00",
+      col3: "1,000,000.00",
+    },
+    {
+      col1: "Coûts commerciaux",
+      col2: "3,000,000.00",
+      col3: "1,000,000.00",
+    },
+    {
+      col1: "Charges administratives",
+      col2: "-",
+      col3: "-",
+    },
+  ];
+  const FicheCRPrint = (
+    <Document>
+      <Page size="A4" orientation="landscape" wrap style={styles.page}>
+        <View style={styles.table}>
+          <View style={[styles.row, styles.bold, styles.header]}>
+            <Text style={[styles.t_center, styles.row_30]}>IMAGE</Text>
+            <View style={[styles.row_30]}>
+              <Text style={[styles.t_center]}>
+                Compte de résultat
+              </Text>
+            </View>
+            <View style={[styles.t_center, styles.row_30]}>
+              <Text style={[styles.t_center]}>CTR001</Text>
+            </View>
+          </View>
+          <View style={[styles.row, styles.bold, styles.p_y]}>
+            <View style={[styles.row_30]}>
+              <Text style={styles.t_center}>Période du : 1/1/2022</Text>
+              <Text style={styles.t_center}> au : 31/12/2022</Text>
+            </View>
+            <View style={[styles.row_30]}>
+              <Text style={[styles.t_center]}>Unité monétaire : Ariary</Text>
+            </View>
+            <View style={[styles.row_30]}>
+              <Text style={[styles.t_center]}>GRANT</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.table}>
+          <View style={[styles.row, styles.bold, styles.header, styles.p_5]}>
+            <View style={styles.row_50}>
+              <View style={styles.row}>
+                <View style={[styles.row_50]}>
+                  <Text style={styles.t_center}>PAR NATURE</Text>
+                </View>
+                <View style={[styles.row_50]}>
+                  <View style={[styles.row, styles.b_left]}>
+                    <View style={[styles.row]}>
+                      <Text style={[styles.row_50, styles.t_center]}>
+                        Solde 2022 (N)
+                      </Text>
+                    </View>
+                    <View style={[styles.row]}>
+                      <Text
+                        style={[styles.row_50, styles.b_left, styles.t_center]}
+                      >
+                        Solde 2021 (N-1)
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={styles.row_50}>
+              <View style={[styles.row]}>
+                <View style={[styles.row_50]}>
+                  <Text style={[styles.t_center, styles.b_left]}>
+                    PAR FONCTION
+                  </Text>
+                </View>
+                <View style={styles.row_50}>
+                  <View style={styles.row}>
+                    <View style={styles.row_50}>
+                      <Text style={[styles.t_center, styles.b_left]}>
+                        Solde 2022 (N)
+                      </Text>
+                    </View>
+                    <View style={styles.row_50}>
+                      <Text style={[styles.t_center, styles.b_left]}>
+                        Solde 2021 (N - 1)
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <View style={[styles.row, styles.b]}>
+          <View style={[styles.row_50, styles.t_center]}>
+            {dataParNature.map(({ col1, col2, col3 }, index: any) => {
+              return (
+                <Fragment key={index}>
+                  <OneRowDetailCRParNature
+                    col1={col1}
+                    col2={col2}
+                    col3={col3}
+                  />
+                </Fragment>
+              );
+            })}
+          </View>
+          <View style={[styles.row_50, styles.t_center]}>
+            {dataParFonction.map(({ col1, col2, col3 }, index: any) => {
+              return (
+                <Fragment key={index}>
+                  <OneRowDetailCRParFonction
+                    col1={col1}
+                    col2={col2}
+                    col3={col3}
+                  />
+                </Fragment>
+              );
+            })}
+          </View>
+        </View>
+
+        <Text
+          style={styles.pageNumber}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+          fixed
+        />
+      </Page>
+    </Document>
+  );
   const [value, setValue] = React.useState(0);
   const [age, setAge] = React.useState("");
+  const router = useRouter();
+  const { idfile }: any = router.query;
   const { grantList } = useAppSelector((state) => state.grant);
   const fetchGrants = useFetchGrants();
   React.useEffect(() => {
@@ -57,7 +396,7 @@ const CompteResultat = () => {
           mb={1}
         >
           <Stack direction={"row"} spacing={4}>
-            <Link href="/">
+            <Link href={`/${idfile}/open-file`}>
               <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
                 Retour
               </Button>
@@ -69,13 +408,18 @@ const CompteResultat = () => {
             >
               Excel
             </Button>
-            <Button
-              color="info"
-              variant="text"
-              startIcon={<FileDownloadIcon />}
+            <PDFDownloadLink
+              document={FicheCRPrint}
+              fileName={"CR" + new Date().toLocaleString() + ".pdf"}
             >
-              Pdf
-            </Button>
+              <Button
+                color="info"
+                variant="text"
+                startIcon={<FileDownloadIcon />}
+              >
+                Pdf
+              </Button>
+            </PDFDownloadLink>
           </Stack>
           <Typography variant="h4">Compte de resultat</Typography>
         </SectionNavigation>

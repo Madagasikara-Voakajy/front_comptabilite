@@ -19,10 +19,7 @@ import { Check, Close, Save } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import {
-  useAppSelector,
-  useAppDispatch,
-} from "../../../../hooks/reduxHooks";
+import { useAppSelector, useAppDispatch } from "../../../../hooks/reduxHooks";
 import { cancelEdit } from "../../../../redux/features/currency/currencySlice";
 import {
   createCurrency,
@@ -44,6 +41,7 @@ const CurrencyForm = () => {
     { id: "AFTER", name: "AFTER", desc: "Aprés" },
   ];
   const router = useRouter();
+  const { idfile }: any = router.query;
 
   const initialValue = {
     iso: "",
@@ -72,10 +70,8 @@ const CurrencyForm = () => {
             values[key] = null;
           }
         });
-        await dispatch(
-          updateCurrency({ id: currency.id!, currency: values })
-        );
-        router.push("/configurations/devise");
+        await dispatch(updateCurrency({ id: currency.id!, currency: values }));
+        router.push(`/${idfile}/open-file/configurations/devise`);
       } else {
         // set empty values to null
         Object.keys(values).forEach((key) => {
@@ -84,7 +80,7 @@ const CurrencyForm = () => {
           }
         });
         await dispatch(createCurrency(values));
-        router.push("/configurations/devise");
+        router.push(`/${idfile}/open-file/configurations/devise`);
       }
       fetchCurrencyListe();
     } catch (e) {
@@ -103,9 +99,7 @@ const CurrencyForm = () => {
           name: Yup.string().required("Champ obligatoire"),
           decimalPlaces: Yup.number().required("champ obligatoire"),
           symbolPosition: Yup.string().required("champ obligatoire"),
-          thousandSeparator: Yup.string().required(
-            "Champ obligatoire"
-          ),
+          thousandSeparator: Yup.string().required("Champ obligatoire"),
         })}
         onSubmit={async (value: any, action) => {
           await handleSubmit(value);
@@ -117,7 +111,7 @@ const CurrencyForm = () => {
             <NavigationContainer>
               <SectionNavigation>
                 <Stack flexDirection={"row"}>
-                  <Link href="/configurations/devise">
+                  <Link href={`/${idfile}/open-file/configurations/devise`}>
                     <Button
                       color="info"
                       variant="text"

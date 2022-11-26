@@ -5,6 +5,7 @@ import { getFiscalListe } from "../../../redux/features/fiscal-year";
 const useFetchFiscalListe = () => {
   const router = useRouter();
   const { id }: any = router.query;
+  const { idfile }: any = router.query;
   const dispatch = useAppDispatch();
   return () => {
     let args: any = {};
@@ -22,7 +23,7 @@ const useFetchFiscalListe = () => {
     }
     args.where = {
       fileId: {
-        equals: +id,
+        equals: +idfile,
       },
     };
     dispatch(getFiscalListe({ args }));

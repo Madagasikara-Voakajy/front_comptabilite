@@ -25,6 +25,7 @@ import useFetchTypeJournal from "../../../components/configurations/typeJournal/
 const NavbarBackOffice = ({ matches }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { idfile }: any = router.query;
   const [navMenu, setNavMenu] = React.useState([]);
   const handleClickLogout = () => {
     dispatch(logout({}));
@@ -37,9 +38,9 @@ const NavbarBackOffice = ({ matches }: any) => {
   const { journalTypeList } = useAppSelector((state) => state.journalType);
   const fetchJournalType = useFetchTypeJournal();
 
-  React.useEffect(() => {
-    setNavMenu(value);
-  }, [value]);
+  // React.useEffect(() => {
+  //   setNavMenu(value);
+  // }, [value]);
 
   React.useEffect(() => {
     fetchJournalType();
@@ -47,50 +48,73 @@ const NavbarBackOffice = ({ matches }: any) => {
 
   React.useEffect(() => {
     manageDisplayMenu();
-  }, []);
+  }, [router.query]);
 
   const manageDisplayMenu = () => {
-    console.log(router.pathname);
+    const pathname = router.pathname;
 
-    switch (router.pathname) {
-      case "/":
-        setNavMenu([]);
-        break;
-      case "/fichier":
-        setNavMenu([]);
-        break;
-      case "/fichier/[id]/annee-exercice":
-        let newValue: any = [];
-        value?.map((val: any, index: number) => {
-          var newobject = {
-            id: val.id,
-            name: val.name,
-            link: val.link,
-            icon: val.icon,
-            items: [...val?.items] as any,
-          };
-          if (val.id == 1) {
-            if (journalTypeList.length > 0) {
-              journalTypeList.map((jt: JournalTypeItem, index: number) => {
-                const oneItem: any = {
-                  id: jt.id,
-                  name: jt.type,
-                  link: `${router.pathname}/journal-de-saisie?id=${jt.id}&type=${jt.type}`,
-                  icon: "",
-                };
-                newobject.items.unshift(oneItem);
-              });
+    if (pathname.includes("open-file")) {
+      let newValue: any = [];
+      value.map((val: any) => {
+        let newobject = {
+          id: val.id,
+          name: val.name,
+          link: val.link,
+          icon: val.icon,
+          items: [...val?.items] as any,
+        };
+        if (newobject.link.includes("[idfile]")) {
+          newobject.link = newobject.link.replace("[idfile]", idfile);
+        }
+
+        if (newobject.items.length > 0) {
+          let newItemList: any = [];
+          newobject.items.map((item: any) => {
+            let newitem = {
+              id: item.id,
+              name: item.name,
+              link: item.link,
+              icon: item.icon,
+            };
+            if (newitem.link.includes("[idfile]")) {
+              newitem.link = newitem.link.replace("[idfile]", idfile);
             }
-          }
-          newValue.push(newobject);
-        });
-        console.log("**********", newValue);
-        // console.log(journalTypeList);
-        setNavMenu(newValue);
-        break;
-      default:
-        setNavMenu([]);
-        break;
+            newItemList.push(newitem);
+          });
+          newobject.items = newItemList;
+        }
+
+        newValue.push(newobject);
+      });
+      setNavMenu(newValue);
+      console.log(navMenu);
+      // let newValue: any = [];
+      // value?.map((val: any, index: number) => {
+      //   var newobject = {
+      //     id: val.id,
+      //     name: val.name,
+      //     link: val.link,
+      //     icon: val.icon,
+      //     items: [...val?.items] as any,
+      //   };
+      //   if (val.id == 1) {
+      //     if (journalTypeList.length > 0) {
+      //       journalTypeList.map((jt: JournalTypeItem, index: number) => {
+      //         const oneItem: any = {
+      //           id: jt.id,
+      //           name: jt.type,
+      //           link: `${router.pathname}/journal-de-saisie?id=${jt.id}&type=${jt.type}`,
+      //           icon: "",
+      //         };
+      //         newobject.items.unshift(oneItem);
+      //       });
+      //     }
+      //   }
+      //   newValue.push(newobject);
+      // });
+      // console.log("**********", newValue);
+      // // console.log(journalTypeList);
+      // setNavMenu(newValue);
     }
   };
 

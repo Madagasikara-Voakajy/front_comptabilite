@@ -33,6 +33,7 @@ import useFetchJournalEntryListe from "../../../journalEntry/hooks/useFetchJourn
 const JournalItemForm = () => {
   const router = useRouter();
   const { id }: any = router.query;
+  const { idfile }: any = router.query;
   const dispatch = useAppDispatch();
 
   // A MODIFIER
@@ -82,7 +83,7 @@ const JournalItemForm = () => {
       } else {
         await dispatch(createJournalItem(values));
       }
-      router.push("/configurations/journal-item");
+      router.push(`/${idfile}/open-file/configurations/journal-item`);
     } catch (error) {
       console.log("error", error);
     }
@@ -121,7 +122,9 @@ const JournalItemForm = () => {
               <NavigationContainer>
                 <SectionNavigation>
                   <Stack flexDirection={"row"}>
-                    <Link href="/configurations/journal-item">
+                    <Link
+                      href={`/${idfile}/open-file/configurations/journal-item`}
+                    >
                       <Button
                         color="info"
                         variant="text"

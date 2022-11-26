@@ -9,29 +9,27 @@ import {
 import React, { useEffect } from "react";
 import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { useRouter } from "next/router";
 import { getJournal } from "../../../redux/features/journal";
 
 const DetailsJournal = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { id }: any = router.query;
+  const { id, idae }: any = router.query;
+  const { idfile }: any = router.query;
   const { journal } = useAppSelector((state) => state.journal);
   const { journalType } = useAppSelector((state) => state.journalType);
 
   useEffect(() => {
     getDetailsJournal();
-  }, [id]);
+  }, [router.query]);
 
   const getDetailsJournal = () => {
     const args: any = {
       include: {
-        fileId:true,
-        journalType:true,
+        file: true,
+        journalType: true,
       },
     };
     dispatch(getJournal({ id, args }));
@@ -44,12 +42,8 @@ const DetailsJournal = () => {
         justifyContent="space-between"
         sx={{ mb: 2 }}
       >
-        <Link href="/journal">
-          <Button
-            color="info"
-            variant="text"
-            startIcon={<ArrowBackIcon />}
-          >
+        <Link href={`/${idfile}/open-file/annee-exercice/${idae}/journal`}>
+          <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
             Retour
           </Button>
         </Link>

@@ -27,6 +27,7 @@ import KeyValue from "../../../shared/keyValue";
 const PosteAnalytiqueForm = () => {
   const router = useRouter();
   const { id }: any = router.query;
+  const { idfile }: any = router.query;
   const dispatch = useAppDispatch();
   const { isEditing, postAnalytic } = useAppSelector(
     (state) => state.postAnalytic
@@ -50,7 +51,7 @@ const PosteAnalytiqueForm = () => {
       } else {
         await dispatch(createPostAnalytic(values));
       }
-      router.push("/configurations/post-analytique");
+      router.push(`/${idfile}/open-file/configurations/post-analytique`);
     } catch (error) {
       console.log("error", error);
     }
@@ -77,7 +78,9 @@ const PosteAnalytiqueForm = () => {
               <NavigationContainer>
                 <SectionNavigation>
                   <Stack flexDirection={"row"}>
-                    <Link href="/grant">
+                    <Link
+                      href={`/${idfile}/open-file/configurations/post-analytique`}
+                    >
                       <Button
                         color="info"
                         variant="text"
@@ -109,7 +112,10 @@ const PosteAnalytiqueForm = () => {
                       Annuler
                     </Button>
                   </Stack>
-                  <Typography variant="h4"> Formulaire GRANT </Typography>
+                  <Typography variant="h4">
+                    {" "}
+                    Formulaire Post analytique{" "}
+                  </Typography>
                 </SectionNavigation>
                 <Divider />
               </NavigationContainer>

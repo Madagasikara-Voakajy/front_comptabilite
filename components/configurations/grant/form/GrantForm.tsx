@@ -28,6 +28,7 @@ import useFetchPostAnalytique from "../../post-analytique/hooks/useFetchPostAnal
 const GrantForm = () => {
   const router = useRouter();
   const { id }: any = router.query;
+  const { idfile }: any = router.query;
   const dispatch = useAppDispatch();
   const { isEditing, grant } = useAppSelector((state) => state.grant);
   const { postAnalyticList } = useAppSelector((state) => state.postAnalytic);
@@ -56,7 +57,7 @@ const GrantForm = () => {
       } else {
         await dispatch(createGrant(values));
       }
-      router.push("/configurations/grant");
+      router.push(`/${idfile}/open-file/configurations/grant`);
     } catch (error) {
       console.log("error", error);
     }
@@ -85,7 +86,7 @@ const GrantForm = () => {
               <NavigationContainer>
                 <SectionNavigation>
                   <Stack flexDirection={"row"}>
-                    <Link href="/configurations/grant">
+                    <Link href={`/${idfile}/open-file/configurations/grant`}>
                       <Button
                         color="info"
                         variant="text"

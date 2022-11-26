@@ -22,6 +22,7 @@ import { createJournal, updateJournal } from "../../../redux/features/journal";
 const JournalForm = () => {
   const router = useRouter();
   const { id, idae }: any = router.query;
+  const { idfile }: any = router.query;
   const { isEditing, journal }: any = useAppSelector((state) => state.journal);
 
   const { comptaFileListe } = useAppSelector((state) => state.comptaFile);
@@ -42,7 +43,7 @@ const JournalForm = () => {
       } else {
         await dispatch(createJournal(values));
       }
-      router.push(`/fichier/${id}/annee-exercice/${idae}/journal`);
+      router.push(`/${idfile}/open-file/annee-exercice/${idae}/journal`);
     } catch (error) {
       console.log("error", error);
     }
@@ -58,7 +59,7 @@ const JournalForm = () => {
             : {
                 name: isEditing ? journal?.name : "",
                 code: isEditing ? journal?.code : "",
-                fileId: +id,
+                fileId: +idfile,
                 typeId: isEditing ? journal?.typeId : "",
               }
         }

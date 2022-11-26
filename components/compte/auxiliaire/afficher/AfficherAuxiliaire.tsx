@@ -18,6 +18,7 @@ import { getAuxiliairyAccount } from "../../../../redux/features/auxiliairyAccou
 const AfficherAuxiliaire = () => {
   const router = useRouter();
   const { id }: any = router.query;
+  const { idfile }: any = router.query;
   const dispatch = useAppDispatch();
   const { isEditing, auxiliaryAccount } = useAppSelector(
     (state) => state.auxiliaryAccount
@@ -34,7 +35,7 @@ const AfficherAuxiliaire = () => {
       <NavigationContainer>
         <SectionNavigation>
           <Stack flexDirection={"row"}>
-            <Link href="/comptes/auxiliaire/">
+            <Link href={`/${idfile}/open-file/comptes/auxiliaire`}>
               <Button color="info" variant="text" startIcon={<ArrowBack />}>
                 Retour
               </Button>

@@ -11,11 +11,19 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { useRouter } from "next/router";
 import useFetchFiscalListe from "../hooks/useFetchFiscalListe";
 
-const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
+const OneAnneeExercice = ({
+  year,
+  locked,
+  fileId,
+  fiscalId,
+  handleClickOpen,
+  handleClose,
+}: any) => {
   const confirm = useConfirm();
   const router = useRouter();
   const fetchFiscalListe = useFetchFiscalListe();
   const { id }: any = router.query;
+  const { idfile }: any = router.query;
   // const { fiscal } = useAppSelector((state) => state.fiscal);
 
   const dispatch = useAppDispatch();
@@ -35,6 +43,7 @@ const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
     })
       .then(async () => {
         await dispatch(deleteFiscal({ id }));
+        handleClose();
         fetchFiscalListe();
       })
       .catch(() => {});
@@ -42,6 +51,7 @@ const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
 
   const handleClickEdit = async (id: any) => {
     await dispatch(editFiscal({ id }));
+    handleClickOpen();
   };
 
   return (
@@ -58,8 +68,12 @@ const OneAnneeExercice = ({ year, locked, fileId, fiscalId }: any) => {
       </Typography>
       {/* </Stack> */}
       <Stack direction={"row"} justifyContent={"center"}>
-        <Link href={`/fichier/${id}/annee-exercice/${fiscalId}/journal`}>
-          <IconButton aria-label="open" component="button" sx={{ color: "#ddd" }}>
+        <Link href={`/${idfile}/open-file/annee-exercice/${fiscalId}/journal`}>
+          <IconButton
+            aria-label="open"
+            component="button"
+            sx={{ color: "#ddd" }}
+          >
             <Visibility />
           </IconButton>
         </Link>
