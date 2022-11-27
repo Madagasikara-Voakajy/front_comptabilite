@@ -1,4 +1,11 @@
-import { Button, Container, Stack, styled, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Divider,
+  Stack,
+  styled,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import Box from "@mui/material/Box";
@@ -15,21 +22,16 @@ import { rows } from "./table/constante";
 import EnhancedTableToolbar from "./table/EnhancedTableToolbar";
 import EnhancedTableHead from "./table/EnhancedTableHead";
 import { getComparator, stableSort } from "./table/function";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Add from "@mui/icons-material/Add";
 import {
   defaultLabelDisplayedRows,
   labelRowsPerPage,
-} from "../../config/table.config";
-import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
+} from "../../../config/table.config";
+import { ArrowBack, Check, Close } from "@mui/icons-material";
+import Detail from "./detail";
 
-const ListJournalDeSaisieRapprochement = () => {
+const ListTableauAmorti = () => {
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof Data>("date");
+  const [orderBy, setOrderBy] = React.useState<keyof Data>("annee");
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -46,7 +48,7 @@ const ListJournalDeSaisieRapprochement = () => {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.date);
+      const newSelecteds = rows.map((n) => n.annee);
       setSelected(newSelecteds);
       return;
     }
@@ -98,51 +100,43 @@ const ListJournalDeSaisieRapprochement = () => {
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
         <Stack direction="row" spacing={2}>
-          <Link href="/">
-            <Button variant="text" color="info" startIcon={<ArrowBackIcon />}>
-              retour
-            </Button>
-          </Link>
-          <Link href="/rapprochement/add">
-            <Button variant="contained" startIcon={<Add />}>
-              Ajouter
-            </Button>
-          </Link>
-          <Link href="/rapprochement/compte">
-            <Button
-              variant="text"
-              color="warning"
-              startIcon={<CompareArrowsIcon />}
-            >
-              Rapprochement
+          <Link href="/amortissement">
+            <Button color="info" variant="text" startIcon={<ArrowBack />}>
+              Retour
             </Button>
           </Link>
           <Button
-            color="info"
             variant="contained"
-            startIcon={<FileDownloadIcon />}
+            color="primary"
+            size="small"
+            startIcon={<Check />}
+            sx={{ marginInline: 3 }}
           >
-            Excel
+            Enregistrer
           </Button>
           <Button
-            color="info"
-            variant="contained"
-            startIcon={<FileDownloadIcon />}
+            variant="text"
+            color="warning"
+            size="small"
+            startIcon={<Close />}
+            sx={{ marginInline: 3 }}
           >
-            Pdf
+            Annuler
           </Button>
         </Stack>
         <Typography variant="h4" color="GrayText">
-          Journal de saisie
+          Amortissement
         </Typography>
       </SectionNavigation>
+      <Divider />
+      <Detail />
       <SectionTable>
         <Box sx={{ width: "100%" }}>
           <Paper sx={{ width: "100%", mb: 2 }}>
             <EnhancedTableToolbar numSelected={selected.length} />
             <TableContainer>
               <Table
-                sx={{ minWidth: 750 }}
+                sx={{ minWidth: 900 }}
                 aria-labelledby="tableTitle"
                 size={"medium"}
               >
@@ -160,7 +154,7 @@ const ListJournalDeSaisieRapprochement = () => {
                   {stableSort(rows, getComparator(order, orderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
-                      const isItemSelected = isSelected(row.date);
+                      const isItemSelected = isSelected(row.annee);
                       const labelId = `enhanced-table-checkbox-${index}`;
 
                       return (
@@ -170,38 +164,19 @@ const ListJournalDeSaisieRapprochement = () => {
                           role="checkbox"
                           aria-checked={isItemSelected}
                           tabIndex={-1}
-                          key={row.date}
+                          key={row.annee}
                           selected={isItemSelected}
                         >
                           <TableCell id={labelId} scope="row" padding="normal">
-                            {row.date}
+                            {row.annee}
                           </TableCell>
-                          <TableCell align="right">{row.numero}</TableCell>
-                          <TableCell align="right">{row.numeroPiece}</TableCell>
-                          <TableCell align="right">{row.journal}</TableCell>
-                          <TableCell align="right">{row.total}</TableCell>
-
-                          <TableCell align="right">
-                            <BtnActionContainer
-                              direction="row"
-                              justifyContent="center"
-                            >
-                              <IconButton
-                                color="primary"
-                                aria-label="Modifier"
-                                component="span"
-                              >
-                                <EditIcon />
-                              </IconButton>
-                              <IconButton
-                                color="warning"
-                                aria-label="Supprimer"
-                                component="span"
-                                size="small"
-                              >
-                                <DeleteIcon />
-                              </IconButton>
-                            </BtnActionContainer>
+                          <TableCell scope="row" align="left">
+                            {row.valeur}
+                          </TableCell>
+                          <TableCell align="left">{row.annuite}</TableCell>
+                          <TableCell align="left">{row.cumul}</TableCell>
+                          <TableCell align="left">
+                            {row.valeurNetteComptable}
                           </TableCell>
                         </TableRow>
                       );
@@ -240,7 +215,7 @@ const ListJournalDeSaisieRapprochement = () => {
   );
 };
 
-export default ListJournalDeSaisieRapprochement;
+export default ListTableauAmorti;
 
 export const BtnActionContainer = styled(Stack)(({ theme }) => ({}));
 export const SectionNavigation = styled(Stack)(({ theme }) => ({}));
