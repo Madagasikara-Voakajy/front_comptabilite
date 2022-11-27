@@ -28,8 +28,11 @@ import {
 } from "../../../config/table.config";
 import { ArrowBack, Check, Close } from "@mui/icons-material";
 import Detail from "./detail";
+import { useRouter } from "next/router";
 
 const ListTableauAmorti = () => {
+  const router = useRouter();
+  const { idfile }: any = router.query;
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Data>("annee");
   const [selected, setSelected] = React.useState<readonly string[]>([]);
@@ -100,7 +103,7 @@ const ListTableauAmorti = () => {
     <Container maxWidth="xl">
       <SectionNavigation direction="row" justifyContent="space-between" mb={2}>
         <Stack direction="row" spacing={2}>
-          <Link href="/amortissement">
+          <Link href={`/${idfile}/open-file/amortissement`}>
             <Button color="info" variant="text" startIcon={<ArrowBack />}>
               Retour
             </Button>
