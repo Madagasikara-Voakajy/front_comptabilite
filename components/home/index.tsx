@@ -136,7 +136,7 @@ const HomeComptabilite = () => {
                     href={`/${idfile}/open-file/etat-financieres/compte-resultat`}
                   >
                     <Button variant="text" color="info">
-                      Compte de résiltats par nature / par fonction
+                      Compte de résultat par nature / par fonction
                     </Button>
                   </Link>
                 </Box>
