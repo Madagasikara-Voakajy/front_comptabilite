@@ -19,7 +19,7 @@ const useFetchAuxiliaire = () => {
         [<string>router.query.orderBy]: router.query.order,
       };
     }
-    await dispatch(getAuxiliairyAccountList({ args }));
+    dispatch(getAuxiliairyAccountList({ args }));
   };
 };
 

@@ -16,12 +16,33 @@ import Link from "next/link";
 import React from "react";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import { Check, Close } from "@mui/icons-material";
+import OSTextField from "../../../../shared/input/OSTextField";
+import OSDatePicker from "../../../../shared/date/OSDatePicker";
 import { useRouter } from "next/router";
+import OSSelectField from "../../../../shared/select/OSSelectField";
+import useFetchAuxiliaire from "../../../../compte/auxiliaire/hooks/useFetchAuxiliaire";
+import { useAppSelector } from "../../../../../hooks/reduxHooks";
 
-const AddFormPieceComptable = () => {
+const AddFormPieceComptable = ({ formikProps }: any) => {
   const router = useRouter();
+  // const fetchAllCompteAuxiliairy = useFetchAuxiliaire();
+  const { journalListe } = useAppSelector((state) => state.journal);
   const { id, idae }: any = router.query;
   const { idfile, idj }: any = router.query;
+
+  // React.useEffect(() => {
+  //   // // fetchAllPCG();
+  //   // fetchAllCompteAuxiliairy();
+  //   // // fetchAllCurrency();
+  //   console.log("rr", journalListe);
+  // }, [journalListe]);
+
+  React.useEffect(() => {
+    if (idj) {
+      formikProps.setFieldValue("journalEntry.journalId", +idj);
+    }
+  }, [router.query]);
+
   return (
     <Container maxWidth="xl" sx={{ pb: 3 }}>
       <NavigationContainer>
@@ -36,6 +57,7 @@ const AddFormPieceComptable = () => {
               variant="contained"
               color="primary"
               size="small"
+              type="submit"
               startIcon={<Check />}
               sx={{ marginInline: 3 }}
             >
@@ -60,32 +82,38 @@ const AddFormPieceComptable = () => {
           direction={{ xs: "column", sm: "column", md: "row" }}
           spacing={{ xs: 2, sm: 2, md: 1 }}
         >
-          <TextField
+          <OSTextField
             fullWidth
-            id="outlined-basic"
-            label="Date pièce comptable"
+            id="reference"
+            name="journalEntry.reference"
+            label="Reference"
             variant="outlined"
           />
-          <TextField
+          <OSDatePicker
+            label="Date pièce comptable"
+            value={formikProps.values.journalEntry.date}
+            name="journalEntry.date"
+            onChange={(value: any) =>
+              formikProps.setFieldValue("journalEntry.date", value)
+            }
+          />
+          <OSTextField
             fullWidth
+            type="number"
             id="outlined-basic"
+            name="journalEntry.number"
             label="Numéro pièce"
             variant="outlined"
           />
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Salaires (Journal)
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Salaires (Journal)"
-            >
-              <MenuItem value={10}>Salaire_1</MenuItem>
-              <MenuItem value={20}>Salaire_2</MenuItem>
-              <MenuItem value={30}>Salaire_3</MenuItem>
-            </Select>
-          </FormControl>
+          <OSSelectField
+            disabled
+            id="journalEntry.journalId"
+            label="Salaires (Journal)"
+            name={`journalEntry.journalId`}
+            options={journalListe}
+            dataKey={"name"}
+            valueKey="id"
+          />
         </CustomStack>
       </FormContainer>
     </Container>
