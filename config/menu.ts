@@ -178,7 +178,7 @@ const menu = [
       {
         id: 56,
         name: "Mode de paiement",
-        link: "#",
+        link: "/[idfile]/open-file/configurations/modeDePaiement",
         icon: "",
       },
     ],
