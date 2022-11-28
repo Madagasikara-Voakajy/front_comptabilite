@@ -439,6 +439,7 @@ const EtatFinancier = () => {
     </Document>
   );
   const [value, setValue] = React.useState(0);
+<<<<<<< HEAD
   const [age, setAge] = React.useState("");
 
   // À VERIFIER
@@ -449,6 +450,17 @@ const EtatFinancier = () => {
   }, []);
   const router = useRouter();
   const { idfile }: any = router.query;
+=======
+  const [age, setAge] = React.useState('');
+  const router = useRouter();
+  const { idfile }: any = router.query;
+  // À VERIFIER
+  const { grantList } = useAppSelector((state) => state.grant);
+  const fetchGrants = useFetchGrants();
+  React.useEffect(() => {
+    fetchGrants();
+  }, []);
+>>>>>>> develop
 
   const handleChangeSelect = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
@@ -465,24 +477,17 @@ const EtatFinancier = () => {
   return (
     <Container maxWidth="xl">
       <Stack>
-        <SectionNavigation
-          direction="row"
-          justifyContent="space-between"
-          mb={1}
-        >
-          <Stack direction={"row"} spacing={4}>
+        <SectionNavigation direction="row" justifyContent="space-between" mb={1}>
+          <Stack direction={'row'} spacing={4}>
             <Link href={`/${idfile}/open-file`}>
               <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
                 Retour
               </Button>
             </Link>
-            <Button
-              color="info"
-              variant="text"
-              startIcon={<FileDownloadIcon />}
-            >
+            <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
               Excel
             </Button>
+<<<<<<< HEAD
             <PDFDownloadLink
               document={FicheBilanPrint}
               fileName={"Bilan" + new Date().toLocaleString() + ".pdf"}
@@ -495,6 +500,11 @@ const EtatFinancier = () => {
                 Pdf
               </Button>
             </PDFDownloadLink>
+=======
+            <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
+              Pdf
+            </Button>
+>>>>>>> develop
           </Stack>
           <Typography variant="h4">Bilan</Typography>
         </SectionNavigation>
@@ -502,39 +512,32 @@ const EtatFinancier = () => {
       </Stack>
       <BodySection>
         <BodySectionHeader>
-          <Grid container spacing={2} alignItems={"center"}>
+          <Grid container spacing={2} alignItems={'center'}>
             <Grid item xs={12} md={4}>
-              <KeyValue keyName="Exercice close le" value={"31/12/2022"} />
+              <KeyValue keyName="Exercice close le" value={'31/12/2022'} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <KeyValue keyName="Unité monétaire" value={"Ariary"} />
+              <KeyValue keyName="Unité monétaire" value={'Ariary'} />
             </Grid>
             <Grid item xs={12} md={4}>
               <FormControl fullWidth>
                 <Autocomplete
                   multiple
                   id="grant"
+<<<<<<< HEAD
                   options={grantList.map((option) => option.code)}
+=======
+                  options={grantList.map((option) => option.code as string)}
+>>>>>>> develop
                   freeSolo
                   renderTags={(value: readonly string[], getTagProps) =>
                     value.map((option: string, index: number) => (
-                      <Fragment key={index}>
-                        <Chip
-                          variant="outlined"
-                          label={option}
-                          {...getTagProps({ index })}
-                        />
-                      </Fragment>
+                      <React.Fragment key={index}>
+                        <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                      </React.Fragment>
                     ))
                   }
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="filled"
-                      label="GRANT"
-                      placeholder="GRANT"
-                    />
-                  )}
+                  renderInput={(params) => <TextField {...params} variant="filled" label="GRANT" placeholder="GRANT" />}
                 />
               </FormControl>
             </Grid>
@@ -594,15 +597,15 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
 export const SectionNavigation = styled(Stack)(({}) => ({}));
 export const BodySection = styled(Box)(({}) => ({
   borderRadius: 20,
-  backgroundColor: "white",
-  padding: "16px 32px",
+  backgroundColor: 'white',
+  padding: '16px 32px',
   marginBlock: 16,
 }));
 

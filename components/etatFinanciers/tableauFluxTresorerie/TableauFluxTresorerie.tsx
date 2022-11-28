@@ -298,6 +298,7 @@ const TableauFluxTresorerie = () => {
   React.useEffect(() => {
     fetchGrants();
   }, []);
+<<<<<<< HEAD
   const top100Films = [
     { title: "The Shawshank Redemption", year: 1994 },
     { title: "The Godfather", year: 1972 },
@@ -307,83 +308,47 @@ const TableauFluxTresorerie = () => {
     { title: "Schindler's List", year: 1993 },
     { title: "Pulp Fiction", year: 1994 },
   ];
+=======
+>>>>>>> develop
   const rows = [
-    createData("Flux de trésorerie liés à l'activité", "", ""),
-    createData("Résultat net de l'exercice", "(2,000,000.00)", "1,000,000.00"),
-    createData("Ajustements pour :", "-", "-"),
-    createData("- Amortissements et provisions", "5,000,000.00", "-"),
-    createData("- Variation des impôts différés", "-", "-"),
-    createData("- Variation des stocks", "(2,000,000.00)", "-"),
-    createData(
-      "- Variation des clients et autres créances",
-      "(3,000,000.00)",
-      "-"
-    ),
-    createData(
-      "- Variation des fournisseurs et autres dettes",
-      "15,000,000.00",
-      "-"
-    ),
-    createData("- Plus ou moins values de cession, nettes d'impôts", "-", "-"),
-    createData(
-      "Flux de trésorerie générés par l'activité (A)",
-      "13,000,000.00",
-      "1,000,000.00"
-    ),
+    createData("Flux de trésorerie liés à l'activité", '', ''),
+    createData("Résultat net de l'exercice", '(2,000,000.00)', '1,000,000.00'),
+    createData('Ajustements pour :', '-', '-'),
+    createData('- Amortissements et provisions', '5,000,000.00', '-'),
+    createData('- Variation des impôts différés', '-', '-'),
+    createData('- Variation des stocks', '(2,000,000.00)', '-'),
+    createData('- Variation des clients et autres créances', '(3,000,000.00)', '-'),
+    createData('- Variation des fournisseurs et autres dettes', '15,000,000.00', '-'),
+    createData("- Plus ou moins values de cession, nettes d'impôts", '-', '-'),
+    createData("Flux de trésorerie générés par l'activité (A)", '13,000,000.00', '1,000,000.00'),
   ];
 
   const rowsTwo = [
-    createData(
-      "Flux de trésorerie liés aux opérations d'investissement",
-      "-",
-      "-"
-    ),
-    createData(
-      "Décaissements sur acquisitions d'immobilisations",
-      "(15,000,000.00)",
-      "-"
-    ),
-    createData("Encaissements sur cessions d'immobilisations", "-", "-"),
-    createData(
-      "Flux de trésorerie liés aux opérations d'investissement (B)",
-      " (15,000,000.00)",
-      "-"
-    ),
+    createData("Flux de trésorerie liés aux opérations d'investissement", '-', '-'),
+    createData("Décaissements sur acquisitions d'immobilisations", '(15,000,000.00)', '-'),
+    createData("Encaissements sur cessions d'immobilisations", '-', '-'),
+    createData("Flux de trésorerie liés aux opérations d'investissement (B)", ' (15,000,000.00)', '-'),
   ];
 
   const rowsThree = [
-    createData(
-      "Flux de trésorerie liés aux activités de financement",
-      "-",
-      "-"
-    ),
-    createData("Dividendes versés aux actionnaires", "-", "-"),
-    createData("Augmentation de capital en numéraire", "-", "60,000,000.00"),
-    createData("Emission d'emprunt", "-", "-"),
-    createData("Remboursement d'emprunt", "-", "-"),
-    createData(
-      "Flux de trésorerie liés aux opérations de financement (C)",
-      "-",
-      "60,000,000.00"
-    ),
+    createData('Flux de trésorerie liés aux activités de financement', '-', '-'),
+    createData('Dividendes versés aux actionnaires', '-', '-'),
+    createData('Augmentation de capital en numéraire', '-', '60,000,000.00'),
+    createData("Emission d'emprunt", '-', '-'),
+    createData("Remboursement d'emprunt", '-', '-'),
+    createData('Flux de trésorerie liés aux opérations de financement (C)', '-', '60,000,000.00'),
   ];
 
-  const rowsFour = [
-    createData(
-      "Variation de trésorerie de la période (A+B+C)",
-      "(2,000,000.00)",
-      "61,000,000.00"
-    ),
-  ];
+  const rowsFour = [createData('Variation de trésorerie de la période (A+B+C)', '(2,000,000.00)', '61,000,000.00')];
 
   const rowsFive = [
-    createData("Trésorerie d'ouverture", "61,000,000.00", "-"),
-    createData("Trésorerie de clôture", "59,000,000.00", "61,000,000.00"),
-    createData("Incidence des variations de cours des devises", "-", "-"),
-    createData("Variation de trésorerie", "(2,000,000.00)", "61,000,000.00"),
+    createData("Trésorerie d'ouverture", '61,000,000.00', '-'),
+    createData('Trésorerie de clôture', '59,000,000.00', '61,000,000.00'),
+    createData('Incidence des variations de cours des devises', '-', '-'),
+    createData('Variation de trésorerie', '(2,000,000.00)', '61,000,000.00'),
   ];
 
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = React.useState('');
 
   const handleChangeSelect = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
@@ -392,24 +357,17 @@ const TableauFluxTresorerie = () => {
   return (
     <Container maxWidth="xl">
       <Stack>
-        <SectionNavigation
-          direction="row"
-          justifyContent="space-between"
-          mb={1}
-        >
-          <Stack direction={"row"} spacing={4}>
+        <SectionNavigation direction="row" justifyContent="space-between" mb={1}>
+          <Stack direction={'row'} spacing={4}>
             <Link href={`/${idfile}/open-file`}>
               <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
                 Retour
               </Button>
             </Link>
-            <Button
-              color="info"
-              variant="text"
-              startIcon={<FileDownloadIcon />}
-            >
+            <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
               Excel
             </Button>
+<<<<<<< HEAD
             <PDFDownloadLink
               document={FicheTFTPrint}
               fileName={"TFT" + new Date().toLocaleString() + ".pdf"}
@@ -422,6 +380,11 @@ const TableauFluxTresorerie = () => {
                 Pdf
               </Button>
             </PDFDownloadLink>
+=======
+            <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
+              Pdf
+            </Button>
+>>>>>>> develop
           </Stack>
           <Typography variant="h4">Tableau de flux de trésorerie</Typography>
         </SectionNavigation>
@@ -429,40 +392,29 @@ const TableauFluxTresorerie = () => {
       </Stack>
       <BodySection>
         <BodySectionHeader>
-          <Grid container spacing={2} alignItems={"center"}>
+          <Grid container spacing={2} alignItems={'center'}>
             <Grid item xs={12} md={4}>
-              <KeyValue keyName="Période du" value={"1/1/2022"} />
-              <KeyValue keyName="au" value={"31/12/2022"} />
+              <KeyValue keyName="Période du" value={'1/1/2022'} />
+              <KeyValue keyName="au" value={'31/12/2022'} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <KeyValue keyName="Unité monétaire" value={"Ariary"} />
+              <KeyValue keyName="Unité monétaire" value={'Ariary'} />
             </Grid>
             <Grid item xs={12} md={4}>
               <FormControl fullWidth>
                 <Autocomplete
                   multiple
                   id="tags-filled"
-                  options={top100Films.map((option) => option.title)}
+                  options={grantList.map((option) => option.code as string)}
                   freeSolo
                   renderTags={(value: readonly string[], getTagProps) =>
                     value.map((option: string, index: number) => (
-                      <Fragment key={index}>
-                        <Chip
-                          variant="outlined"
-                          label={option}
-                          {...getTagProps({ index })}
-                        />
-                      </Fragment>
+                      <React.Fragment key={index}>
+                        <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                      </React.Fragment>
                     ))
                   }
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="filled"
-                      label="GRANT"
-                      placeholder="GRANT"
-                    />
-                  )}
+                  renderInput={(params) => <TextField {...params} variant="filled" label="GRANT" placeholder="GRANT" />}
                 />
               </FormControl>
             </Grid>
@@ -495,19 +447,12 @@ const TableauFluxTresorerie = () => {
                 </TableRow>
                 {rows.map((row) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.capitaux_prop_passif}
-                    >
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.capitaux_prop_passif}>
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
                           </TableCell>
                         );
                       })}
@@ -519,19 +464,12 @@ const TableauFluxTresorerie = () => {
                 </TableRow>
                 {rowsTwo.map((row) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.capitaux_prop_passif}
-                    >
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.capitaux_prop_passif}>
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
                           </TableCell>
                         );
                       })}
@@ -543,19 +481,12 @@ const TableauFluxTresorerie = () => {
                 </TableRow>
                 {rowsThree.map((row) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.capitaux_prop_passif}
-                    >
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.capitaux_prop_passif}>
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
                           </TableCell>
                         );
                       })}
@@ -567,19 +498,12 @@ const TableauFluxTresorerie = () => {
                 </TableRow>
                 {rowsFour.map((row) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.capitaux_prop_passif}
-                    >
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.capitaux_prop_passif}>
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
                           </TableCell>
                         );
                       })}
@@ -591,19 +515,12 @@ const TableauFluxTresorerie = () => {
                 </TableRow>
                 {rowsFive.map((row) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.capitaux_prop_passif}
-                    >
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.capitaux_prop_passif}>
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
                           </TableCell>
                         );
                       })}
@@ -624,8 +541,8 @@ export default TableauFluxTresorerie;
 export const SectionNavigation = styled(Stack)(({}) => ({}));
 export const BodySection = styled(Box)(({}) => ({
   borderRadius: 20,
-  backgroundColor: "white",
-  padding: "16px 32px",
+  backgroundColor: 'white',
+  padding: '16px 32px',
   marginBlock: 16,
 }));
 

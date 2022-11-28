@@ -390,24 +390,17 @@ const CompteResultat = () => {
   return (
     <Container maxWidth="xl">
       <Stack>
-        <SectionNavigation
-          direction="row"
-          justifyContent="space-between"
-          mb={1}
-        >
-          <Stack direction={"row"} spacing={4}>
+        <SectionNavigation direction="row" justifyContent="space-between" mb={1}>
+          <Stack direction={'row'} spacing={4}>
             <Link href={`/${idfile}/open-file`}>
               <Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
                 Retour
               </Button>
             </Link>
-            <Button
-              color="info"
-              variant="text"
-              startIcon={<FileDownloadIcon />}
-            >
+            <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
               Excel
             </Button>
+<<<<<<< HEAD
             <PDFDownloadLink
               document={FicheCRPrint}
               fileName={"CR" + new Date().toLocaleString() + ".pdf"}
@@ -420,6 +413,11 @@ const CompteResultat = () => {
                 Pdf
               </Button>
             </PDFDownloadLink>
+=======
+            <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
+              Pdf
+            </Button>
+>>>>>>> develop
           </Stack>
           <Typography variant="h4">Compte de resultat</Typography>
         </SectionNavigation>
@@ -427,19 +425,20 @@ const CompteResultat = () => {
       </Stack>
       <BodySection>
         <BodySectionHeader>
-          <Grid container spacing={2} alignItems={"center"}>
+          <Grid container spacing={2} alignItems={'center'}>
             <Grid item xs={12} md={4}>
-              <KeyValue keyName="Période du" value={"1/1/2022"} />
-              <KeyValue keyName="au" value={"31/12/2022"} />
+              <KeyValue keyName="Période du" value={'1/1/2022'} />
+              <KeyValue keyName="au" value={'31/12/2022'} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <KeyValue keyName="Unité monétaire" value={"Ariary"} />
+              <KeyValue keyName="Unité monétaire" value={'Ariary'} />
             </Grid>
             <Grid item xs={12} md={4}>
               <FormControl fullWidth>
                 <Autocomplete
                   multiple
                   id="tags-filled"
+<<<<<<< HEAD
                   options={grantList.map((option) => option.code)}
                   freeSolo
                   renderTags={(value: readonly string[], getTagProps) =>
@@ -450,16 +449,18 @@ const CompteResultat = () => {
                         label={option}
                         {...getTagProps({ index })}
                       />
+=======
+                  options={grantList.map((option) => option.code as string)}
+                  freeSolo
+                  renderTags={(value: readonly string[], getTagProps) =>
+                    value.map((option: string, index: number) => (
+                      <React.Fragment key={index}>
+                        <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                      </React.Fragment>
+>>>>>>> develop
                     ))
                   }
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="filled"
-                      label="GRANT"
-                      placeholder="GRANT"
-                    />
-                  )}
+                  renderInput={(params) => <TextField {...params} variant="filled" label="GRANT" placeholder="GRANT" />}
                 />
               </FormControl>
             </Grid>
@@ -519,15 +520,15 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
 export const SectionNavigation = styled(Stack)(({}) => ({}));
 export const BodySection = styled(Box)(({}) => ({
   borderRadius: 20,
-  backgroundColor: "white",
-  padding: "16px 32px",
+  backgroundColor: 'white',
+  padding: '16px 32px',
   marginBlock: 16,
 }));
 
