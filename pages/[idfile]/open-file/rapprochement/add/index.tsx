@@ -5,11 +5,11 @@ import AddJournalDeSaisiRapprochement from "../../../../../components/rapprochem
 import BackOfficeLayout from "../../../../../layouts/backOffice";
 
 const JournalSaisie = () => {
-  return (
-    <BackOfficeLayout>
-      <AddJournalDeSaisiRapprochement />
-    </BackOfficeLayout>
-  );
+	return (
+		<BackOfficeLayout>
+			<AddJournalDeSaisiRapprochement />
+		</BackOfficeLayout>
+	);
 };
 
 export default JournalSaisie;
