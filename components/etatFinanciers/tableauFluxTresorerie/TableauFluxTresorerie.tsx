@@ -1,57 +1,38 @@
-import React, { Fragment } from "react";
-import {
-  Button,
-  Grid,
-  Stack,
-  Divider,
-  Typography,
-  styled,
-  Autocomplete,
-  TextField,
-  Box,
-} from "@mui/material";
-import Chip from "@mui/material/Chip";
-import Container from "@mui/material/Container";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import Link from "next/link";
-import KeyValue from "../../shared/keyValue";
-import { createData } from "./table/tableauFluxTresorerie.function";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { columns } from "./table/tableauFluxTresorerie.constant";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import useFetchGrants from "../../configurations/grant/hooks/useFetchGrants";
-import { useAppSelector } from "../../../hooks/reduxHooks";
-import { useRouter } from "next/router";
-import {
-  Document,
-  Font,
-  Page,
-  PDFDownloadLink,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-} from "@react-pdf/renderer";
-import useBasePath from "../../../hooks/useBasePath";
-import OneRowDetailTFT from "./print/OneRowDetailTFT";
+import React, { Fragment } from 'react';
+import { Button, Grid, Stack, Divider, Typography, styled, Autocomplete, TextField, Box } from '@mui/material';
+import Chip from '@mui/material/Chip';
+import Container from '@mui/material/Container';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import Link from 'next/link';
+import KeyValue from '../../shared/keyValue';
+import { createData } from './table/tableauFluxTresorerie.function';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { columns } from './table/tableauFluxTresorerie.constant';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import useFetchGrants from '../../configurations/grant/hooks/useFetchGrants';
+import { useAppSelector } from '../../../hooks/reduxHooks';
+import { useRouter } from 'next/router';
+import { Document, Font, Page, PDFDownloadLink, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
+import useBasePath from '../../../hooks/useBasePath';
+import OneRowDetailTFT from './print/OneRowDetailTFT';
 
 Font.register({
-  family: "Open Sans",
+  family: 'Open Sans',
   fonts: [
     {
-      src: "https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-regular.ttf",
+      src: 'https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-regular.ttf',
     },
     {
-      src: "https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-600.ttf",
+      src: 'https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-600.ttf',
       fontWeight: 600,
     },
   ],
@@ -62,83 +43,83 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   table: {
-    width: "100%",
+    width: '100%',
     marginTop: 15,
   },
   row: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
     fontSize: 9,
-    alignItems: "center",
-    justifyContent: "flex-start",
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   col: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     fontSize: 9,
   },
   rowBody: {
-    display: "flex",
-    flexDirection: "row",
+    display: 'flex',
+    flexDirection: 'row',
     fontSize: 9,
-    border: "1px solid #000",
-    borderTop: "none",
+    border: '1px solid #000',
+    borderTop: 'none',
   },
   header: {
-    border: "1px solid #000",
-    backgroundColor: "#D5D8DC",
+    border: '1px solid #000',
+    backgroundColor: '#D5D8DC',
   },
   bold: {
-    fontWeight: "normal",
+    fontWeight: 'normal',
   },
   b: {
-    border: "1px solid #000",
+    border: '1px solid #000',
   },
   b_left: {
-    borderLeft: "1px solid #000",
+    borderLeft: '1px solid #000',
   },
   b_top: {
-    borderTop: "1px solid #000",
+    borderTop: '1px solid #000',
   },
   b_right: {
-    borderRight: "1px solid #000",
+    borderRight: '1px solid #000',
   },
   row_60: {
-    width: "60%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '60%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   row_50: {
-    width: "50%",
+    width: '50%',
   },
   row_40: {
-    width: "40%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '40%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   row_30: {
-    width: "33%",
+    width: '33%',
   },
   row_25: {
-    width: "25%",
-    textAlign: "center",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '25%',
+    textAlign: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   row_75: {
-    width: "75%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '75%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   row_70: {
-    width: "70%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '70%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   font_10: {
     fontSize: 10,
@@ -147,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 7,
   },
   t_center: {
-    textAlign: "center",
+    textAlign: 'center',
   },
   p_y: {
     paddingTop: 10,
@@ -171,13 +152,13 @@ const styles = StyleSheet.create({
     height: 90,
   },
   pageNumber: {
-    position: "absolute",
+    position: 'absolute',
     fontSize: 10,
     bottom: 30,
     left: 0,
     right: 0,
-    textAlign: "center",
-    color: "grey",
+    textAlign: 'center',
+    color: 'grey',
   },
 });
 
@@ -185,33 +166,33 @@ const TableauFluxTresorerie = () => {
   const dataTFT = [
     {
       col1: "Chiffre d'affaires",
-      col2: "3,000,000.00",
-      col3: "1,000,000.00",
+      col2: '3,000,000.00',
+      col3: '1,000,000.00',
     },
     {
-      col1: "Production stockée",
-      col2: "-",
-      col3: "-",
+      col1: 'Production stockée',
+      col2: '-',
+      col3: '-',
     },
     {
-      col1: "Production immobilisée",
-      col2: "5,000,000.00",
-      col3: "5,000,000.00",
+      col1: 'Production immobilisée',
+      col2: '5,000,000.00',
+      col3: '5,000,000.00',
     },
     {
       col1: "I- Production de l'exercice",
-      col2: "3,000,000.00",
-      col3: "1,000,000.00",
+      col2: '3,000,000.00',
+      col3: '1,000,000.00',
     },
     {
-      col1: "Achats consommés",
-      col2: "3,000,000.00",
-      col3: "1,000,000.00",
+      col1: 'Achats consommés',
+      col2: '3,000,000.00',
+      col3: '1,000,000.00',
     },
     {
-      col1: "Services extérieurs et autres consommations",
-      col2: "-",
-      col3: "-",
+      col1: 'Services extérieurs et autres consommations',
+      col2: '-',
+      col3: '-',
     },
   ];
   const FicheTFTPrint = (
@@ -221,9 +202,7 @@ const TableauFluxTresorerie = () => {
           <View style={[styles.row, styles.bold, styles.header]}>
             <Text style={[styles.t_center, styles.row_30]}>IMAGE</Text>
             <View style={[styles.row_30]}>
-              <Text style={[styles.t_center]}>
-                Tableau de flux de trésorerie
-              </Text>
+              <Text style={[styles.t_center]}>Tableau de flux de trésorerie</Text>
             </View>
             <View style={[styles.t_center, styles.row_30]}>
               <Text style={[styles.t_center]}>TFT001</Text>
@@ -235,9 +214,7 @@ const TableauFluxTresorerie = () => {
               <Text style={styles.t_center}> au : 31/12/2022</Text>
             </View>
             <View style={[styles.row_30]}>
-              <Text style={[styles.t_center]}>
-                Unité monétaire : Ariary
-              </Text>
+              <Text style={[styles.t_center]}>Unité monétaire : Ariary</Text>
             </View>
             <View style={[styles.row_30]}>
               <Text style={[styles.t_center]}>GRANT</Text>
@@ -254,16 +231,10 @@ const TableauFluxTresorerie = () => {
               <View style={[styles.row_50]}>
                 <View style={[styles.row, styles.b_left]}>
                   <View style={[styles.row]}>
-                    <Text style={[styles.row_50, styles.t_center]}>
-                      Solde 2022 (N)
-                    </Text>
+                    <Text style={[styles.row_50, styles.t_center]}>Solde 2022 (N)</Text>
                   </View>
                   <View style={[styles.row]}>
-                    <Text
-                      style={[styles.row_50, styles.b_left, styles.t_center]}
-                    >
-                      Solde 2021 (N-1)
-                    </Text>
+                    <Text style={[styles.row_50, styles.b_left, styles.t_center]}>Solde 2021 (N-1)</Text>
                   </View>
                 </View>
               </View>
@@ -281,13 +252,7 @@ const TableauFluxTresorerie = () => {
           })}
         </View>
 
-        <Text
-          style={styles.pageNumber}
-          render={({ pageNumber, totalPages }) =>
-            `${pageNumber} / ${totalPages}`
-          }
-          fixed
-        />
+        <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`} fixed />
       </Page>
     </Document>
   );
@@ -298,18 +263,6 @@ const TableauFluxTresorerie = () => {
   React.useEffect(() => {
     fetchGrants();
   }, []);
-<<<<<<< HEAD
-  const top100Films = [
-    { title: "The Shawshank Redemption", year: 1994 },
-    { title: "The Godfather", year: 1972 },
-    { title: "The Godfather: Part II", year: 1974 },
-    { title: "The Dark Knight", year: 2008 },
-    { title: "12 Angry Men", year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: "Pulp Fiction", year: 1994 },
-  ];
-=======
->>>>>>> develop
   const rows = [
     createData("Flux de trésorerie liés à l'activité", '', ''),
     createData("Résultat net de l'exercice", '(2,000,000.00)', '1,000,000.00'),
@@ -367,24 +320,11 @@ const TableauFluxTresorerie = () => {
             <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
               Excel
             </Button>
-<<<<<<< HEAD
-            <PDFDownloadLink
-              document={FicheTFTPrint}
-              fileName={"TFT" + new Date().toLocaleString() + ".pdf"}
-            >
-              <Button
-                color="info"
-                variant="text"
-                startIcon={<FileDownloadIcon />}
-              >
+            <PDFDownloadLink document={FicheTFTPrint} fileName={'TFT' + new Date().toLocaleString() + '.pdf'}>
+              <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
                 Pdf
               </Button>
             </PDFDownloadLink>
-=======
-            <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
-              Pdf
-            </Button>
->>>>>>> develop
           </Stack>
           <Typography variant="h4">Tableau de flux de trésorerie</Typography>
         </SectionNavigation>
