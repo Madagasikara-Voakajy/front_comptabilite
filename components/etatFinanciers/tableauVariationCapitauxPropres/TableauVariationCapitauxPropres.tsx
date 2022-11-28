@@ -1,36 +1,338 @@
-import React, { Fragment } from 'react';
-import { Button, Grid, Stack, Divider, Typography, styled, Autocomplete, TextField, Box } from '@mui/material';
-import Chip from '@mui/material/Chip';
-import Container from '@mui/material/Container';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import Link from 'next/link';
-import KeyValue from '../../shared/keyValue';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { createData } from './table/tableauVariationCapitauxPropres.function';
-import { columns } from './table/tableauVariationCapitauxPropres.constant';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useRouter } from 'next/router';
-import useFetchGrants from '../../configurations/grant/hooks/useFetchGrants';
-import { useAppSelector } from '../../../hooks/reduxHooks';
+import React, { Fragment } from "react";
+import {
+  Button,
+  Grid,
+  Stack,
+  Divider,
+  Typography,
+  styled,
+  Autocomplete,
+  TextField,
+  Box,
+} from "@mui/material";
+import Chip from "@mui/material/Chip";
+import Container from "@mui/material/Container";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import Link from "next/link";
+import KeyValue from "../../shared/keyValue";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { createData } from "./table/tableauVariationCapitauxPropres.function";
+import { columns } from "./table/tableauVariationCapitauxPropres.constant";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import useFetchGrants from "../../configurations/grant/hooks/useFetchGrants";
+import { useAppSelector } from "../../../hooks/reduxHooks";
+import { useRouter } from "next/router";
+import {
+  Document,
+  Font,
+  Page,
+  PDFDownloadLink,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+} from "@react-pdf/renderer";
+import useBasePath from "../../../hooks/useBasePath";
+import OneRowDetailTVCP from "./print/OneRowDetailTVCP";
+
+Font.register({
+  family: "Open Sans",
+  fonts: [
+    {
+      src: "https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-regular.ttf",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-600.ttf",
+      fontWeight: 600,
+    },
+  ],
+});
+
+const styles = StyleSheet.create({
+  page: {
+    padding: 15,
+  },
+  table: {
+    width: "100%",
+    marginTop: 15,
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    fontSize: 9,
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  col: {
+    display: "flex",
+    flexDirection: "column",
+    fontSize: 9,
+  },
+  rowBody: {
+    display: "flex",
+    flexDirection: "row",
+    fontSize: 9,
+    border: "1px solid #000",
+    borderTop: "none",
+  },
+  header: {
+    border: "1px solid #000",
+    backgroundColor: "#D5D8DC",
+  },
+  bold: {
+    fontWeight: "normal",
+  },
+  b: {
+    border: "1px solid #000",
+  },
+  b_left: {
+    borderLeft: "1px solid #000",
+  },
+  b_top: {
+    borderTop: "1px solid #000",
+  },
+  b_right: {
+    borderRight: "1px solid #000",
+  },
+  row_50: {
+    width: "50%",
+  },
+  row_40: {
+    width: "40%",
+  },
+  row_60: {
+    width: "60%",
+  },
+  row_30: {
+    width: "33%",
+  },
+  row_25: {
+    width: "25%",
+  },
+  row_75: {
+    width: "75%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  row_70: {
+    width: "70%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  font_10: {
+    fontSize: 10,
+  },
+  font_7: {
+    fontSize: 7,
+  },
+  t_center: {
+    textAlign: "center",
+  },
+  p_y: {
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  p_5: {
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  p_top_5: {
+    paddingTop: 5,
+  },
+  p_top_10: {
+    paddingTop: 10,
+  },
+  p_left: {
+    paddingLeft: 10,
+  },
+  logo: {
+    width: 100,
+    height: 90,
+  },
+  pageNumber: {
+    position: "absolute",
+    fontSize: 10,
+    bottom: 30,
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    color: "grey",
+  },
+});
 
 const TableauVariationCapitauxPropres = () => {
+  const dataTFT = [
+    {
+      col1: "Chiffre d'affaires",
+      col2: "3,000,000.00",
+      col3: "1,000,000.00",
+      col4: "-",
+      col5: "-",
+      col6: "-",
+    },
+    {
+      col1: "Production stockée",
+      col2: "-",
+      col3: "-",
+      col4: "-",
+      col5: "-",
+      col6: "-",
+    },
+    {
+      col1: "Production immobilisée",
+      col2: "5,000,000.00",
+      col3: "5,000,000.00",
+      col4: "-",
+      col5: "-",
+      col6: "-",
+    },
+    {
+      col1: "I- Production de l'exercice",
+      col2: "3,000,000.00",
+      col3: "1,000,000.00",
+      col4: "-",
+      col5: "-",
+      col6: "-",
+    },
+    {
+      col1: "Achats consommés",
+      col2: "3,000,000.00",
+      col3: "1,000,000.00",
+      col4: "-",
+      col5: "-",
+      col6: "-",
+    },
+    {
+      col1: "Services extérieurs et autres consommations",
+      col2: "-",
+      col3: "-",
+      col4: "-",
+      col5: "-",
+      col6: "-",
+    },
+  ];
+  const FicheTVCPPrint = (
+    <Document>
+      <Page size="A4" orientation="landscape" wrap style={styles.page}>
+        <View style={styles.table}>
+          <View style={[styles.row, styles.bold, styles.header]}>
+            <Text style={[styles.t_center, styles.row_30]}>IMAGE</Text>
+            <View style={[styles.row_30]}>
+              <Text style={[styles.t_center]}>
+                Tableau de variation des capitaux propres
+              </Text>
+            </View>
+            <View style={[styles.t_center, styles.row_30]}>
+              <Text style={[styles.t_center]}>TVCP001</Text>
+            </View>
+          </View>
+          <View style={[styles.row, styles.bold, styles.p_y]}>
+            <View style={[styles.row_30]}>
+              <Text style={styles.t_center}>Période du : 1/1/2022</Text>
+              <Text style={styles.t_center}> au : 31/12/2022</Text>
+            </View>
+            <View style={[styles.row_30]}>
+              <Text style={[styles.t_center]}>Unité monétaire : Ariary</Text>
+            </View>
+            <View style={[styles.row_30]}>
+              <Text style={[styles.t_center]}>GRANT</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.table}>
+          <View style={[styles.row, styles.bold, styles.header, styles.p_5]}>
+            <View style={styles.row}>
+              <View style={[styles.row_40]}>
+                <Text style={styles.t_center}>TITRE</Text>
+              </View>
+              <View style={[styles.row_60]}>
+                <View style={[styles.row, styles.b_left]}>
+                  <Text style={[styles.row_25, styles.t_center]}>
+                    Capital social
+                  </Text>
+                  <Text style={[styles.row_25, styles.b_left, styles.t_center]}>
+                    Primes & réserves
+                  </Text>
+                  <Text style={[styles.row_25, styles.b_left, styles.t_center]}>
+                    Ecart d’évaluation
+                  </Text>
+                  <Text style={[styles.row_25, styles.b_left, styles.t_center]}>
+                    Résultat & R N
+                  </Text>
+                  <Text style={[styles.row_25, styles.b_left, styles.t_center]}>
+                    Total
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <View style={[styles.b]}>
+          {dataTFT.map(({ col1, col2, col3, col4, col5, col6 }, index: any) => {
+            return (
+              <Fragment key={index}>
+                <OneRowDetailTVCP
+                  col1={col1}
+                  col2={col2}
+                  col3={col3}
+                  col4={col4}
+                  col5={col5}
+                  col6={col6}
+                />
+              </Fragment>
+            );
+          })}
+        </View>
+
+        <Text
+          style={styles.pageNumber}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+          fixed
+        />
+      </Page>
+    </Document>
+  );
   const router = useRouter();
   const { idfile }: any = router.query;
+<<<<<<< HEAD
+  const rows = [
+    createData("Solde au 31 décembre N-2", "-", "-", "-", "-", "-"),
+  ];
+=======
   const rows = [createData('Solde au 31 décembre N-2', '-', '-', '-', '-', '-')];
+>>>>>>> develop
   const { grantList } = useAppSelector((state) => state.grant);
   const fetchGrants = useFetchGrants();
   React.useEffect(() => {
     fetchGrants();
   }, []);
+<<<<<<< HEAD
+  const top100Films = [
+    { title: "The Shawshank Redemption", year: 1994 },
+    { title: "The Godfather", year: 1972 },
+    { title: "The Godfather: Part II", year: 1974 },
+    { title: "The Dark Knight", year: 2008 },
+    { title: "12 Angry Men", year: 1957 },
+    { title: "Schindler's List", year: 1993 },
+    { title: "Pulp Fiction", year: 1994 },
+  ];
+=======
+>>>>>>> develop
   const rowsTwo = [
     createData('Changement de méthode comptable', '-', '-', '-', '-', '-'),
     createData("Correction d'erreurs", '-', '-', '-', '-', '-'),
@@ -70,9 +372,24 @@ const TableauVariationCapitauxPropres = () => {
             <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
               Excel
             </Button>
+<<<<<<< HEAD
+            <PDFDownloadLink
+              document={FicheTVCPPrint}
+              fileName={"TVCP" + new Date().toLocaleString() + ".pdf"}
+            >
+              <Button
+                color="info"
+                variant="text"
+                startIcon={<FileDownloadIcon />}
+              >
+                Pdf
+              </Button>
+            </PDFDownloadLink>
+=======
             <Button color="info" variant="text" startIcon={<FileDownloadIcon />}>
               Pdf
             </Button>
+>>>>>>> develop
           </Stack>
           <Typography variant="h4">Tableau de flux de trésorerie</Typography>
         </SectionNavigation>
@@ -97,7 +414,16 @@ const TableauVariationCapitauxPropres = () => {
                   freeSolo
                   renderTags={(value: readonly string[], getTagProps) =>
                     value.map((option: string, index: number) => (
+<<<<<<< HEAD
+                      <Chip
+                        key={index}
+                        variant="outlined"
+                        label={option}
+                        {...getTagProps({ index })}
+                      />
+=======
                       <Chip key={index} variant="outlined" label={option} {...getTagProps({ index })} />
+>>>>>>> develop
                     ))
                   }
                   renderInput={(params) => <TextField {...params} variant="filled" label="GRANT" placeholder="GRANT" />}
@@ -178,7 +504,6 @@ const TableauVariationCapitauxPropres = () => {
     </Container>
   );
 };
-
 export default TableauVariationCapitauxPropres;
 
 export const SectionNavigation = styled(Stack)(({}) => ({}));
