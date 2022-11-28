@@ -1,6 +1,6 @@
 import React from "react";
 import OneData, { Order } from "./one-type-variable";
-import { Box, Paper, Stack, styled } from "@mui/material";
+import { Box, Card, Paper, Stack, styled } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,6 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import { getComparator, stableSort } from "./one-function";
 import { onerows } from "./one-constant";
 import OneTableHeader from "./OneTableHeader";
+import SectionFormOne from "../../SectionFormOne";
+import SectionFormTwo from "../../SectionFormTwo";
 
 const OneList = () => {
   const [order, setOrder] = React.useState<Order>("asc");
@@ -81,6 +83,8 @@ const OneList = () => {
     <TableSection>
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
+          {/* <SectionFormOne /> */}
+          <SectionFormTwo />
           <TableContainer>
             <Table
               // sx={{ minWidth: 750 }}

@@ -67,12 +67,12 @@ const menu = [
         link: "/[idfile]/open-file/grand-livre/toutes-les-operations",
         icon: "",
       },
-      {
-        id: 22,
-        name: "Auxiliaire",
-        link: "/[idfile]/open-file/grand-livre/auxiliaire",
-        icon: "",
-      },
+      // {
+      //   id: 22,
+      //   name: "Auxiliaire",
+      //   link: "/[idfile]/open-file/grand-livre/auxiliaire",
+      //   icon: "",
+      // },
       {
         id: 23,
         name: "Balance générale",

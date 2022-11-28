@@ -16,8 +16,9 @@ const SectionForm = () => {
   return (
     <FormContainer spacing={2}>
       <CustomStack
-      direction={{ xs:"column", sm:"column", md:"row"}}
-      spacing={{xs: 2, sm:2, md:1}}>
+        direction={{ xs: "column", sm: "column", md: "row" }}
+        spacing={{ xs: 2, sm: 2, md: 1 }}
+      >
         <TextField
           id="outlined-basic"
           fullWidth
@@ -58,9 +59,9 @@ const FormContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export const CustomStack = styled(Stack)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]:{
-    flexwrap:"wrap"
-  }
+  [theme.breakpoints.down("sm")]: {
+    flexwrap: "wrap",
+  },
 }));
 
 export default SectionForm;
