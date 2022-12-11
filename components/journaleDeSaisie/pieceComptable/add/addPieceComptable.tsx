@@ -7,9 +7,37 @@ import * as Yup from "yup";
 import { JournalItemItem } from "../../../../redux/features/journalItem/journalItem.interface";
 import { useRouter } from "next/router";
 import useFetchPlanComptable from "../../../compte/planComptable/hooks/useFetchPlanComptable";
+import { createJournalEntry } from "../../../../redux/features/journal-entry";
+import { createJournalItem } from "../../../../redux/features/journalItem";
 import useFetchCurrencyListe from "../../../configurations/currency/hooks/useFetchCurrency";
 import useFetchJournalListe from "../../../journal/hooks/useFetchJournalListe";
 import useFetchAuxiliaire from "../../../compte/auxiliaire/hooks/useFetchAuxiliaire";
+import { useAppDispatch } from "../../../../hooks/reduxHooks";
+
+interface FromValue {
+  journalEntry: {
+    number: number;
+    date: string;
+    reference: string;
+    journalId: number;
+    fiscalYearId: number;
+  };
+  journalItem: [
+    {
+      chartOfAccountId: number;
+      auxiliaryAccountId: number;
+      label: string;
+      debit: number;
+      credit: number;
+      currencyId: number;
+      checkNumber: string;
+      refBU: string;
+      refMV: string;
+      refAR: string;
+      journalEntryId: number;
+    }
+  ];
+}
 
 const AddPieceComptable = () => {
   const router = useRouter();
@@ -19,6 +47,7 @@ const AddPieceComptable = () => {
   const fetchAllCompteAuxiliairy = useFetchAuxiliaire();
   const fetchAllCurrency = useFetchCurrencyListe();
   const fetchAllJournal = useFetchJournalListe();
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     fetchAllPCG();
@@ -27,12 +56,42 @@ const AddPieceComptable = () => {
     fetchAllJournal();
   }, []);
 
+  const handleSubmint = async (value: FromValue) => {
+    try {
+      const journalEntry = await dispatch(
+        createJournalEntry(value.journalEntry)
+      ).unwrap();
+      await Promise.all(
+        value.journalItem.map(async (journal) => {
+          const journalTmp: JournalItemItem = {
+            chartOfAccountId: journal.chartOfAccountId,
+            auxiliaryAccountId: journal.auxiliaryAccountId,
+            label: journal.label,
+            debit: journal.debit,
+            credit: journal.credit,
+            currencyId: journal.currencyId,
+            checkNumber: journal.checkNumber,
+            refBU: journal.refBU,
+            refMV: journal.refMV,
+            refAR: journal.refAR,
+            journalEntryId: journalEntry.id,
+          };
+          await dispatch(createJournalItem(journalTmp));
+        })
+      );
+
+      router.push(`/${idfile}/open-file/annee-exercice/${idae}/journal`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Formik
       enableReinitialize
       initialValues={{
         journalEntry: {
-          number: null,
+          number: 0,
           date: "",
           reference: "",
           journalId: +idj,
@@ -61,15 +120,16 @@ const AddPieceComptable = () => {
           journalId: Yup.number().required("Champs obligatoire"),
           fiscalYearId: Yup.number().required("Champs obligatoire"),
         }),
-        journalItem: Yup.object().shape({
-          chartOfAccountId: Yup.number().required("Champs obligatoire"),
-          currencyId: Yup.number().required("Champs obligatoire"),
-        }),
+        journalItem: Yup.array().of(
+          Yup.object().shape({
+            chartOfAccountId: Yup.number().required("Champs obligatoire"),
+            currencyId: Yup.number().required("Champs obligatoire"),
+          })
+        ),
       })}
       onSubmit={(value: any, action) => {
-        console.log(value);
-        // await handleSubmint(value);
-        // action.resetForm();
+        handleSubmint(value);
+        action.resetForm();
       }}
     >
       {(formikProps) => (
