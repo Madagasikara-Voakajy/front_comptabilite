@@ -68,7 +68,11 @@ const ListeEcriture = ({ formikProps }: any) => {
   }, [formikProps.values.journalItem]);
 
   const handleDeleteTable = (index: number) => {
-    console.log("delete table", index);
+    const tmpJournalItem = formikProps.values.journalItem;
+    if (index > -1) {
+      tmpJournalItem.splice(index, 1);
+      formikProps.setFieldValue("journalItem", tmpJournalItem);
+    }
   };
 
   const handleDeleteDB = (id: number) => {
@@ -289,14 +293,10 @@ const ListeEcriture = ({ formikProps }: any) => {
                 <TableCell align="left"></TableCell>
                 <TableCell align="left"></TableCell>
                 <TableCell align="left">
-                  <Typography variant="body2">
-                    {/* {totalDebit} */}
-                    </Typography>
+                  <Typography variant="body2">{/* {totalDebit} */}</Typography>
                 </TableCell>
                 <TableCell align="left">
-                  <Typography variant="body2">
-                    {/* {totalCredit} */}
-                    </Typography>
+                  <Typography variant="body2">{/* {totalCredit} */}</Typography>
                 </TableCell>
                 <TableCell align="left"></TableCell>
                 <TableCell align="left"></TableCell>
