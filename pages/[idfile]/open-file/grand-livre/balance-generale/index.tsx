@@ -1,14 +1,13 @@
 import React from "react";
+import Balance from "../../../../../components/grand-livre/balanceGenerale/balance";
 import BackOfficeLayout from "../../../../../layouts/backOffice";
-import { Container } from "@mui/material";
-import ListBalance from "../../../../../components/grand-livre/balance/tables/ListBalance";
-// import Balance from '../../../components/grand-livre/balance';
+// import ListBalance from "../../../../../components/grand-livre/balance/tables/ListBalance";
 
 const Index = () => {
   return (
     <BackOfficeLayout>
-      {/* <Balance /> */}
-      <ListBalance />
+      {/* <ListBalance /> */}
+      <Balance />
     </BackOfficeLayout>
   );
 };

@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axios } from "../../../../axios";
 import { enqueueSnackbar } from "../../notification/notificationSlice";
-import { JournalItemItem } from "../journalItem.interface";
+import { ComptaJournalItem } from "../journalItem.interface";
 
 export const updateJournalItem = createAsyncThunk(
   "journalItem/updateJournalItem",
-  async (data: { id: string; journalItem: JournalItemItem }, thunkAPI) => {
+  async (data: { id: string; journalItem: ComptaJournalItem }, thunkAPI) => {
     try {
       const response = await axios.patch(
         `/compta/journal-item/${data.id}`,

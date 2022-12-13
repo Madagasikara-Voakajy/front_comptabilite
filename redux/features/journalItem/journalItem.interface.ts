@@ -1,4 +1,4 @@
-export interface JournalItemItem {
+export interface ComptaJournalItem {
   chartOfAccountId?: number;
   auxiliaryAccountId?: number;
   label?: string;
@@ -10,12 +10,15 @@ export interface JournalItemItem {
   refMV?: string;
   refAR?: string;
   journalEntryId?: number;
+  journalEntry?: any;
+  auxiliaryAccount?: any;
+  chartOfAccount?: any;
   [x: string]: any;
 }
 
-export interface JournalItemInitialState {
-  journalItemList: JournalItemItem[];
-  journalItem: JournalItemItem;
+export interface ComptaJournalItemInitialState {
+  journalItemList: ComptaJournalItem[];
+  journalItem: ComptaJournalItem;
   isEditing: boolean;
   loading: boolean;
   [key: string]: any;
