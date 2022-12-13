@@ -1,14 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axios } from "../../../../axios";
 
-export const getJournalItemList = createAsyncThunk(
-  "journalItem/getJournalItemList",
-  async (data: { args?: any }, thunkAPI) => {
+export const getComptaJournalItem = createAsyncThunk(
+  "comptaJournalItem/getComptaJournalItem",
+  async (data: { id: string; args?: any }, thunkAPI) => {
     try {
       const params = {
         args: JSON.stringify(data.args),
       };
-      const response = await axios.get("/compta/journal-item", { params });
+      const response = await axios.get(`/compta/journal-item/${data.id}`, {
+        params,
+      });
       return response.data;
     } catch (error: any) {
       if (error.response) {

@@ -12,7 +12,7 @@ import { grantSlice } from "./features/grant/grantSlice";
 import { budgetLineSlice } from "./features/budgetLine/budgetLineSlice";
 import { comptaFileSlice } from "./features/comptaFile/comptaFileSlice";
 import { journalTypeSlice } from "./features/journalType/journalTypeSlice";
-import { journalItemSlice } from "./features/journalItem/journalItemSlice";
+import { comptaJournalItemSlice } from "./features/journalItem/journalItemSlice";
 import { fiscalSlice } from "./features/fiscal-year/fiscalSlice";
 import { journalSlice } from "./features/journal/journalSlice";
 import { journalEntrySlice } from "./features/journal-entry/JournalEntrySlice";
@@ -32,10 +32,11 @@ export const store = configureStore({
     budgetLine: budgetLineSlice.reducer,
     comptaFile: comptaFileSlice.reducer,
     journalType: journalTypeSlice.reducer,
-    journalItem: journalItemSlice.reducer,
+    // journalItem: journalItemSlice.reducer,
     fiscal: fiscalSlice.reducer,
     journal: journalSlice.reducer,
     journalEntry: journalEntrySlice.reducer,
+    journalItem: comptaJournalItemSlice.reducer,
   },
 });
 

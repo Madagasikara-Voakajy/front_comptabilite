@@ -3,7 +3,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import TwoList from "./tables/tableTwo/TwoList";
 import OneListTest from "../Livre/organism/tableEine/organism/table";
 import TwoListTest from "../Livre/organism/tableZwei/organism/table";
 
@@ -62,7 +61,6 @@ const TabsForm = () => {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {/* <TwoList /> */}
         <TwoListTest />
       </TabPanel>
       <TabPanel value={value} index={1}>

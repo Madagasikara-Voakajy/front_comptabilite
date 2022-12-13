@@ -9,7 +9,6 @@ import TableRow from "@mui/material/TableRow";
 import { getComparator, stableSort } from "./one-function";
 import { onerows } from "./one-constant";
 import OneTableHeader from "./OneTableHeader";
-import SectionFormOne from "../../SectionFormOne";
 import SectionFormTwo from "../../SectionFormTwo";
 
 const OneList = () => {
@@ -83,7 +82,6 @@ const OneList = () => {
     <TableSection>
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
-          {/* <SectionFormOne /> */}
           <SectionFormTwo />
           <TableContainer>
             <Table

@@ -5,9 +5,9 @@ import { JournalItemItem } from "../journalItem.interface";
 
 export const createJournalItem = createAsyncThunk(
   "journalItem/createJournalItem",
-  async (data: JournalItemItem, thunkAPI) => {
+  async (journalItem: JournalItemItem, thunkAPI) => {
     try {
-      const response = await axios.post("/compta/journal-item", data);
+      const response = await axios.post("/compta/journal-item", journalItem);
       thunkAPI.dispatch(
         enqueueSnackbar({
           message: "Journal Item créé avec succès",
@@ -22,7 +22,7 @@ export const createJournalItem = createAsyncThunk(
         if (error.response.data.statusCode == 409) {
           thunkAPI.dispatch(
             enqueueSnackbar({
-              message: "Cet code exite déjà:" + data.code,
+              message: "Cet code exite déjà:" + journalItem.code,
               options: { variant: "error" },
             })
           );

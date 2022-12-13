@@ -83,7 +83,6 @@ const OneList = () => {
     <TableSection>
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
-          {/* <OneTableToolbar numSelected={selected.length} /> */}
           <SectionFormOne />
           <TableContainer>
             <Table
