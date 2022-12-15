@@ -17,6 +17,7 @@ import { createData } from "./table/actif.function";
 import { columns } from "./table/actif.constant";
 import Button from "@mui/material/Button";
 import TableModal from "../../modal/modal";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Actif = () => {
   const rows = [
@@ -131,9 +132,6 @@ const Actif = () => {
                       </TableCell>
                     );
                   })}
-                  <Button variant="text" color="info" onClick={handleClickOpen}>
-                    PCG
-                  </Button>
                 </TableRow>
               );
             })}
@@ -142,8 +140,8 @@ const Actif = () => {
               <TableCell align="left">15,000,000.00</TableCell>
               <TableCell align="center">5,000,000.00 </TableCell>
               <TableCell align="center">10,000,000.00 </TableCell>
-              <TableCell align="right">
-                -
+              <TableCell align="center">
+                {/* - */}
                 <Button variant="text" color="info" onClick={handleClickOpen}>
                   PCG
                 </Button>
@@ -157,6 +155,9 @@ const Actif = () => {
                     </Button>
                     <Button variant="text" onClick={handleClose}>
                       Enregistrer
+                    </Button>
+                    <Button color="info" onClick={handleClose}>
+                      <CloseIcon />
                     </Button>
                   </DialogActions>
                   <DialogContent>
@@ -190,7 +191,11 @@ const Actif = () => {
             <TableRow hover tabIndex={-1}>
               <TableCell>TOTAL ACTIFS COURANTS</TableCell>
               <TableCell align="left">64,000,000.00 </TableCell>
-              <TableCell align="center">-</TableCell>
+              <TableCell align="center">
+                <Button variant="text" color="info" onClick={handleClickOpen}>
+                  PCG
+                </Button>
+              </TableCell>
               <TableCell align="center">64,000,000.00</TableCell>
               <TableCell align="center">61,000,000.00 </TableCell>
             </TableRow>
