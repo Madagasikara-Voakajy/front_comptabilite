@@ -16,6 +16,10 @@ import {
 import * as React from "react";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import {
+  KeyboardArrowLeft,
+  KeyboardDoubleArrowRight,
+} from "@mui/icons-material";
 
 const TableModal = () => {
   return (
@@ -77,13 +81,15 @@ const TableModal = () => {
         </PermissionList>
         <PermissionAction spacing={2} justifyContent="center">
           <IconButton color="accent" aria-label="move" component="span">
-            <KeyboardDoubleArrowLeftIcon />
+            {/* <KeyboardDoubleArrowLeftIcon /> */}
+            <KeyboardDoubleArrowRight />
           </IconButton>
           <IconButton color="secondary" aria-label="move" component="span">
             <KeyboardArrowRightIcon />
           </IconButton>
           <IconButton color="secondary" aria-label="move" component="span">
-            <KeyboardDoubleArrowLeftIcon />
+            {/* <KeyboardDoubleArrowLeftIcon /> */}
+            <KeyboardArrowLeft />
           </IconButton>
           <IconButton color="accent" aria-label="move" component="span">
             <KeyboardDoubleArrowLeftIcon />

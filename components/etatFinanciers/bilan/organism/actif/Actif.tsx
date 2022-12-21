@@ -11,6 +11,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
   TextField,
 } from "@mui/material";
 import { createData } from "./table/actif.function";
@@ -129,6 +130,15 @@ const Actif = () => {
                         {column.format && typeof value === "number"
                           ? column.format(value)
                           : value}
+                        {
+                          // <Button
+                          //   variant="text"
+                          //   color="info"
+                          //   onClick={handleClickOpen}
+                          // >
+                          //   PCG
+                          // </Button>
+                        }
                       </TableCell>
                     );
                   })}
@@ -141,7 +151,6 @@ const Actif = () => {
               <TableCell align="center">5,000,000.00 </TableCell>
               <TableCell align="center">10,000,000.00 </TableCell>
               <TableCell align="center">
-                {/* - */}
                 <Button variant="text" color="info" onClick={handleClickOpen}>
                   PCG
                 </Button>
@@ -156,9 +165,9 @@ const Actif = () => {
                     <Button variant="text" onClick={handleClose}>
                       Enregistrer
                     </Button>
-                    <Button color="info" onClick={handleClose}>
+                    <IconButton color="default" onClick={handleClose}>
                       <CloseIcon />
-                    </Button>
+                    </IconButton>
                   </DialogActions>
                   <DialogContent>
                     <TableModal />
