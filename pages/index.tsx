@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import BackOfficeLayout from "../layouts/backOffice";
 import useBasePath from "../hooks/useBasePath";
-import HomeComptabilite from "../components/home";
 import FichierComptable from "../components/fichier/FichierComptable";
 
 const Home: NextPage = () => {

@@ -16,34 +16,36 @@ import { journalItemSlice } from "./features/journalItem/journalItemSlice";
 import { fiscalSlice } from "./features/fiscal-year/fiscalSlice";
 import { journalSlice } from "./features/journal/journalSlice";
 import { journalEntrySlice } from "./features/journal-entry/JournalEntrySlice";
+import { pcgGlobalSlice } from "./features/pcgGlobal/pcgSlice";
 
 export const store = configureStore({
-  reducer: {
-    auth: authSlice.reducer,
-    customization: customizationSlice.reducer,
-    menu: menuSlice.reducer,
-    menuprofile: menuProfileSlice.reducer,
-    notification: notificationSlice.reducer,
-    currency: currencySlice.reducer,
-    auxiliaryAccount: auxiliaryAccountSlice.reducer,
-    pcg: pcgSlice.reducer,
-    postAnalytic: postAnalyticSlice.reducer,
-    grant: grantSlice.reducer,
-    budgetLine: budgetLineSlice.reducer,
-    comptaFile: comptaFileSlice.reducer,
-    journalType: journalTypeSlice.reducer,
-    journalItem: journalItemSlice.reducer,
-    fiscal: fiscalSlice.reducer,
-    journal: journalSlice.reducer,
-    journalEntry: journalEntrySlice.reducer,
-  },
+	reducer: {
+		auth: authSlice.reducer,
+		customization: customizationSlice.reducer,
+		menu: menuSlice.reducer,
+		menuprofile: menuProfileSlice.reducer,
+		notification: notificationSlice.reducer,
+		currency: currencySlice.reducer,
+		auxiliaryAccount: auxiliaryAccountSlice.reducer,
+		pcg: pcgSlice.reducer,
+		postAnalytic: postAnalyticSlice.reducer,
+		grant: grantSlice.reducer,
+		budgetLine: budgetLineSlice.reducer,
+		comptaFile: comptaFileSlice.reducer,
+		journalType: journalTypeSlice.reducer,
+		journalItem: journalItemSlice.reducer,
+		fiscal: fiscalSlice.reducer,
+		journal: journalSlice.reducer,
+		journalEntry: journalEntrySlice.reducer,
+		pcgGlobal: pcgGlobalSlice.reducer,
+	},
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
+	ReturnType,
+	RootState,
+	unknown,
+	Action<string>
 >;
