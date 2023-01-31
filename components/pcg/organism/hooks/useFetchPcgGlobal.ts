@@ -12,7 +12,22 @@ const useFetchPcgGlobal = () => {
 	return async () => {
 		let args: any = {};
 		if (router.query.search) {
-			args.where = {};
+			args.where = {
+				OR: [
+					{
+						name: {
+							contains: router.query.search,
+							mode: "insensitive",
+						},
+					},
+					{
+						description: {
+							contains: router.query.search,
+							mode: "insensitive",
+						},
+					},
+				],
+			};
 		}
 		if (router.query.orderBy && router.query.order) {
 			args.orderBy = {

@@ -9,20 +9,20 @@ const useFetchPlanComptable = () => {
 		let args: any = {};
 		if (router.query.search) {
 			args.where = {
-				// OR: [
-				//   {
-				//     reference: {
-				//       contains: router.query.search,
-				//       mode: "insensitive",
-				//     },
-				//   },
-				//   {
-				//     name: {
-				//       contains: router.query.search,
-				//       mode: "insensitive",
-				//     },
-				//   },
-				// ],
+				OR: [
+					{
+						code: {
+							contains: router.query.search,
+							mode: "insensitive",
+						},
+					},
+					{
+						name: {
+							contains: router.query.search,
+							mode: "insensitive",
+						},
+					},
+				],
 			};
 		}
 		if (router.query.orderBy && router.query.order) {
