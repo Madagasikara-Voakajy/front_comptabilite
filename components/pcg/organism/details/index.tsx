@@ -7,10 +7,11 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Link from "next/link";
-import PcgForm from "./organism/PcgForm";
-import PcgList from "./organism/PcgList";
+import { useRouter } from "next/router";
+import PlanComptableForm from "./planComptable/organism/PlanComptableForm";
+import PlanComptableList from "./planComptable/organism/table/PlanComptableList";
 
-const PcgGlobalComponent = () => {
+const PcgGlobalDetailsComponent = () => {
 	return (
 		<Container maxWidth="xl">
 			<Stack>
@@ -21,26 +22,26 @@ const PcgGlobalComponent = () => {
 						alignItems="flex-start"
 						spacing={2}
 					>
-						<Link href={`/`}>
+						<Link href={`/pcg`}>
 							<Button color="info" variant="text" startIcon={<ArrowBackIcon />}>
 								Retour
 							</Button>
 						</Link>
 					</Stack>
-					<Typography variant="h4">Compte</Typography>
+					<Typography variant="h4">Details PCG (pcg name)</Typography>
 				</Stack>
 				<Divider />
 			</Stack>
 			<Grid container spacing={2} py={2}>
 				<Grid item xs={12} md={4}>
-					<PcgForm />
+					<PlanComptableForm />
 				</Grid>
 				<Grid item xs={12} md={8} mb={3}>
-					<PcgList />
+					<PlanComptableList />
 				</Grid>
 			</Grid>
 		</Container>
 	);
 };
 
-export default PcgGlobalComponent;
+export default PcgGlobalDetailsComponent;
