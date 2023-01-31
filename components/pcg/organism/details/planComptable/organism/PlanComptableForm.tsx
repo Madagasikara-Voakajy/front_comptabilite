@@ -1,3 +1,5 @@
+import { InfoSharp } from "@mui/icons-material";
+import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import { Stack, styled, Typography, Button } from "@mui/material";
 import { Form, Formik } from "formik";
 import React from "react";
@@ -9,9 +11,12 @@ import {
 import { createPcg, updatePcg } from "../../../../../../redux/features/pcg";
 import { cancelEdit } from "../../../../../../redux/features/pcg/pcgSlice";
 import OSTextField from "../../../../../shared/input/OSTextField";
+import { PcgGlobalItem } from "../../../table/pcg.interface";
 import useFetchPlanComptable from "../hooks/useFetchPlanComptable";
 
-const PlanComptableForm = () => {
+type PcgGlobalProps = { pcgGlob: PcgGlobalItem };
+
+const PlanComptableForm = ({ pcgGlob }: any) => {
 	const { isEditing, pcg } = useAppSelector((state) => state.pcg);
 	const dispatch = useAppDispatch();
 	const fetchListPcg = useFetchPlanComptable();
@@ -45,6 +50,7 @@ const PlanComptableForm = () => {
 						: {
 								code: "",
 								name: "",
+								// pcgGlobalId: pcgGlob.id!
 						  }
 				}
 				validationSchema={Yup.object({
@@ -59,9 +65,15 @@ const PlanComptableForm = () => {
 				{(formikProps) => (
 					<Form>
 						<Stack spacing={4}>
-							<Typography variant="h5" color="initial">
-								Formulaire (Créer/Modifier)
-							</Typography>
+							<Stack>
+								<Typography variant="h5" color="initial">
+									Formulaire (Créer/Modifier)
+								</Typography>
+								<Stack justifyContent="left" flexDirection="row">
+									<InfoOutlined fontSize="small" />
+									Chaque compte créer ici sera liée au {pcgGlob?.name}
+								</Stack>
+							</Stack>
 							<OSTextField label="Code" name="code"></OSTextField>
 							<OSTextField label="Nom" name="name"></OSTextField>
 							<BtnContainer

@@ -7,7 +7,7 @@ export const createPcgGlobal = createAsyncThunk(
 	"pcg/createPcgGlobal",
 	async (data: PcgGlobalItem, thunkAPI) => {
 		try {
-			const response = await axios.post("/compta/pcg", data);
+			const response = await axios.post("/pcg", data);
 			thunkAPI.dispatch(
 				enqueueSnackbar({
 					message: "PCG créé avec succès",

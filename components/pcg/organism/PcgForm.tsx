@@ -1,13 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
-import ArrowBack from "@mui/icons-material/ArrowBack";
 import Check from "@mui/icons-material/Check";
-import Close from "@mui/icons-material/Close";
 import { styled } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -21,14 +16,15 @@ import {
 
 const AuxiliaireForm = () => {
 	const router = useRouter();
-	const { id }: any = router.query;
 	const dispatch = useAppDispatch();
 	const { isEditing, pcg } = useAppSelector((state) => state.pcgGlobal);
+
+	console.log("pcg", isEditing, pcg);
 
 	const handleSubmit = async (values: any) => {
 		try {
 			if (isEditing) {
-				dispatch(updatePcgGlobal({ id: id!, pcg: values }));
+				dispatch(updatePcgGlobal({ id: pcg?.id!, pcg: values }));
 			} else {
 				dispatch(createPcgGlobal(values));
 			}
@@ -69,15 +65,17 @@ const AuxiliaireForm = () => {
 								<Button
 									variant="text"
 									color="warning"
-									size="small"
-									onClick={() => {}}
+									size="medium"
+									onClick={(action: any) => {
+										action.resetForm();
+									}}
 								>
 									Annuler
 								</Button>
 								<Button
 									variant="contained"
 									color="primary"
-									size="small"
+									size="medium"
 									startIcon={<Check />}
 									sx={{ marginLeft: 3 }}
 									type="submit"

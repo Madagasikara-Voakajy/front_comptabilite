@@ -12,7 +12,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import SettingsInputComponent from "@mui/icons-material/SettingsInputComponent";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Edit from "@mui/icons-material/Edit";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
@@ -32,18 +32,6 @@ import {
 import { PcgGlobalItem } from "../../../redux/features/pcgGlobal/pcg.interface";
 
 const PcgList = () => {
-	const FAKE_DATA: PcgGlobalItem[] = [
-		{
-			id: "1",
-			name: "MV PCG",
-			description: "pcg pour le mv",
-		},
-		{
-			id: "2",
-			name: "MV NEW CG",
-			description: "pcg pour le mv 2",
-		},
-	];
 	const [page, setPage] = React.useState(0);
 	const [dense, setDense] = React.useState(false);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -110,73 +98,72 @@ const PcgList = () => {
 						>
 							<PcgTableHead />
 							<TableBody>
-								{FAKE_DATA.slice(
-									page * rowsPerPage,
-									page * rowsPerPage + rowsPerPage
-								).map((row: PcgGlobalItem, index: any) => {
-									const labelId = `enhanced-table-checkbox-${index}`;
+								{pcgList
+									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+									.map((row: PcgGlobalItem, index: any) => {
+										const labelId = `enhanced-table-checkbox-${index}`;
 
-									return (
-										<TableRow hover tabIndex={-1} key={row.id}>
-											<TableCell
-												component="th"
-												id={labelId}
-												scope="row"
-												padding="normal"
-												align="left"
-											>
-												{row.name}
-											</TableCell>
-											<TableCell
-												component="th"
-												id={labelId}
-												scope="row"
-												padding="normal"
-												align="left"
-											>
-												{row?.description}
-											</TableCell>
-
-											<TableCell align="right">
-												<BtnActionContainer
-													direction="row"
-													justifyContent="right"
+										return (
+											<TableRow hover tabIndex={-1} key={row.id}>
+												<TableCell
+													component="th"
+													id={labelId}
+													scope="row"
+													padding="normal"
+													align="left"
 												>
-													<Link href={`/pcg/${row.id}/details`}>
+													{row.name}
+												</TableCell>
+												<TableCell
+													component="th"
+													id={labelId}
+													scope="row"
+													padding="normal"
+													align="left"
+												>
+													{row?.description}
+												</TableCell>
+
+												<TableCell align="right">
+													<BtnActionContainer
+														direction="row"
+														justifyContent="right"
+													>
+														<Link href={`/pcg/${row.id}/details`}>
+															<IconButton
+																color="accent"
+																aria-label="Details"
+																component="span"
+																size="small"
+															>
+																<SettingsInputComponent />
+															</IconButton>
+														</Link>
 														<IconButton
-															color="accent"
-															aria-label="Details"
-															component="span"
+															color="primary"
+															aria-label="Modifier"
 															size="small"
+															component="span"
+															onClick={() => handleClickEdit(row.id)}
 														>
-															<VisibilityIcon />
+															<Edit />
 														</IconButton>
-													</Link>
-													<IconButton
-														color="primary"
-														aria-label="Modifier"
-														size="small"
-														component="span"
-														onClick={() => handleClickEdit(row.id)}
-													>
-														<Edit />
-													</IconButton>
-													<IconButton
-														color="warning"
-														aria-label="Supprimer"
-														size="small"
-														component="span"
-														onClick={() => {
-															handleclickDelete(row.id);
-														}}
-													>
-														<DeleteIcon />
-													</IconButton>
-												</BtnActionContainer>
-											</TableCell>
-										</TableRow>
-									);
-								})}
+														<IconButton
+															color="warning"
+															aria-label="Supprimer"
+															size="small"
+															component="span"
+															onClick={() => {
+																handleclickDelete(row.id);
+															}}
+														>
+															<DeleteIcon />
+														</IconButton>
+													</BtnActionContainer>
+												</TableCell>
+											</TableRow>
+										);
+									})}
 								{emptyRows > 0 && (
 									<TableRow
 										style={{

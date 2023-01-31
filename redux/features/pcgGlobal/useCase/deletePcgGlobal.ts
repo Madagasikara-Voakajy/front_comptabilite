@@ -6,7 +6,7 @@ export const deletePcgGlobal = createAsyncThunk(
 	"pcg/deletePcgGlobal",
 	async (data: { id: string }, thunkAPI) => {
 		try {
-			const response = await axios.delete(`/compta/pcg/${data.id}`);
+			const response = await axios.delete(`/pcg/${data.id}`);
 			thunkAPI.dispatch(
 				enqueueSnackbar({
 					message: "Pcg supprimé avec succès",

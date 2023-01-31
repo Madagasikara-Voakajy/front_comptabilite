@@ -7,7 +7,7 @@ export const updatePcgGlobal = createAsyncThunk(
 	"pcg/updatePcgGlobal",
 	async (data: { id: string; pcg: PcgGlobalItem }, thunkAPI) => {
 		try {
-			const response = await axios.patch(`/compta/pcg/${data.id}`, data.pcg);
+			const response = await axios.patch(`/pcg/${data.id}`, data.pcg);
 			thunkAPI.dispatch(
 				enqueueSnackbar({
 					message: "Pcg mis à jour avec succès",

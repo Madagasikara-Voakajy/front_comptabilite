@@ -8,7 +8,7 @@ export const getPcgGlobalList = createAsyncThunk(
 			const params = {
 				args: JSON.stringify(data.args),
 			};
-			const response = await axios.get("/compta/pcg/", { params });
+			const response = await axios.get("/pcg/", { params });
 			return response.data;
 		} catch (error: any) {
 			if (error.response) {

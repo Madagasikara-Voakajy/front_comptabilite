@@ -8,7 +8,7 @@ export const editPcgGlobal = createAsyncThunk(
 			const params = {
 				args: JSON.stringify(data.args),
 			};
-			const response = await axios.get(`/compta/pcg/${data.id}`, {
+			const response = await axios.get(`/pcg/${data.id}`, {
 				params,
 			});
 			return response.data;
