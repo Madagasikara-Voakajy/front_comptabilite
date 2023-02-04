@@ -2,7 +2,7 @@ export interface PcgItem {
 	id?: string;
 	code?: string;
 	name?: string;
-	pcgId?: string;
+	PCGId?: string;
 }
 
 export interface PcgInitialState {

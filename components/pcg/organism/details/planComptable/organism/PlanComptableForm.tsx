@@ -2,33 +2,38 @@ import { InfoSharp } from "@mui/icons-material";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import { Stack, styled, Typography, Button } from "@mui/material";
 import { Form, Formik } from "formik";
-import React from "react";
+import React, { ReactNode } from "react";
 import * as Yup from "yup";
 import {
 	useAppDispatch,
 	useAppSelector,
 } from "../../../../../../hooks/reduxHooks";
 import { createPcg, updatePcg } from "../../../../../../redux/features/pcg";
+import { PcgItem } from "../../../../../../redux/features/pcg/pcg.interface";
 import { cancelEdit } from "../../../../../../redux/features/pcg/pcgSlice";
 import OSTextField from "../../../../../shared/input/OSTextField";
 import { PcgGlobalItem } from "../../../table/pcg.interface";
 import useFetchPlanComptable from "../hooks/useFetchPlanComptable";
 
-type PcgGlobalProps = { pcgGlob: PcgGlobalItem };
+// type PcgGlobalProps = { pcgGlob: PcgGlobalItem };
 
 const PlanComptableForm = ({ pcgGlob }: any) => {
 	const { isEditing, pcg } = useAppSelector((state) => state.pcg);
 	const dispatch = useAppDispatch();
 	const fetchListPcg = useFetchPlanComptable();
 
-	const handleSubmint = async (values: any) => {
+	const handleSubmint = async (values: PcgItem) => {
 		try {
 			if (isEditing) {
-				delete values.id;
 				await dispatch(
 					updatePcg({
 						id: pcg.id!,
-						pcg: values,
+						pcg: {
+							id: values?.id,
+							code: values?.code,
+							name: values?.name,
+							PCGId: pcgGlob?.id,
+						},
 					})
 				);
 			} else {
@@ -50,11 +55,11 @@ const PlanComptableForm = ({ pcgGlob }: any) => {
 						: {
 								code: "",
 								name: "",
-								// pcgGlobalId: pcgGlob.id!
+								PCGId: pcgGlob?.id!,
 						  }
 				}
 				validationSchema={Yup.object({
-					code: Yup.string().min(6).required("Champ obligatoire"),
+					code: Yup.string().min(3).required("Champ obligatoire"),
 					name: Yup.string().required("Champ obligatoire"),
 				})}
 				onSubmit={async (value: any, action) => {

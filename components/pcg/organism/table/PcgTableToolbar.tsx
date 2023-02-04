@@ -51,7 +51,7 @@ const PcgTableToolbar = () => {
 					}}
 				>
 					<Typography variant="h6" id="tableTitle" component="div">
-						PCG Global
+						PCG 
 					</Typography>
 					<TextField
 						variant="outlined"
