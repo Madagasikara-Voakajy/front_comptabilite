@@ -116,6 +116,14 @@ const FichierComptable = () => {
 									value={comptaFile.fiscalYearType}
 								/>
 								<KeyValue keyName="Devise" value={comptaFile?.currency?.name} />
+								<KeyValue
+									keyName="PCG utilisé"
+									value={
+										comptaFile?.PCG
+											? comptaFile?.PCG?.name
+											: "Aucun pcg séléctionné pour ce fichier"
+									}
+								/>
 							</SectionDetailsContent>
 							<SectionDetailsFooter spacing={2} direction="row">
 								<Link href={`/${comptaFile.id}/details`}>

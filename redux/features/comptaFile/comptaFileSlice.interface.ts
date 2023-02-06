@@ -1,24 +1,25 @@
 export interface ComptaFileItem {
-  id?: string;
-  companyName?: string;
-  activity?: string;
-  NIF?: string;
-  STAT?: string;
-  RCS?: string;
-  country?: string;
-  phone?: string;
-  address?: string;
-  email?: string;
-  postalCode?: string;
-  fiscalYearType?: string;
-  currencyId?: string;
-  [x: string]: any;
+	id?: string;
+	companyName?: string;
+	activity?: string;
+	NIF?: string;
+	STAT?: string;
+	RCS?: string;
+	country?: string;
+	phone?: string;
+	address?: string;
+	email?: string;
+	postalCode?: string;
+	fiscalYearType?: string;
+	currencyId?: string;
+	PCGId?: string;
+	[x: string]: any;
 }
 
 export interface ComptaFileInitialState {
-  comptaFileListe: ComptaFileItem[];
-  comptaFile: ComptaFileItem;
-  isEditing: boolean;
-  loading: boolean;
-  [key: string]: any;
+	comptaFileListe: ComptaFileItem[];
+	comptaFile: ComptaFileItem;
+	isEditing: boolean;
+	loading: boolean;
+	[key: string]: any;
 }

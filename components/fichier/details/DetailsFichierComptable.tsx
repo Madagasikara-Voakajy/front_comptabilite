@@ -49,6 +49,7 @@ const DetailsFichierComptable = () => {
 		const args: any = {
 			include: {
 				currency: true,
+				PCG: true,
 			},
 		};
 		dispatch(getComptaFile({ id: idfile, args }));
@@ -140,7 +141,7 @@ const DetailsFichierComptable = () => {
 						/>
 					</Grid>
 					<Grid item xs={12} md={6}>
-						<KeyValue keyName="activité" value={comptaFile.activity} />
+						<KeyValue keyName="Activité" value={comptaFile.activity} />
 					</Grid>
 					<Grid item xs={12} md={6}>
 						<KeyValue
@@ -183,6 +184,16 @@ const DetailsFichierComptable = () => {
 					</Grid>
 					<Grid item xs={12} md={6}>
 						<KeyValue keyName="Devise" value={comptaFile.currency?.iso} />
+					</Grid>
+					<Grid item xs={12} md={6}>
+						<KeyValue
+							keyName="PCG utilisé"
+							value={
+								comptaFile?.PCG
+									? comptaFile?.PCG?.name
+									: "Aucun pcg séléctionné pour ce fichier"
+							}
+						/>
 					</Grid>
 				</Grid>
 			</SectionDetails>
