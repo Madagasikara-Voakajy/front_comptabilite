@@ -119,47 +119,47 @@ const HomeComptabilite = () => {
 							</LinkContainer>
 						</Grid>
 
-            <Grid item xs={12} md={6}>
-              <LinkContainer>
-                <Typography sx={{ mb: 2 }} variant="h5" color="initial">
-                  Configuration états financières
-                </Typography>
-                <Box>
-                  <Link href={`/${idfile}/open-file/etat-financieres/bilan`}>
-                    <Button variant="text" color="info">
-                      Bilan passif/actif
-                    </Button>
-                  </Link>
-                </Box>
-                <Box>
-                  <Link
-                    href={`/${idfile}/open-file/etat-financieres/compte-resultat`}
-                  >
-                    <Button variant="text" color="info">
-                      Compte de résultat par nature / par fonction
-                    </Button>
-                  </Link>
-                </Box>
-                <Box>
-                  <Link
-                    href={`/${idfile}/open-file/etat-financieres/tableau-flux-tresorerie`}
-                  >
-                    <Button variant="text" color="info">
-                      Tableau de flux de trésorerie
-                    </Button>
-                  </Link>
-                </Box>
-                <Box>
-                  <Link
-                    href={`/${idfile}/open-file/etat-financieres/tableau-variation-capitaux-propres`}
-                  >
-                    <Button variant="text" color="info">
-                      Variation des capitaux propres
-                    </Button>
-                  </Link>
-                </Box>
-              </LinkContainer>
-            </Grid>
+						<Grid item xs={12} md={6}>
+							<LinkContainer>
+								<Typography sx={{ mb: 2 }} variant="h5" color="initial">
+									Configuration états financières
+								</Typography>
+								<Box>
+									<Link href={`/${idfile}/open-file/etat-financieres/bilan`}>
+										<Button variant="text" color="info">
+											Bilan passif/actif
+										</Button>
+									</Link>
+								</Box>
+								<Box>
+									<Link
+										href={`/${idfile}/open-file/etat-financieres/compte-resultat`}
+									>
+										<Button variant="text" color="info">
+											Compte de résultat par nature / par fonction
+										</Button>
+									</Link>
+								</Box>
+								<Box>
+									<Link
+										href={`/${idfile}/open-file/etat-financieres/tableau-flux-tresorerie`}
+									>
+										<Button variant="text" color="info">
+											Tableau de flux de trésorerie
+										</Button>
+									</Link>
+								</Box>
+								<Box>
+									<Link
+										href={`/${idfile}/open-file/etat-financieres/tableau-variation-capitaux-propres`}
+									>
+										<Button variant="text" color="info">
+											Variation des capitaux propres
+										</Button>
+									</Link>
+								</Box>
+							</LinkContainer>
+						</Grid>
 
 						<Grid item xs={12} md={6}>
 							<LinkContainer>
@@ -187,7 +187,7 @@ const HomeComptabilite = () => {
 										href={`/${idfile}/open-file/configurations/ligne-budgetaire`}
 									>
 										<Button variant="text" color="info">
-											Toustes les lignes budgétaires
+											Toutes les lignes budgétaires
 										</Button>
 									</Link>
 								</Box>
@@ -201,7 +201,7 @@ const HomeComptabilite = () => {
 								<Box>
 									<Link href={`/${idfile}/open-file/rapprochement`}>
 										<Button variant="text" color="info">
-											journal de saisie
+											Journal de saisie
 										</Button>
 									</Link>
 								</Box>

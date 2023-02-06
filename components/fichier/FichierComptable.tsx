@@ -51,23 +51,25 @@ const FichierComptable = () => {
 						<Link href="/pcg">
 							<Button
 								color="info"
-								variant="outlined"
+								variant="text"
 								startIcon={<SettingsInputComponent />}
 							>
 								Configurer PCG
 							</Button>
 						</Link>
-						<Link href={"/create"}>
-							<Button variant="text" startIcon={<Add />} size="small">
-								Créer fichier comptable
-							</Button>
-						</Link>
+						{comptaFileListe.length > 0 && (
+							<Link href={"/create"}>
+								<Button variant="contained" startIcon={<Add />} size="small">
+									Créer fichier comptable
+								</Button>
+							</Link>
+						)}
 					</Stack>
 					<Typography variant="h4">Fichiers comptables</Typography>
 				</SectionNavigation>
 				<Divider />
 			</Stack>
-			<Grid container spacing={2}>
+			<Grid container spacing={3}>
 				{/* <Grid item xs={12} md={6}>
 					<SectionBtnAdd>
 						<Typography variant="h4" color="black" mb={2}>
@@ -78,7 +80,7 @@ const FichierComptable = () => {
 					</SectionBtnAdd>
 				</Grid> */}
 				{comptaFileListe.map((comptaFile: ComptaFileItem) => (
-					<Grid item xs={12} md={6} mb={3} key={comptaFile?.id}>
+					<Grid item xs={12} md={6} key={comptaFile?.id}>
 						<SectionDetails>
 							<SectionDetailsTitle>
 								<Typography variant="h5" color="black">
