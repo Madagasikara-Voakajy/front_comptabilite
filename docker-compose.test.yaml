@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  mvt-font-comptabilite:
+    container_name: mvt-front-comptabilite
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    networks:
+      - mvt-docker-network
+    command: npm run start
+    expose:
+      - 3000
+networks:
+  mvt-docker-network:
+    name: mvt-docker-network
+    
